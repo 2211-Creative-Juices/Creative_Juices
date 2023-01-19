@@ -7,15 +7,24 @@ const {
   getUserByEmail,
   // updateUser,
 } = require('./users');
-const { createService } = require('./services');
+const {
+  createService,
+  getAllServices,
+  getServiceByUser,
+  getServiceById,
+  getServiceByName,
+  getServiceByDate,
+  updateService,
+  destroyService,
+} = require('./services');
 
 async function dropTables() {
   try {
     console.log('Dropping All Tables!..');
 
     await client.query(`
-    DROP TABLE IF EXISTS services;
     DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS services;
     `);
 
     console.log('All Tables Dropped!..');
@@ -30,16 +39,6 @@ async function createTables() {
     console.log('Starting to build tables...');
 
     await client.query(`
-    CREATE TABLE users (
-      id SERIAL PRIMARY KEY,
-      name varchar(255) NOT NULL,
-      username varchar(255) NOT NULL,
-      password varchar(255) NOT NULL,
-      zipcode INT NOT NULL,
-      email varchar(255) NOT NULL,
-      UNIQUE (username, email)
-    );
-
     CREATE TABLE services (
       id SERIAL PRIMARY KEY,
       name varchar(255) NOT NULL,
@@ -50,7 +49,18 @@ async function createTables() {
       location varchar(255),
       date DATE,
       notes TEXT
-    )
+    );
+
+    CREATE TABLE users (
+      id SERIAL PRIMARY KEY,
+      name varchar(255) NOT NULL,
+      username varchar(255) NOT NULL,
+      password varchar(255) NOT NULL,
+      zipcode INT NOT NULL,
+      email varchar(255) NOT NULL,
+      "serviceId" INTEGER REFERENCES services(id),
+      UNIQUE (username, email)
+    );
     `);
 
     console.log('All tables created!');
@@ -128,13 +138,17 @@ async function createFakeServices() {
 
 async function testDB() {
   try {
+    //*******************USER TESTS******************//
     console.log('starting testing testingdatabase');
     const userByUsername = await getUserByUsername('ashley');
     console.log('testing getUserByUsername', userByUsername);
+
     const userById = await getUserById(1);
     console.log('testing getUserById', userById);
+
     const userByUser = await getUser('ashley', 'ashley1!');
     console.log('testing getUser', userByUser);
+
     const userByEmail = await getUserByEmail('ashley@gmail.com');
     console.log('testing getUserByemail', userByEmail);
     // const updatedUser = await updateUser([0].id, {
@@ -145,6 +159,36 @@ async function testDB() {
     //   email: 'sandy@gmail.com',
     // });
     // console.log('testing updateUsers', updatedUser);
+
+    //*******************SERVICES TESTS******************//
+    console.log('starting to test services');
+    const allServices = await getAllServices();
+    console.log('testing getAllServices', allServices);
+
+    // const serviceByUser = await getServiceByUser('megan');
+    // console.log('testing getServiceByUser', serviceByUser);
+
+    const serviceById = await getServiceById(1);
+    console.log('testing getServiceById', serviceById);
+
+    const serviceByDate = await getServiceByDate('2023-02-05T07:00:00.000Z');
+    console.log('testing getServiceByDate', serviceByDate);
+
+    const serviceByName = await getServiceByName('Sip n Paint');
+    console.log('testing getServiceByName', serviceByName);
+
+    const updatedService = await updateService(allServices[0].id, {
+      name: 'Paint n Sip',
+      type: 'kid',
+      isRemote: true,
+      guests: 10,
+      cost: 160.0,
+      location: 'home',
+      date: '2023-02-09',
+      notes: 'would love to have this at my cozy home!',
+    });
+    console.log('testing update service at index 0', updatedService);
+
     console.log('finished testing database!');
   } catch (error) {
     console.log('error testing database');

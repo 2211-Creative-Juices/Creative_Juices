@@ -46,6 +46,7 @@ async function getServiceByUser({ username }) {
       `
     SELECT *
     FROM services
+    JOIN users ON services.id = users."serviceId"
     WHERE username = $1
     `,
       [username]
@@ -57,15 +58,14 @@ async function getServiceByUser({ username }) {
   }
 }
 
-async function getServiceById({ id }) {
+async function getServiceById(id) {
   try {
     const { rows: service } = await client.query(
       `
     SELECT *
     FROM services
-    WHERE id = $1
-    `,
-      [id]
+    WHERE id = ${id}
+    `
     );
     console.log('These are our services by id:', service);
     return service;
@@ -74,7 +74,7 @@ async function getServiceById({ id }) {
   }
 }
 
-async function getServiceByDate({ date }) {
+async function getServiceByDate(date) {
   try {
     const { rows: service } = await client.query(
       `
@@ -86,10 +86,12 @@ async function getServiceByDate({ date }) {
     );
     console.log('These are our services by date:', service);
     return service;
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
 }
 
-async function getServiceByName({ name }) {
+async function getServiceByName(name) {
   try {
     const { rows: service } = await client.query(
       `
