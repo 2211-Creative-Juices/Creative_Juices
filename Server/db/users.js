@@ -77,10 +77,14 @@ async function getUserByEmail(email) {
   try {
     const {
       rows: [user],
-    } = await client.query(`
-    SELECT id, username, zipcode, email, name
+    } = await client.query(
+      `
+    SELECT *
     FROM users
-    WHERE email=${email}`);
+    WHERE email = $1
+    `,
+      [email]
+    );
 
     return user;
   } catch (error) {

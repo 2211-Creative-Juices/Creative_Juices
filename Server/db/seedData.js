@@ -1,5 +1,12 @@
 const client = require('./client');
-const { createUser } = require('./users');
+const {
+  createUser,
+  getUserByUsername,
+  getUserById,
+  getUser,
+  getUserByEmail,
+  // updateUser,
+} = require('./users');
 const { createService } = require('./services');
 
 async function dropTables() {
@@ -119,12 +126,39 @@ async function createFakeServices() {
   }
 }
 
+async function testDB() {
+  try {
+    console.log('starting testing testingdatabase');
+    const userByUsername = await getUserByUsername('ashley');
+    console.log('testing getUserByUsername', userByUsername);
+    const userById = await getUserById(1);
+    console.log('testing getUserById', userById);
+    const userByUser = await getUser('ashley', 'ashley1!');
+    console.log('testing getUser', userByUser);
+    const userByEmail = await getUserByEmail('ashley@gmail.com');
+    console.log('testing getUserByemail', userByEmail);
+    // const updatedUser = await updateUser([0].id, {
+    //   name: 'sandy',
+    //   username: 'rockstar',
+    //   password: 'lemons!',
+    //   zipcode: '12324',
+    //   email: 'sandy@gmail.com',
+    // });
+    // console.log('testing updateUsers', updatedUser);
+    console.log('finished testing database!');
+  } catch (error) {
+    console.log('error testing database');
+    console.error(error);
+  }
+}
+
 async function rebuildDB() {
   try {
     await dropTables();
     await createTables();
     await createFakeUsers();
     await createFakeServices();
+    await testDB();
     //await initial stuff
   } catch (error) {
     console.log('Error during rebuildDB');
