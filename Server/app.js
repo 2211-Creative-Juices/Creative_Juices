@@ -4,7 +4,12 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 
-const apiRouter = require('./api');
+const api = require('./api');
+
+const client = require('./db/client');
+client.connect();
+
+// const apiRouter = require('./api');
 
 // Setup your Middleware and API Router here
 app.use(cors());
@@ -21,7 +26,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api', apiRouter);
+app.use('/api', api);
 
 app.get('*', (req, res) => {
   res.status(404).send({
@@ -31,15 +36,15 @@ app.get('*', (req, res) => {
 });
 
 // error handling middleware
-app.use((error, req, res, next) => {
-  console.error('SERVER ERROR: ', error);
-  if (res.statusCode < 400) res.status(500);
-  res.send({
-    error: error.message,
-    name: error.name,
-    message: error.message,
-    table: error.table,
-  });
-});
+// app.use((error, req, res, next) => {
+//   console.error('SERVER ERROR: ', error);
+//   if (res.statusCode < 400) res.status(500);
+//   res.send({
+//     error: error.message,
+//     name: error.name,
+//     message: error.message,
+//     table: error.table,
+//   });
+// });
 
 module.exports = app;

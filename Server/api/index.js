@@ -1,10 +1,10 @@
 const express = require('express');
-const router = express.Router();
+const apiRouter = express.Router();
 const { JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const { getUserById } = require('../db');
 
-router.use(async (req, res, next) => {
+apiRouter.use(async (req, res, next) => {
   const prefix = 'Bearer ';
   const auth = req.header('Authorization');
 
@@ -31,7 +31,7 @@ router.use(async (req, res, next) => {
   }
 });
 
-router.use((req, res, next) => {
+apiRouter.use((req, res, next) => {
   if (req.user) {
     console.log('User is set:', req.user);
   }
@@ -39,6 +39,9 @@ router.use((req, res, next) => {
 });
 
 const usersRouter = require('./users');
-router.use('/users', usersRouter);
+apiRouter.use('/users', usersRouter);
 
-module.exports = router;
+const servicesRouter = require('./services');
+apiRouter.use('/services', servicesRouter);
+
+module.exports = apiRouter;

@@ -3,7 +3,7 @@ const { requireUser } = require('./utils');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const usersRouter = express.Router();
-const { getUserByUsername, getUser } = require('../db');
+const { getUserByUsername, getAllUsers, createUser } = require('../db');
 
 //Register
 usersRouter.use((req, res, next) => {
@@ -12,13 +12,16 @@ usersRouter.use((req, res, next) => {
 });
 
 usersRouter.get('/', async (req, res) => {
-  const users = await getUser();
+  const users = await getAllUsers();
+  console.log('these are my users', users);
   res.send({ users });
 });
 
-//REGISTER
+//REGISTER /api/users/register
+
 usersRouter.post('/register', async (req, res, next) => {
-  const { username, password, name, zipcode, email } = req.body;
+  console.log('this is my req.bodaayy', req.body);
+  const { name, username, password, zipcode, email } = req.body;
 
   try {
     const _user = await getUserByUsername(username);
@@ -105,11 +108,11 @@ usersRouter.get('/me', async (req, res, next) => {
     const me = req.user;
     res.send(me);
   } catch (error) {
-    throw error;
+    next(error);
   }
 });
 
 // Make for later!
 // usersRouter.get('/:username/services', )
 
-module.export = usersRouter;
+module.exports = usersRouter;
