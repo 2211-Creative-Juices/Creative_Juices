@@ -40,7 +40,7 @@ async function getAllServices() {
   }
 }
 
-async function getServiceByUser({ username }) {
+async function getServiceByUser(username) {
   try {
     const { rows: service } = await client.query(
       `

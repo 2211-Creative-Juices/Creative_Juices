@@ -19,12 +19,26 @@ async function createUser({
         INSERT INTO users(name, username, password, zipcode, email, "serviceId")
         VALUES ($1, $2, $3, $4, $5, $6)
         ON CONFLICT (username, email) DO NOTHING
-        RETURNING id, name, username, zipcode, email, "serviceId"
+        RETURNING *;
         `,
       [name, username, hashedPassword, zipcode, email, serviceId]
     );
     return user;
   } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllUsers() {
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT * FROM users;
+    `
+    );
+    return rows;
+  } catch (error) {
+    console.log('error gettingAllUsers');
     throw error;
   }
 }
@@ -131,4 +145,5 @@ module.exports = {
   getUserById,
   getUserByEmail,
   updateUser,
+  getAllUsers,
 };

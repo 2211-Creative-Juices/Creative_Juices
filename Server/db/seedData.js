@@ -5,7 +5,8 @@ const {
   getUserById,
   getUser,
   getUserByEmail,
-  // updateUser,
+  getAllUsers,
+  updateUser,
 } = require('./users');
 const {
   createService,
@@ -70,10 +71,45 @@ async function createTables() {
   }
 }
 
+async function createFakeServices() {
+  try {
+    const fakeServices = [
+      {
+        name: 'Sip n Paint',
+        type: 'adult',
+        isRemote: false,
+        guests: 8,
+        cost: 160.0,
+        location: 'brewery',
+        date: '2023-02-05',
+        notes: 'would love to have this at my local brewery!',
+      },
+      {
+        name: 'Painting for family',
+        type: 'kids',
+        isRemote: false,
+        guests: 4,
+        cost: 80.0,
+        location: 'home',
+        date: '2023-05-13',
+        notes: 'its my sons birthday',
+      },
+    ];
+    const service = await Promise.all(fakeServices.map(createService));
+    console.log('Services created:');
+    console.log(service);
+    console.log('Finished creating services!');
+  } catch (error) {
+    console.error('Error creating services!');
+    throw error;
+  }
+}
+
 async function createFakeUsers() {
   try {
     const fakeUsers = [
       {
+        serviceId: 2,
         name: 'ashley',
         username: 'ashley',
         password: 'ashley1!',
@@ -81,6 +117,7 @@ async function createFakeUsers() {
         email: 'ashley@gmail.com',
       },
       {
+        serviceId: 1,
         name: 'megan',
         username: 'megan',
         password: 'megan1!',
@@ -88,6 +125,7 @@ async function createFakeUsers() {
         email: 'megan@gmail.com',
       },
       {
+        serviceId: 1,
         name: 'chelsea',
         username: 'chelsea',
         password: 'chelsea1!',
@@ -95,6 +133,7 @@ async function createFakeUsers() {
         email: 'chelsea@gmail.com',
       },
       {
+        serviceId: 2,
         name: 'philip',
         username: 'philip',
         password: 'philip1!',
@@ -112,61 +151,15 @@ async function createFakeUsers() {
   }
 }
 
-async function createFakeServices() {
-  try {
-    const fakeServices = [
-      {
-        name: 'Sip n Paint',
-        type: 'adult',
-        isRemote: false,
-        guests: 8,
-        cost: 160.0,
-        location: 'brewery',
-        date: '2023-02-05',
-        notes: 'would love to have this at my local brewery!',
-      },
-    ];
-    const service = await Promise.all(fakeServices.map(createService));
-    console.log('Services created:');
-    console.log(service);
-    console.log('Finished creating services!');
-  } catch (error) {
-    console.error('Error creating services!');
-    throw error;
-  }
-}
-
 async function testDB() {
   try {
-    //*******************USER TESTS******************//
-    console.log('starting testing testingdatabase');
-    const userByUsername = await getUserByUsername('ashley');
-    console.log('testing getUserByUsername', userByUsername);
-
-    const userById = await getUserById(1);
-    console.log('testing getUserById', userById);
-
-    const userByUser = await getUser('ashley', 'ashley1!');
-    console.log('testing getUser', userByUser);
-
-    const userByEmail = await getUserByEmail('ashley@gmail.com');
-    console.log('testing getUserByemail', userByEmail);
-    // const updatedUser = await updateUser([0].id, {
-    //   name: 'sandy',
-    //   username: 'rockstar',
-    //   password: 'lemons!',
-    //   zipcode: '12324',
-    //   email: 'sandy@gmail.com',
-    // });
-    // console.log('testing updateUsers', updatedUser);
-
     //*******************SERVICES TESTS******************//
     console.log('starting to test services');
     const allServices = await getAllServices();
     console.log('testing getAllServices', allServices);
 
-    // const serviceByUser = await getServiceByUser('megan');
-    // console.log('testing getServiceByUser', serviceByUser);
+    const serviceByUser = await getServiceByUser('megan');
+    console.log('testing getServiceByUser', serviceByUser);
 
     const serviceById = await getServiceById(1);
     console.log('testing getServiceById', serviceById);
@@ -189,6 +182,28 @@ async function testDB() {
     });
     console.log('testing update service at index 0', updatedService);
 
+    // *******************USER TESTS******************//
+
+    const userByUsername = await getUserByUsername('ashley');
+    console.log('testing getUserByUsername', userByUsername);
+
+    const userById = await getUserById(1);
+    console.log('testing getUserById', userById);
+
+    const userByUser = await getUser('ashley', 'ashley1!');
+    console.log('testing getUser', userByUser);
+
+    const userByEmail = await getUserByEmail('ashley@gmail.com');
+    console.log('testing getUserByemail', userByEmail);
+    // const updatedUser = await updateUser([0].id, {
+    //   name: 'sandy',
+    //   username: 'rockstar',
+    //   password: 'lemons!',
+    //   zipcode: '12324',
+    //   email: 'sandy@gmail.com',
+    // });
+    // console.log('testing updateUsers', updatedUser);
+
     console.log('finished testing database!');
   } catch (error) {
     console.log('error testing database');
@@ -200,8 +215,9 @@ async function rebuildDB() {
   try {
     await dropTables();
     await createTables();
-    await createFakeUsers();
     await createFakeServices();
+    await createFakeUsers();
+
     await testDB();
     //await initial stuff
   } catch (error) {
