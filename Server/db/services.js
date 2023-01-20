@@ -3,7 +3,7 @@ const client = require('./client');
 async function createService({
   name,
   type,
-  isRemote,
+  isremote,
   guests,
   cost,
   location,
@@ -15,11 +15,11 @@ async function createService({
       rows: [service],
     } = await client.query(
       `
-          INSERT INTO services (name, type, isRemote, guests, cost, location, date, notes)
+          INSERT INTO services (name, type, isremote, guests, cost, location, date, notes)
           VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
           RETURNING *;
           `,
-      [name, type, isRemote, guests, cost, location, date, notes]
+      [name, type, isremote, guests, cost, location, date, notes]
     );
     return service;
   } catch (error) {
@@ -106,7 +106,8 @@ async function getServiceByName(name) {
   } catch (error) {}
 }
 
-async function updateService({ id, ...fields }) {
+async function updateService(id, { ...fields }) {
+  console.log('id:', id, 'update fields:', fields);
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(', ');

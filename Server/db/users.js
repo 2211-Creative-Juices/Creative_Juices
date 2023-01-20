@@ -62,16 +62,19 @@ async function getUserByUsername(username) {
   }
 }
 
-async function getUser({ username, password }) {
+async function getUser(username, password) {
+  if (!username || !password) return;
   try {
     const user = await getUserByUsername(username);
-    if (!user) return;
     const hashedPassword = user.password;
-    const passwordsMatch = await bcrypt.compare(password, hashedPassword);
-    if (!passwordsMatch) return;
-    delete user.password;
 
-    return user;
+    let passwordsMatch = await bcrypt.compare(password, hashedPassword);
+    if (passwordsMatch) {
+      delete user.password;
+      return user;
+    } else {
+      return;
+    }
   } catch (error) {
     console.error('Error getting user');
     throw error;
@@ -114,7 +117,9 @@ async function getUserByEmail(email) {
   }
 }
 
-async function updateUser({ id, ...fields }) {
+async function updateUser(id, { ...fields }) {
+  const updatedHashedPassword = await bcrypt.hash(fields.password, saltRounds);
+
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(',');
@@ -127,7 +132,7 @@ async function updateUser({ id, ...fields }) {
         UPDATE users
         SET ${setString}
         WHERE id = ${id}
-        RETURNING *;
+        RETURNING * 
         `,
         Object.values(fields)
       );
@@ -138,6 +143,28 @@ async function updateUser({ id, ...fields }) {
   }
 }
 
+// async function updateUserPassword(id, password) {
+//   console.log('id', id, 'pass to update:', password);
+
+//   try {
+//     const rows = await client.query(
+//       `
+//         UPDATE users
+//         SET password
+//         WHERE id = ${id}
+//         RETURNING *
+//         `,
+//       [id, password]
+//     );
+
+//     // const updatedHashedPassword = await bcrypt.hash(password, saltRounds);
+
+//     return rows;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
 module.exports = {
   createUser,
   getUserByUsername,
@@ -145,5 +172,6 @@ module.exports = {
   getUserById,
   getUserByEmail,
   updateUser,
+  // updateUserPassword,
   getAllUsers,
 };

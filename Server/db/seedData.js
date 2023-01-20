@@ -7,6 +7,7 @@ const {
   getUserByEmail,
   getAllUsers,
   updateUser,
+  // updateUserPassword,
 } = require('./users');
 const {
   createService,
@@ -44,7 +45,7 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       name varchar(255) NOT NULL,
       type varchar(255) NOT NULL,
-      isRemote BOOLEAN DEFAULT false,
+      isremote BOOLEAN DEFAULT false,
       guests INT,
       cost DECIMAL,
       location varchar(255),
@@ -77,7 +78,7 @@ async function createFakeServices() {
       {
         name: 'Sip n Paint',
         type: 'adult',
-        isRemote: false,
+        isremote: false,
         guests: 8,
         cost: 160.0,
         location: 'brewery',
@@ -87,7 +88,7 @@ async function createFakeServices() {
       {
         name: 'Painting for family',
         type: 'kids',
-        isRemote: false,
+        isremote: false,
         guests: 4,
         cost: 80.0,
         location: 'home',
@@ -173,7 +174,7 @@ async function testDB() {
     const updatedService = await updateService(allServices[0].id, {
       name: 'Paint n Sip',
       type: 'kid',
-      isRemote: true,
+      isremote: true,
       guests: 10,
       cost: 160.0,
       location: 'home',
@@ -187,6 +188,9 @@ async function testDB() {
     const userByUsername = await getUserByUsername('ashley');
     console.log('testing getUserByUsername', userByUsername);
 
+    const allUsers = await getAllUsers();
+    console.log('These are all the users!', allUsers);
+
     const userById = await getUserById(1);
     console.log('testing getUserById', userById);
 
@@ -195,14 +199,18 @@ async function testDB() {
 
     const userByEmail = await getUserByEmail('ashley@gmail.com');
     console.log('testing getUserByemail', userByEmail);
-    // const updatedUser = await updateUser([0].id, {
-    //   name: 'sandy',
-    //   username: 'rockstar',
-    //   password: 'lemons!',
-    //   zipcode: '12324',
-    //   email: 'sandy@gmail.com',
-    // });
-    // console.log('testing updateUsers', updatedUser);
+
+    const updatedUser = await updateUser(allUsers[0].id, {
+      name: 'sandy',
+      username: 'rockstar',
+      password: 'lemons!',
+      zipcode: '12324',
+      email: 'sandy@gmail.com',
+    });
+    console.log('testing updateUsers', updatedUser);
+
+    // const updatedPassword = await updateUserPassword(1, 'melons');
+    // console.log('this is my updated password', updatedPassword);
 
     console.log('finished testing database!');
   } catch (error) {
