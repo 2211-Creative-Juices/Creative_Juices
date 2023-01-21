@@ -34,10 +34,11 @@ servicesRouter.post('/', requireUser, async (req, res, next) => {
   }
 });
 
-//PATCH /api/:serviceId
+//PATCH /api/services/:serviceId
 servicesRouter.patch('/:serviceId', requireUser, async (req, res, next) => {
   const { name, type, isremote, guests, cost, location, date, notes } =
     req.body;
+
   const id = req.params.serviceId;
 
   try {
@@ -50,8 +51,7 @@ servicesRouter.patch('/:serviceId', requireUser, async (req, res, next) => {
         message: `Service ${id} not found`,
       });
     } else {
-      const updatedService = await updateService({
-        id,
+      const updatedService = await updateService(id, {
         name,
         type,
         isremote,
@@ -76,6 +76,7 @@ servicesRouter.delete('/:serviceId', requireUser, async (req, res, next) => {
 
   try {
     const ogService = await getServiceById(id);
+    console.log('service to be deleted', ogService);
 
     if (!ogService) {
       next({
@@ -85,6 +86,7 @@ servicesRouter.delete('/:serviceId', requireUser, async (req, res, next) => {
       });
     } else {
       const deletedService = await destroyService(id);
+      console.log('this is the deleted service', deletedService);
 
       res.send(deletedService);
     }
