@@ -23,8 +23,17 @@ servicesRouter.get('/', async (req, res, next) => {
 // POST /api/services
 
 servicesRouter.post('/', requireUser, async (req, res, next) => {
-  const { name, type, isremote, guests, cost, location, date, notes } =
-    req.body;
+  const {
+    name,
+    type,
+    isremote,
+    guests,
+    cost,
+    location,
+    date,
+    notes,
+    isactive,
+  } = req.body;
 
   try {
     const newService = await createService(req.body);
@@ -36,8 +45,17 @@ servicesRouter.post('/', requireUser, async (req, res, next) => {
 
 //PATCH /api/services/:serviceId
 servicesRouter.patch('/:serviceId', requireUser, async (req, res, next) => {
-  const { name, type, isremote, guests, cost, location, date, notes } =
-    req.body;
+  const {
+    name,
+    type,
+    isremote,
+    guests,
+    cost,
+    location,
+    date,
+    notes,
+    isactive,
+  } = req.body;
 
   const id = req.params.serviceId;
 
@@ -60,6 +78,7 @@ servicesRouter.patch('/:serviceId', requireUser, async (req, res, next) => {
         location,
         date,
         notes,
+        isactive,
       });
 
       res.send(updatedService);

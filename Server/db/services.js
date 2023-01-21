@@ -1,4 +1,5 @@
 const client = require('./client');
+// const {attachServicesToUser} = require('/users')
 
 async function createService({
   name,
@@ -9,17 +10,18 @@ async function createService({
   location,
   date,
   notes,
+  isactive,
 }) {
   try {
     const {
       rows: [service],
     } = await client.query(
       `
-          INSERT INTO services (name, type, isremote, guests, cost, location, date, notes)
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+          INSERT INTO services (name, type, isremote, guests, cost, location, date, notes, isactive)
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
           RETURNING *;
           `,
-      [name, type, isremote, guests, cost, location, date, notes]
+      [name, type, isremote, guests, cost, location, date, notes, isactive]
     );
     return service;
   } catch (error) {
@@ -47,7 +49,7 @@ async function getServiceByUser(username) {
     SELECT *
     FROM services
     JOIN users ON services.id = users."serviceId"
-    WHERE username = $1
+    WHERE username = $1;
     `,
       [username]
     );
@@ -64,7 +66,7 @@ async function getServiceById(id) {
       `
     SELECT *
     FROM services
-    WHERE id = ${id}
+    WHERE id = ${id};
     `
     );
     console.log('These are our services by id:', service);
@@ -80,7 +82,7 @@ async function getServiceByDate(date) {
       `
     SELECT *
     FROM services
-    WHERE date = $1
+    WHERE date = $1;
     `,
       [date]
     );
@@ -97,13 +99,51 @@ async function getServiceByName(name) {
       `
     SELECT *
     FROM services
-    WHERE name = $1
+    WHERE name = $1;
     `,
       [name]
     );
     console.log('These are our services by service name:', service);
     return service;
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getServiceByActive(isactive) {
+  try {
+    const { rows: service } = await client.query(
+      `
+    SELECT *
+    FROM services
+    WHERE isactive = $1;
+    `,
+      [isactive]
+    );
+    console.log('These are our services by if active', service);
+    return service;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//getServiceIdbyUser
+async function getServiceIdByUser(username) {
+  try {
+    const {
+      rows: [service],
+    } = await client.query(
+      `
+    SELECT "serviceId" FROM users
+    WHERE username = $1;
+    `,
+      [username]
+    );
+
+    return service;
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function updateService(id, { ...fields }) {
@@ -168,5 +208,6 @@ module.exports = {
   getServiceByName,
   getServiceByDate,
   updateService,
-  destroyService,
+  getServiceByActive,
+  getServiceIdByUser,
 };

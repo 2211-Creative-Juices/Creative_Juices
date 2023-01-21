@@ -7,7 +7,7 @@ const {
   getUserByEmail,
   getAllUsers,
   updateUser,
-  // updateUserPassword,
+  attachServicesToUser,
 } = require('./users');
 const {
   createService,
@@ -17,7 +17,8 @@ const {
   getServiceByName,
   getServiceByDate,
   updateService,
-  destroyService,
+  getServiceByActive,
+  getServiceIdByUser,
 } = require('./services');
 
 async function dropTables() {
@@ -50,7 +51,8 @@ async function createTables() {
       cost DECIMAL,
       location varchar(255),
       date DATE,
-      notes TEXT
+      notes TEXT,
+      isactive BOOLEAN DEFAULT true
     );
 
     CREATE TABLE users (
@@ -84,6 +86,7 @@ async function createFakeServices() {
         location: 'brewery',
         date: '2023-02-05',
         notes: 'would love to have this at my local brewery!',
+        isactive: true,
       },
       {
         name: 'Painting for family',
@@ -94,6 +97,7 @@ async function createFakeServices() {
         location: 'home',
         date: '2023-05-13',
         notes: 'its my sons birthday',
+        isactive: true,
       },
     ];
     const service = await Promise.all(fakeServices.map(createService));
@@ -171,6 +175,12 @@ async function testDB() {
     const serviceByName = await getServiceByName('Sip n Paint');
     console.log('testing getServiceByName', serviceByName);
 
+    const serviceByActive = await getServiceByActive(true);
+    console.log('testing getServiceByActive', serviceByActive);
+
+    const serviceIdByUser = await getServiceIdByUser('ashley');
+    console.log('testing getServiceIdByUser', serviceIdByUser);
+
     const updatedService = await updateService(allServices[0].id, {
       name: 'Paint n Sip',
       type: 'kid',
@@ -180,6 +190,7 @@ async function testDB() {
       location: 'home',
       date: '2023-02-09',
       notes: 'would love to have this at my cozy home!',
+      isactive: false,
     });
     console.log('testing update service at index 0', updatedService);
 
@@ -208,6 +219,12 @@ async function testDB() {
       email: 'sandy@gmail.com',
     });
     console.log('testing updateUsers', updatedUser);
+
+    const attachedUserServ = await attachServicesToUser(allUsers);
+    console.log(
+      'these are all the users w services attached:',
+      attachedUserServ
+    );
 
     // const updatedPassword = await updateUserPassword(1, 'melons');
     // console.log('this is my updated password', updatedPassword);
