@@ -71,28 +71,28 @@ servicesRouter.patch('/:serviceId', requireUser, async (req, res, next) => {
 
 //DELETE /api/services/:serviceId
 
-servicesRouter.delete('/:serviceId', requireUser, async (req, res, next) => {
-  const id = req.params.serviceId;
+// servicesRouter.delete('/:serviceId', requireUser, async (req, res, next) => {
+//   const id = req.params.serviceId;
 
-  try {
-    const ogService = await getServiceById(id);
-    console.log('service to be deleted', ogService);
+//   try {
+//     const ogService = await getServiceById(id);
+//     console.log('service to be deleted', ogService);
 
-    if (!ogService) {
-      next({
-        error: 'error',
-        name: 'NoServiceFoundError',
-        message: `Service ${id} not found, cannot update`,
-      });
-    } else {
-      const deletedService = await destroyService(id);
-      console.log('this is the deleted service', deletedService);
+//     if (!ogService) {
+//       next({
+//         error: 'error',
+//         name: 'NoServiceFoundError',
+//         message: `Service ${id} not found, cannot update`,
+//       });
+//     } else {
+//       const deletedService = await destroyService(id);
+//       console.log('this is the deleted service', deletedService);
 
-      res.send(deletedService);
-    }
-  } catch (error) {
-    next(error);
-  }
-});
+//       res.send(deletedService);
+//     }
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 module.exports = servicesRouter;

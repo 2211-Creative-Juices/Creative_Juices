@@ -132,33 +132,33 @@ async function updateService(id, { ...fields }) {
   }
 }
 
-async function destroyService(id) {
-  console.log('this is the id i am trying to delete:', id);
-  try {
-    await client.query(
-      `
-      DELETE users."serviceId" FROM users WHERE "serviceId" = $1;
-      `,
-      [id]
-    );
+// async function destroyService(id) {
+//   console.log('this is the id i am trying to delete:', id);
+//   try {
+//     await client.query(
+//       `
+//       DELETE users."serviceId" FROM users WHERE "serviceId" = $1;
+//       `,
+//       [id]
+//     );
 
-    const {
-      rows: [service],
-    } = await client.query(
-      `
-    DELETE FROM services
-    WHERE id = $1
-    RETURNING *;
-    `,
-      [id]
-    );
+//     const {
+//       rows: [service],
+//     } = await client.query(
+//       `
+//     DELETE FROM services
+//     WHERE id = $1
+//     RETURNING *;
+//     `,
+//       [id]
+//     );
 
-    console.log('These are my destroy services: ', service);
-    return service;
-  } catch (error) {
-    throw error;
-  }
-}
+//     console.log('These are my destroy services: ', service);
+//     return service;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 module.exports = {
   createService,
