@@ -18,6 +18,7 @@ export const authenticateUser = async (username, password, method) => {
     if (!result.token) {
       return;
     } else {
+      console.log('this is result.token', result.token);
       window.localStorage.setItem(`juice-token`, result.token);
       return await me();
     }
