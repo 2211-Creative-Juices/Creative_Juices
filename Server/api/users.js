@@ -20,7 +20,6 @@ usersRouter.get('/', async (req, res) => {
 //REGISTER /api/users/register
 
 usersRouter.post('/register', async (req, res, next) => {
-  console.log('this is my req.bodaayy', req.body);
   const { name, username, password, zipcode, email } = req.body;
 
   try {
@@ -75,6 +74,7 @@ usersRouter.post('/register', async (req, res, next) => {
 
 //LOGIN
 usersRouter.post('/login', async (req, res, next) => {
+  console.log('this is req.body', req.body);
   const { username, password } = req.body;
   try {
     const user = await getUserByUsername(username);
@@ -88,8 +88,8 @@ usersRouter.post('/login', async (req, res, next) => {
     if (user && match) {
       res.send({
         message: "You're logged in!",
-        token: token,
-        user: user,
+        token,
+        user,
       });
     } else {
       next({
