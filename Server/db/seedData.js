@@ -50,7 +50,7 @@ async function createTables() {
       guests INT,
       cost DECIMAL,
       location varchar(255),
-      date DATE,
+      date varchar(255),
       notes TEXT,
       isactive BOOLEAN DEFAULT true
     );

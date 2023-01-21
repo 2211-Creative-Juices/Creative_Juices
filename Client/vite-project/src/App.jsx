@@ -1,32 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { React, useState, useEffect } from 'react'
+import { Route, Routes } from "react-router-dom";
 import './App.css'
+import {getAllServices} from "./api/services";
+import {AllServices} from "./Components/Index";
+
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    const fetchedServices = async () => {
+      const allServices = await getAllServices();
+      setServices(allServices)
+    }
+    fetchedServices();
+  },
+  []
+  );
 
   return (
     <div className="App">
+      Creative Juices
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <AllServices services = {services}/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   )
 }
