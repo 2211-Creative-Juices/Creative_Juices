@@ -14,3 +14,20 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.service {
+  border: 1pt white solid;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: white;
+  align-items: center;
+  color: black;
+  cursor: pointer;
+}
+
+#home-container {
+  padding: 10em;
+}
