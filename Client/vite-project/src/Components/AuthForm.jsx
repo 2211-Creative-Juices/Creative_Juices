@@ -15,22 +15,67 @@ const AuthForm = ({ name, buttonName }) => {
       console.log('Either no input or password too short');
       return;
     }
-    await authenticateUser(username, password, formName);
-    updateAuthStatus();
+    if (formName === 'login') {
+      await authenticateUser(username, password, formName);
+      updateAuthStatus();
+    } else {
+      const fullName = event.target.fullname.value;
+      const zipcode = event.target.zipcode.value;
+      const email = event.target.email.value;
+      await authenticateUser(
+        username,
+        password,
+        formName,
+        fullName,
+        zipcode,
+        email
+      );
+      updateAuthStatus();
+    }
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
+      <form
+        onSubmit={handleSubmit}
+        name={name}
+      >
         <div>
           <label htmlFor='username'>Username</label>
-          <input type='text' name='username' />
+          <input
+            type='text'
+            name='username'
+          />
         </div>
         <div>
           <label htmlFor='password'>Password</label>
-          <input type='text' name='password' />
+          <input
+            type='text'
+            name='password'
+          />
         </div>
-        <button>{buttonName}</button>
+        {name === 'login' ? (
+          <button>{buttonName}</button>
+        ) : (
+          <div>
+            <label htmlFor='name'>Full Name:</label>
+            <input
+              type='text'
+              name='fullname'
+            />
+            <label htmlFor='zip'>ZIP code:</label>
+            <input
+              type='text'
+              name='zipcode'
+            />
+            <label htmlFor='email'>Email:</label>
+            <input
+              type='text'
+              name='email'
+            />
+            <button>{buttonName}</button>
+          </div>
+        )}
       </form>
       {name === 'login' ? (
         <p>
@@ -47,5 +92,15 @@ const AuthForm = ({ name, buttonName }) => {
   );
 };
 
-export const Login = <AuthForm name={'login'} buttonName={'Login'} />;
-export const Signup = <AuthForm name={'register'} buttonName={'Register'} />;
+export const Login = (
+  <AuthForm
+    name={'login'}
+    buttonName={'Login'}
+  />
+);
+export const Signup = (
+  <AuthForm
+    name={'register'}
+    buttonName={'Register'}
+  />
+);
