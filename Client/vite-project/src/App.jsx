@@ -3,7 +3,13 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { getAllServices } from './api/services';
 import { getAllBundles } from './api/bundles';
-import { AllServices, NavBar, Home, AllBundles } from './Components/Index';
+import {
+  AllServices,
+  NavBar,
+  Home,
+  AllBundles,
+  About,
+} from './Components/Index';
 import { Signup, Login } from './Components/AuthForm';
 import { useAuth } from './custom-hooks';
 
@@ -37,18 +43,13 @@ function App() {
       <div>
         <button onClick={logout}>Logout</button>
         <Routes>
-          <Route
-            path='/login'
-            element={Login}
-          />
-          <Route
-            path='/signup'
-            element={Signup}
-          />
+          <Route path='/login' element={Login} />
+          <Route path='/signup' element={Signup} />
         </Routes>
       </div>
       <div>
         <Home />
+        <About />
         <AllServices services={services} />
         <AllBundles bundles={bundles} />
       </div>
