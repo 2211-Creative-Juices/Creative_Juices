@@ -7,6 +7,7 @@ const {
   getUserByEmail,
   getAllUsers,
   updateUser,
+  updateUserPassword,
   attachServicesToUser,
 } = require('./users');
 const {
@@ -226,8 +227,8 @@ async function testDB() {
       attachedUserServ
     );
 
-    // const updatedPassword = await updateUserPassword(1, 'melons');
-    // console.log('this is my updated password', updatedPassword);
+    const updatedPassword = await updateUserPassword(1, 'melons');
+    console.log('this is my updated password', updatedPassword);
 
     console.log('finished testing database!');
   } catch (error) {

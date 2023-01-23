@@ -166,27 +166,25 @@ async function updateUser(id, { ...fields }) {
   }
 }
 
-// async function updateUserPassword(id, password) {
-//   console.log('id', id, 'pass to update:', password);
+async function updateUserPassword(id, password) {
+  console.log('id', id, 'pass to update:', password);
+  const updatedHashedPassword = await bcrypt.hash(password, saltRounds);
+  try {
+    const rows = await client.query(
+      `
+        UPDATE users
+        SET password = $2
+        WHERE id = $1
+        RETURNING password
+        `,
+      [id, updatedHashedPassword]
+    );
 
-//   try {
-//     const rows = await client.query(
-//       `
-//         UPDATE users
-//         SET password
-//         WHERE id = ${id}
-//         RETURNING *
-//         `,
-//       [id, password]
-//     );
-
-//     // const updatedHashedPassword = await bcrypt.hash(password, saltRounds);
-
-//     return rows;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
+    return updatedHashedPassword;
+  } catch (error) {
+    throw error;
+  }
+}
 
 module.exports = {
   createUser,
@@ -195,6 +193,7 @@ module.exports = {
   getUserById,
   getUserByEmail,
   updateUser,
+  updateUserPassword,
   attachServicesToUser,
   getAllUsers,
 };
