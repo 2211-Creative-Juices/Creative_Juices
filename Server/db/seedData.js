@@ -9,6 +9,7 @@ const {
   updateUser,
   updateUserPassword,
   attachServicesToUser,
+  attachBundleToUser,
 } = require('./users');
 const {
   createService,
@@ -21,7 +22,12 @@ const {
   getServiceByActive,
   getServiceIdByUser,
 } = require('./services');
-const { createBundleKit } = require('./bundleKits');
+const {
+  createBundleKit,
+  getAllBundles,
+  getBundleByUser,
+  getBundleById,
+} = require('./bundleKits');
 
 async function dropTables() {
   try {
@@ -48,9 +54,9 @@ async function createTables() {
     
     CREATE TABLE bundlekit (
       id SERIAL PRIMARY KEY,
-      name varchar(255) NOT NULL,
+      bundlename varchar(255) NOT NULL,
       quantity INT NOT NULL,
-      cost DECIMAL
+      bundlecost DECIMAL
     );
     
     CREATE TABLE services (
@@ -91,9 +97,14 @@ async function createFakeBundle() {
   try {
     const fakeBundle = [
       {
-        name: 'Paint Kit: Spring',
+        bundlename: 'Paint Kit: Spring',
         quantity: 1,
-        cost: 50.0,
+        bundlecost: 50.0,
+      },
+      {
+        bundlename: 'Paint Kit: Summer',
+        quantity: 1,
+        bundlecost: 20.0,
       },
     ];
     const bundle = await Promise.all(fakeBundle.map(createBundleKit));
@@ -146,6 +157,7 @@ async function createFakeUsers() {
     const fakeUsers = [
       {
         serviceId: 2,
+        bundlekitId: 1,
         name: 'ashley',
         username: 'ashley',
         password: 'ashley1!',
@@ -154,6 +166,7 @@ async function createFakeUsers() {
       },
       {
         serviceId: 1,
+        bundlekitId: 1,
         name: 'megan',
         username: 'megan',
         password: 'megan1!',
@@ -162,6 +175,7 @@ async function createFakeUsers() {
       },
       {
         serviceId: 1,
+        bundlekitId: 1,
         name: 'chelsea',
         username: 'chelsea',
         password: 'chelsea1!',
@@ -190,7 +204,15 @@ async function createFakeUsers() {
 async function testDB() {
   try {
     //*******************BUNDLE KIT TEST********************//
-    // console.log('starting to test bundle kit');
+    console.log('starting to test bundle kit');
+    const allBundles = await getAllBundles();
+    console.log('testing get all bundles', allBundles);
+
+    const userBund = await getBundleByUser('chelsea');
+    console.log('testing getBundleByUser', userBund);
+
+    const idBund = await getBundleById(1);
+    console.log('testing getBundleById', idBund);
 
     //*******************SERVICES TESTS******************//
 
@@ -204,7 +226,7 @@ async function testDB() {
     const serviceById = await getServiceById(1);
     console.log('testing getServiceById', serviceById);
 
-    const serviceByDate = await getServiceByDate('2023-02-05T07:00:00.000Z');
+    const serviceByDate = await getServiceByDate('2023-02-05');
     console.log('testing getServiceByDate', serviceByDate);
 
     const serviceByName = await getServiceByName('Sip n Paint');
@@ -259,6 +281,16 @@ async function testDB() {
     console.log(
       'these are all the users w services attached:',
       attachedUserServ
+    );
+
+    const attachedUserBundle = await attachBundleToUser(allUsers);
+    console.log(
+      'these are all the users w bundles attached:',
+      attachedUserBundle
+    );
+    console.log(
+      'these are all the users w bundles attached BUNDLES:',
+      attachedUserBundle[1].bundles
     );
 
     const updatedPassword = await updateUserPassword(1, 'melons');

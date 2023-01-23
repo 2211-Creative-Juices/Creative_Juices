@@ -9,6 +9,7 @@ async function createUser({
   zipcode,
   email,
   serviceId,
+  bundlekitId,
 }) {
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -16,12 +17,12 @@ async function createUser({
       rows: [user],
     } = await client.query(
       `
-        INSERT INTO users(name, username, password, zipcode, email, "serviceId")
-        VALUES ($1, $2, $3, $4, $5, $6)
+        INSERT INTO users(name, username, password, zipcode, email, "serviceId", "bundlekitId")
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
         ON CONFLICT (username, email) DO NOTHING
         RETURNING *;
         `,
-      [name, username, hashedPassword, zipcode, email, serviceId]
+      [name, username, hashedPassword, zipcode, email, serviceId, bundlekitId]
     );
     return user;
   } catch (error) {
@@ -140,6 +141,29 @@ async function attachServicesToUser(users) {
   }
 }
 
+//attachBundleToUser
+async function attachBundleToUser(users) {
+  const usersToReturn = [...users];
+
+  try {
+    const { rows: bundles } = await client.query(`
+    SELECT *
+    FROM bundlekit
+    JOIN users ON bundlekit.id = users."bundlekitId"
+    `);
+
+    for (const user of usersToReturn) {
+      const bundlesToAdd = bundles.filter(
+        (bundle) => bundle.id === user.bundlekitId
+      );
+      user.bundles = bundlesToAdd;
+    }
+    return usersToReturn;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function updateUser(id, { ...fields }) {
   const updatedHashedPassword = await bcrypt.hash(fields.password, saltRounds);
 
@@ -196,4 +220,5 @@ module.exports = {
   updateUserPassword,
   attachServicesToUser,
   getAllUsers,
+  attachBundleToUser,
 };
