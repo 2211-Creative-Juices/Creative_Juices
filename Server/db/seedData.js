@@ -29,6 +29,7 @@ async function dropTables() {
     await client.query(`
     DROP TABLE IF EXISTS users;
     DROP TABLE IF EXISTS services;
+    DROP TABLE IF EXISTS bundlekit;
     `);
 
     console.log('All Tables Dropped!..');
@@ -85,6 +86,24 @@ async function createTables() {
   }
 }
 
+async function createFakeBundle() {
+  try {
+    const fakeBundle = [
+      {
+        name: 'Paint Kit: Spring',
+        quantity: 1,
+        cost: 50.0,
+      },
+    ];
+    const bundle = await Promise.all(fakeBundle.map(createBundle));
+    console.log('Bundle created:');
+    console.log(bundle);
+    console.log('Finished creating Bundle!');
+  } catch (error) {
+    console.error('Error creating fakeBundle');
+    throw error;
+  }
+}
 async function createFakeServices() {
   try {
     const fakeServices = [
