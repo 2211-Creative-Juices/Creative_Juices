@@ -43,6 +43,14 @@ async function createTables() {
     console.log('Starting to build tables...');
 
     await client.query(`
+    
+    CREATE TABLE bundlekit (
+      id SERIAL PRIMARY KEY,
+      name varchar(255) NOT NULL,
+      quantity INT NOT NULL,
+      cost DECIMAL,
+    )
+    
     CREATE TABLE services (
       id SERIAL PRIMARY KEY,
       name varchar(255) NOT NULL,
@@ -64,8 +72,10 @@ async function createTables() {
       zipcode INT NOT NULL,
       email varchar(255) NOT NULL,
       "serviceId" INTEGER REFERENCES services(id),
+      "bundlekitId" INTEGER REFERENCES bundlekit(id),
       UNIQUE (username, email)
     );
+    
     `);
 
     console.log('All tables created!');
