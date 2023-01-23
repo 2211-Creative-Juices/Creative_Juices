@@ -21,6 +21,7 @@ const {
   getServiceByActive,
   getServiceIdByUser,
 } = require('./services');
+const { createBundleKit } = require('./bundleKits');
 
 async function dropTables() {
   try {
@@ -49,8 +50,8 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       name varchar(255) NOT NULL,
       quantity INT NOT NULL,
-      cost DECIMAL,
-    )
+      cost DECIMAL
+    );
     
     CREATE TABLE services (
       id SERIAL PRIMARY KEY,
@@ -95,7 +96,7 @@ async function createFakeBundle() {
         cost: 50.0,
       },
     ];
-    const bundle = await Promise.all(fakeBundle.map(createBundle));
+    const bundle = await Promise.all(fakeBundle.map(createBundleKit));
     console.log('Bundle created:');
     console.log(bundle);
     console.log('Finished creating Bundle!');
@@ -188,7 +189,11 @@ async function createFakeUsers() {
 
 async function testDB() {
   try {
+    //*******************BUNDLE KIT TEST********************//
+    // console.log('starting to test bundle kit');
+
     //*******************SERVICES TESTS******************//
+
     console.log('starting to test services');
     const allServices = await getAllServices();
     console.log('testing getAllServices', allServices);
@@ -270,6 +275,7 @@ async function rebuildDB() {
   try {
     await dropTables();
     await createTables();
+    await createFakeBundle();
     await createFakeServices();
     await createFakeUsers();
 

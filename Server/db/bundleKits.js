@@ -8,7 +8,7 @@ async function createBundleKit({ name, quantity, cost }) {
       `
             INSERT INTO bundlekit(name, quantity, cost)
             VALUES ($1, $2, $3)
-            ON CONFLICT (name) DO NOTHING
+         
             RETURNING *;
             `,
       [name, quantity, cost]
@@ -18,3 +18,7 @@ async function createBundleKit({ name, quantity, cost }) {
     throw error;
   }
 }
+
+module.exports = {
+  createBundleKit,
+};
