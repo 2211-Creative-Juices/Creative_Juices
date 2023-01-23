@@ -4,7 +4,6 @@ const {
   createService,
   getServiceById,
   updateService,
-  destroyService,
 } = require('../db');
 const { requireUser } = require('./utils');
 const servicesRouter = express.Router();

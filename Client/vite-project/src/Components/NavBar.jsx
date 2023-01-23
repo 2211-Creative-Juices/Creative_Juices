@@ -41,25 +41,13 @@ const NavBar = () => {
       <nav>
         {navLinks.map(({ navLinkId, scrollToId }) => (
           <NavLink
+            key={navLinkId}
             navLinkId={navLinkId}
             scrollToId={scrollToId}
             activeNavLinkId={activeNavLinkId}
             setActiveNavLinkId={setActiveNavLinkId}
           />
         ))}
-
-        {/* <NavLink
-          id='home'
-          to='/'
-        >
-          Home
-        </NavLink>
-        <NavLink to='/'>About</NavLink>
-        <NavLink to='/'>Services</NavLink>
-        <NavLink to='/'>Testimonials</NavLink>
-        <NavLink to='/'>FAQ's</NavLink>
-        <NavLink to='/'>Contact</NavLink>
-        <NavLink to='/'>Calendar</NavLink> */}
       </nav>
     </div>
   );

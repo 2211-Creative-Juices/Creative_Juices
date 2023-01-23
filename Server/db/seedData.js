@@ -27,6 +27,7 @@ const {
   getAllBundles,
   getBundleByUser,
   getBundleById,
+  updateBundle,
 } = require('./bundleKits');
 
 async function dropTables() {
@@ -214,6 +215,13 @@ async function testDB() {
     const idBund = await getBundleById(1);
     console.log('testing getBundleById', idBund);
 
+    const updatedBund = await updateBundle(allBundles[0].id, {
+      bundlename: 'fall fun!',
+      quantity: 2,
+      bundlecost: 90.0,
+    });
+    console.log('testing update bundle at index 0', updatedBund);
+
     //*******************SERVICES TESTS******************//
 
     console.log('starting to test services');
@@ -290,7 +298,7 @@ async function testDB() {
     );
     console.log(
       'these are all the users w bundles attached BUNDLES:',
-      attachedUserBundle[1].bundles
+      attachedUserBundle[0].bundles
     );
 
     const updatedPassword = await updateUserPassword(1, 'melons');

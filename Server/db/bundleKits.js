@@ -67,9 +67,36 @@ async function getBundleById(id) {
   }
 }
 
+async function updateBundle(id, { ...fields }) {
+  console.log('id:', id, 'update fields:', fields);
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(', ');
+
+  try {
+    const {
+      rows: [bundle],
+    } = await client.query(
+      `
+    UPDATE bundlekit
+    SET ${setString}
+    WHERE id = ${id}
+    RETURNING *;
+    `,
+
+      Object.values(fields)
+    );
+    console.log('These are my update bundles: ', bundle);
+    return bundle;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createBundleKit,
   getAllBundles,
   getBundleByUser,
   getBundleById,
+  updateBundle,
 };
