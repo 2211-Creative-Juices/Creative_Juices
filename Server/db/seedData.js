@@ -80,6 +80,7 @@ async function createTables() {
       password varchar(255) NOT NULL,
       zipcode INT NOT NULL,
       email varchar(255) NOT NULL,
+      isadmin BOOLEAN DEFAULT false,
       "serviceId" INTEGER REFERENCES services(id),
       "bundlekitId" INTEGER REFERENCES bundlekit(id),
       UNIQUE (username, email)
@@ -164,6 +165,7 @@ async function createFakeUsers() {
         password: 'ashley1!',
         zipcode: '80504',
         email: 'ashley@gmail.com',
+        isadmin: false,
       },
       {
         serviceId: 1,
@@ -173,6 +175,7 @@ async function createFakeUsers() {
         password: 'megan1!',
         zipcode: '80521',
         email: 'megan@gmail.com',
+        isadmin: false,
       },
       {
         serviceId: 1,
@@ -182,6 +185,7 @@ async function createFakeUsers() {
         password: 'chelsea1!',
         zipcode: '73049',
         email: 'chelsea@gmail.com',
+        isadmin: false,
       },
       {
         serviceId: 2,
@@ -190,6 +194,15 @@ async function createFakeUsers() {
         password: 'philip1!',
         zipcode: '70001',
         email: 'philip@gmail.com',
+        isadmin: false,
+      },
+      {
+        name: 'shelley',
+        username: 'username',
+        password: 'password',
+        isadmin: true,
+        zipcode: '80504',
+        email: 'shelley@gmail.com',
       },
     ];
     const users = await Promise.all(fakeUsers.map(createUser));
@@ -276,7 +289,7 @@ async function testDB() {
     const userByEmail = await getUserByEmail('ashley@gmail.com');
     console.log('testing getUserByemail', userByEmail);
 
-    const updatedUser = await updateUser(allUsers[0].id, {
+    const updatedUser = await updateUser(allUsers[3].id, {
       name: 'sandy',
       username: 'rockstar',
       password: 'lemons!',

@@ -22,6 +22,7 @@ const AuthForm = ({ name, buttonName }) => {
       const fullName = event.target.fullname.value;
       const zipcode = event.target.zipcode.value;
       const email = event.target.email.value;
+
       await authenticateUser(
         username,
         password,

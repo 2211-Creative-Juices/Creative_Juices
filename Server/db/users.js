@@ -8,21 +8,34 @@ async function createUser({
   password,
   zipcode,
   email,
+  isadmin,
   serviceId,
   bundlekitId,
 }) {
   try {
+    //if password is exactly this turn is admin to true
+
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     const {
       rows: [user],
     } = await client.query(
       `
-        INSERT INTO users(name, username, password, zipcode, email, "serviceId", "bundlekitId")
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        INSERT INTO users(name, username, password, zipcode, email, isadmin, "serviceId", "bundlekitId")
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         ON CONFLICT (username, email) DO NOTHING
         RETURNING *;
         `,
-      [name, username, hashedPassword, zipcode, email, serviceId, bundlekitId]
+      [
+        name,
+        username,
+        hashedPassword,
+        zipcode,
+        email,
+        isadmin,
+        serviceId,
+        bundlekitId,
+      ]
     );
     return user;
   } catch (error) {
