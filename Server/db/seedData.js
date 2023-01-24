@@ -1,4 +1,13 @@
 const client = require('./client');
+const bcrypt = require('bcrypt');
+require('dotenv').config();
+
+const adminPass = process.env.ADMIN_PASS;
+const adminUser = process.env.ADMIN_USER;
+const { JWT_SECRET } = process.env;
+
+const saltRounds = 10;
+
 const {
   createUser,
   getUserByUsername,
@@ -194,8 +203,8 @@ async function createFakeUsers() {
       },
       {
         name: 'shelley',
-        username: 'username',
-        password: 'password',
+        username: `${adminUser}`,
+        password: `${adminPass}`,
         isadmin: true,
         zipcode: '80504',
         email: 'shelley@gmail.com',
