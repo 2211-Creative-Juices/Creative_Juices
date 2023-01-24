@@ -9,6 +9,7 @@ import {
   Home,
   AllBundles,
   About,
+  ServiceForm,
 } from './Components/Index';
 import { Signup, Login } from './Components/AuthForm';
 import { useAuth } from './custom-hooks';
@@ -51,6 +52,7 @@ function App() {
         <Home />
         <About />
         <AllServices services={services} />
+        <ServiceForm/>
         <AllBundles bundles={bundles} />
       </div>
     </div>
