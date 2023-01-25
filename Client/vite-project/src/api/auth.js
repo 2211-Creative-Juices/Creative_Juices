@@ -1,4 +1,4 @@
-const APIURL = `http://localhost:8000/api`;
+const APIURL = `/api`;
 
 export const authenticateUser = async (
   username,
