@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import { createService } from '../api/services';
 import Dropdown from './Dropdown';
 
-const ServiceForm = ({ isRemote, service, setService }) => {
+const ServiceForm = ({ service, setService }) => {
   const [type, setType] = useState('');
   const [guests, setGuests] = useState(0);
   const [cost, setCost] = useState(0.0);
@@ -10,21 +10,22 @@ const ServiceForm = ({ isRemote, service, setService }) => {
   const [date, setDate] = useState('');
   const [notes, setNotes] = useState('');
   const [isActive, setIsActive] = useState(false);
+  const [isRemote, setIsRemote] = useState(false);
 
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
-      const newService = await createService(
-        // token,
-        type,
-        guests,
-        cost,
-        location,
-        date,
-        notes,
-        isActive
-      );
-      console.log('this is newService', newService);
+      // const newService = await createService(
+      //   // token,
+      //   type,
+      //   guests,
+      //   cost,
+      //   location,
+      //   date,
+      //   notes,
+      //   isActive
+      // );
+      console.log('this is the isRemoteSTate in submitHandler', isRemote);
     } catch (error) {
       console.error(error);
     }
@@ -49,6 +50,17 @@ const ServiceForm = ({ isRemote, service, setService }) => {
               placeholder='Additional notes for Shelley'
               onChange={(e) => setNotes(e.target.value)}
             ></input>
+            <label>
+              Select Here to make it Virtual!
+              <input
+                id='dropdown-virtual'
+                type='checkbox'
+                checked={isRemote}
+                onChange={(e) => {
+                  setIsRemote(e.target.checked);
+                }}
+              ></input>
+            </label>
 
             <button onClick={submitHandler} type={'submit'}>
               Submit
@@ -56,7 +68,7 @@ const ServiceForm = ({ isRemote, service, setService }) => {
           </div>
         </div>
       </form>
-      <Dropdown isRemote={isRemote} />
+      {/* <Dropdown isRemote={isRemote} /> */}
     </div>
   );
 };

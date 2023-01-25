@@ -1,4 +1,4 @@
-const APIURL = `/api`;
+const APIURL = `https://creative-juices.fly.dev/api`;
 
 export const authenticateUser = async (
   username,
