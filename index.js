@@ -1,8 +1,8 @@
 // const http = require('http');
 const chalk = require('chalk');
-const server = require('./app');
+const server = require('./Server/app');
 // const app = require('app');
-const PORT = process.env['PORT'] ?? 8000;
+const PORT = process.env['PORT'] ?? 8080;
 // const server = http.createServer(app);
 
 server.listen(PORT, () => {

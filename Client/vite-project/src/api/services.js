@@ -1,5 +1,5 @@
 import React from 'react';
-const APIURL = `http://localhost:8000/api`;
+const APIURL = `/api`;
 
 export const getAllServices = async () => {
   try {

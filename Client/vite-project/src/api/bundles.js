@@ -1,5 +1,5 @@
 import React from 'react';
-const APIURL = `http://localhost:8000/api`;
+const APIURL = `/api`;
 
 export const getAllBundles = async () => {
   console.log('calling get all bundles...');

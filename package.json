@@ -1,12 +1,12 @@
 {
   "name": "creative-juices",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "seed:dev": "nodemon ./db/seed.js",
-    "seed": "node ./db/seed.js",
-    "start": "node server.js",
-    "start:dev": "nodemon server.js"
+    "seed:dev": "nodemon Server/db/seed.js",
+    "seed": "node Server/db/seed.js",
+    "start": "node index.js",
+    "start:dev": "(npm run build --prefix Client/vite-project & npm run preview --prefix Client/vite-project) & nodemon index.js"
   },
   "keywords": [],
   "author": "",
