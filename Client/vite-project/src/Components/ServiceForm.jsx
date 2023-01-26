@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { createService } from '../api/services';
-import Dropdown from './Dropdown';
+// import Dropdown from './Dropdown';
 
 const ServiceForm = ({ service, setService }) => {
   const [type, setType] = useState('');
@@ -11,6 +11,15 @@ const ServiceForm = ({ service, setService }) => {
   const [notes, setNotes] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [isRemote, setIsRemote] = useState(false);
+  const [isBrewery, setBreweryLocation] = useState();
+  const [isBreweryChecked, setBreweryIsChecked] = useState(false);
+  const [isCoffee, setCoffeeLocation] = useState();
+  const [isCoffeeChecked, setCoffeeIsChecked] = useState(false);
+  const [isHome, setHomeLocation] = useState();
+  const [isHomeChecked, setHomeIsChecked] = useState(false);
+  const [isOther, setOtherLocation] = useState();
+  const [isOtherChecked, setOtherIsChecked] = useState(false);
+  
 
   const submitHandler = async (e) => {
     try {
@@ -25,7 +34,7 @@ const ServiceForm = ({ service, setService }) => {
       //   notes,
       //   isActive
       // );
-      console.log('this is the isRemoteSTate in submitHandler', isRemote);
+      console.log('this is the isBreweryState in submitHandler', isOther);
     } catch (error) {
       console.error(error);
     }
@@ -36,7 +45,56 @@ const ServiceForm = ({ service, setService }) => {
         <div id='service-form-inputs'>
           <div>IsRemote Dropdown</div>
           <div>add/sub clicker</div>
-          <div>Location Dropdown</div>
+          <div>Location
+            <label>Brewery
+            <input id='brewery'
+                label='brewery'
+                value='brewery'
+                type='checkbox'
+                checked={isBreweryChecked}
+                onChange={(e) => {
+                  setBreweryIsChecked(e.target.checked);
+                  setBreweryLocation(e.target.value);
+                }}>
+              </input>
+              </label>
+              <label>Coffee Shop
+              <input id='coffee-shop'
+                label='coffee-shop'
+                value='coffee-shop'
+                type='checkbox'
+                checked={isCoffeeChecked}
+                onChange={(e) => {
+                  setCoffeeIsChecked(e.target.checked);
+                  setCoffeeLocation(e.target.value);
+                }}>
+              </input>
+              </label>
+              <label>Home
+              <input id='home'
+                label='home'
+                value='home'
+                type='checkbox'
+                checked={isHomeChecked}
+                onChange={(e) => {
+                  setHomeIsChecked(e.target.checked);
+                  setHomeLocation(e.target.value);
+                }}>
+              </input>
+              </label>
+              <label>Other
+              <input id='other'
+                label='other'
+                value='other'
+                type='checkbox'
+                checked={isOtherChecked}
+                onChange={(e) => {
+                  setOtherIsChecked(e.target.checked);
+                  setOtherLocation(e.target.value);
+                }}>
+              </input>
+              </label>
+          </div>
           <div>
             <input
               value={date}
