@@ -3,27 +3,56 @@ import { createService } from '../api/services';
 // import Dropdown from './Dropdown';
 
 const ServiceForm = ({ service, setService }) => {
-  const [type, setType] = useState('');
-  const [guests, setGuests] = useState(0);
-  const [cost, setCost] = useState(0.0);
-  const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
   const [notes, setNotes] = useState('');
+  const [location, setLocation] = useState('');
+  const [type, setType] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [isRemote, setIsRemote] = useState(false);
-  const [isBrewery, setBreweryLocation] = useState();
+  const [isBrewery, setBreweryLocation] = useState('');
   const [isBreweryChecked, setBreweryIsChecked] = useState(false);
-  const [isCoffee, setCoffeeLocation] = useState();
+  const [isCoffee, setCoffeeLocation] = useState('');
   const [isCoffeeChecked, setCoffeeIsChecked] = useState(false);
-  const [isHome, setHomeLocation] = useState();
+  const [isHome, setHomeLocation] = useState('');
   const [isHomeChecked, setHomeIsChecked] = useState(false);
-  const [isOther, setOtherLocation] = useState();
+  const [isOther, setOtherLocation] = useState('');
   const [isOtherChecked, setOtherIsChecked] = useState(false);
+  const [adult, setAdult] = useState('');
+  const [isAdult, setIsAdultChecked] = useState(false);
+  const [kid, setKid] = useState('');
+  const [isKid, setIsKidChecked] = useState(false);
+  const [guests, setGuests] = useState(0);
+  
   
 
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
+      if(isHome.length > 0){
+        setLocation(isHome)
+      }
+      e.preventDefault();
+       if(isCoffee.length > 0){
+        setLocation(isCoffee)
+      }
+      e.preventDefault();
+       if(isBrewery.length > 0){
+        setLocation(isBrewery)
+      }
+      e.preventDefault();
+      if(isOther.length > 0){
+        setLocation(isOther)
+      }
+      e.preventDefault();
+      if(adult.length > 0){
+        setType(adult)
+      }
+      e.preventDefault();
+      if(kid.length > 0){
+        setType(kid)
+      }
+      console.log("this is the selected loca:", location);
+      console.log("this is the selected type:", type);
       // const newService = await createService(
       //   // token,
       //   type,
@@ -35,6 +64,8 @@ const ServiceForm = ({ service, setService }) => {
       //   isActive
       // );
       console.log('this is the isBreweryState in submitHandler', isOther);
+      console.log('number of guests', guests);
+      
     } catch (error) {
       console.error(error);
     }
@@ -43,8 +74,42 @@ const ServiceForm = ({ service, setService }) => {
     <div id='service-form'>
       <form onSubmit={submitHandler}>
         <div id='service-form-inputs'>
-          <div>IsRemote Dropdown</div>
-          <div>add/sub clicker</div>
+          <div> Type: 
+          <label>Adults
+            <input id='adult'
+                label='Adult'
+                value='adult'
+                type='checkbox'
+                checked={isAdult}
+                onChange={(e) => {
+                  setIsAdultChecked(e.target.checked);
+                  setAdult(e.target.value);
+                }}>
+              </input>
+              </label>
+          </div>
+          <div> Type: 
+          <label>Kid
+            <input id='kid'
+                label='Kid'
+                value='kid'
+                type='checkbox'
+                checked={isKid}
+                onChange={(e) => {
+                  setIsKidChecked(e.target.checked);
+                  setKid(e.target.value);
+                }}>
+              </input>
+              </label>
+          </div>
+          <div>
+            <label># of Guests
+              <input type="number" value={guests} id="input"
+              onChange={(e) => {
+                setGuests(e.target.value);
+            }}></input>
+            </label>
+          </div>
           <div>Location
             <label>Brewery
             <input id='brewery'
