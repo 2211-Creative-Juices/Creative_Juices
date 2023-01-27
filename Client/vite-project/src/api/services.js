@@ -19,8 +19,7 @@ export const createService = async (
   cost,
   location,
   date,
-  notes,
-  isactive
+  notes
 ) => {
   try {
     const response = await fetch(`${APIURL}/services`, {
@@ -37,7 +36,6 @@ export const createService = async (
         location,
         date,
         notes,
-        isactive,
       }),
     });
 

@@ -1,14 +1,20 @@
+import { useAuth } from '../custom-hooks';
 import { React, useState } from 'react';
 import { createService } from '../api/services';
-// import Dropdown from './Dropdown';
+import { AuthContext } from '../context/AuthContext';
 
 const ServiceForm = ({ service, setService }) => {
+  const user = useAuth();
   const [date, setDate] = useState('');
   const [notes, setNotes] = useState('');
+  const [cost, setCost] = useState(0);
   const [location, setLocation] = useState('');
   const [type, setType] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [isRemote, setIsRemote] = useState(false);
+  const [guests, setGuests] = useState(0);
+
+  //************* CHECK BOX STATE **************/
   const [isBrewery, setBreweryLocation] = useState('');
   const [isBreweryChecked, setBreweryIsChecked] = useState(false);
   const [isCoffee, setCoffeeLocation] = useState('');
@@ -21,51 +27,53 @@ const ServiceForm = ({ service, setService }) => {
   const [isAdult, setIsAdultChecked] = useState(false);
   const [kid, setKid] = useState('');
   const [isKid, setIsKidChecked] = useState(false);
-  const [guests, setGuests] = useState(0);
-  
-  
 
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
-      if(isHome.length > 0){
-        setLocation(isHome)
+      if (isHome.length > 0) {
+        setLocation(isHome);
       }
       e.preventDefault();
-       if(isCoffee.length > 0){
-        setLocation(isCoffee)
+      if (isCoffee.length > 0) {
+        setLocation(isCoffee);
       }
       e.preventDefault();
-       if(isBrewery.length > 0){
-        setLocation(isBrewery)
+      if (isBrewery.length > 0) {
+        setLocation(isBrewery);
       }
       e.preventDefault();
-      if(isOther.length > 0){
-        setLocation(isOther)
+      if (isOther.length > 0) {
+        setLocation(isOther);
       }
       e.preventDefault();
-      if(adult.length > 0){
-        setType(adult)
+      if (adult.length > 0) {
+        setType(adult);
       }
       e.preventDefault();
-      if(kid.length > 0){
-        setType(kid)
+      if (kid.length > 0) {
+        setType(kid);
       }
-      console.log("this is the selected loca:", location);
-      console.log("this is the selected type:", type);
-      // const newService = await createService(
-      //   // token,
-      //   type,
-      //   guests,
-      //   cost,
-      //   location,
-      //   date,
-      //   notes,
-      //   isActive
-      // );
-      console.log('this is the isBreweryState in submitHandler', isOther);
+      console.log('this is the selected loca:', location);
+      console.log('this is the selected type:', type);
+      console.log('this is the set date:', date);
+      console.log('these are the notes', notes);
       console.log('number of guests', guests);
-      
+      console.log('user:', user);
+      console.log('cost:', cost);
+
+      const newService = await createService(
+        user.token,
+        type,
+        isRemote,
+        guests,
+        cost,
+        location,
+        date,
+        notes
+      );
+
+      console.log('this is the new service!', newService);
     } catch (error) {
       console.error(error);
     }
@@ -74,9 +82,13 @@ const ServiceForm = ({ service, setService }) => {
     <div id='service-form'>
       <form onSubmit={submitHandler}>
         <div id='service-form-inputs'>
-          <div> Type: 
-          <label>Adults
-            <input id='adult'
+          <div>
+            {' '}
+            Type:
+            <label>
+              Adults
+              <input
+                id='adult'
                 label='Adult'
                 value='adult'
                 type='checkbox'
@@ -84,13 +96,14 @@ const ServiceForm = ({ service, setService }) => {
                 onChange={(e) => {
                   setIsAdultChecked(e.target.checked);
                   setAdult(e.target.value);
-                }}>
-              </input>
-              </label>
-          </div>
-          <div> Type: 
-          <label>Kid
-            <input id='kid'
+                }}
+              ></input>
+            </label>{' '}
+            Type:
+            <label>
+              Kid
+              <input
+                id='kid'
                 label='Kid'
                 value='kid'
                 type='checkbox'
@@ -98,21 +111,30 @@ const ServiceForm = ({ service, setService }) => {
                 onChange={(e) => {
                   setIsKidChecked(e.target.checked);
                   setKid(e.target.value);
-                }}>
-              </input>
-              </label>
-          </div>
-          <div>
-            <label># of Guests
-              <input type="number" value={guests} id="input"
-              onChange={(e) => {
-                setGuests(e.target.value);
-            }}></input>
+                }}
+              ></input>
             </label>
           </div>
-          <div>Location
-            <label>Brewery
-            <input id='brewery'
+          <div>
+            <label>
+              # of Guests
+              <input
+                type='number'
+                value={guests}
+                id='input'
+                onChange={(e) => {
+                  setGuests(e.target.value);
+                  setCost(20 * e.target.value);
+                }}
+              ></input>
+            </label>
+          </div>
+          <div>
+            Location
+            <label>
+              Brewery
+              <input
+                id='brewery'
                 label='brewery'
                 value='brewery'
                 type='checkbox'
@@ -120,11 +142,13 @@ const ServiceForm = ({ service, setService }) => {
                 onChange={(e) => {
                   setBreweryIsChecked(e.target.checked);
                   setBreweryLocation(e.target.value);
-                }}>
-              </input>
-              </label>
-              <label>Coffee Shop
-              <input id='coffee-shop'
+                }}
+              ></input>
+            </label>
+            <label>
+              Coffee Shop
+              <input
+                id='coffee-shop'
                 label='coffee-shop'
                 value='coffee-shop'
                 type='checkbox'
@@ -132,11 +156,13 @@ const ServiceForm = ({ service, setService }) => {
                 onChange={(e) => {
                   setCoffeeIsChecked(e.target.checked);
                   setCoffeeLocation(e.target.value);
-                }}>
-              </input>
-              </label>
-              <label>Home
-              <input id='home'
+                }}
+              ></input>
+            </label>
+            <label>
+              Home
+              <input
+                id='home'
                 label='home'
                 value='home'
                 type='checkbox'
@@ -144,11 +170,13 @@ const ServiceForm = ({ service, setService }) => {
                 onChange={(e) => {
                   setHomeIsChecked(e.target.checked);
                   setHomeLocation(e.target.value);
-                }}>
-              </input>
-              </label>
-              <label>Other
-              <input id='other'
+                }}
+              ></input>
+            </label>
+            <label>
+              Other
+              <input
+                id='other'
                 label='other'
                 value='other'
                 type='checkbox'
@@ -156,9 +184,9 @@ const ServiceForm = ({ service, setService }) => {
                 onChange={(e) => {
                   setOtherIsChecked(e.target.checked);
                   setOtherLocation(e.target.value);
-                }}>
-              </input>
-              </label>
+                }}
+              ></input>
+            </label>
           </div>
           <div>
             <input
@@ -185,13 +213,15 @@ const ServiceForm = ({ service, setService }) => {
               ></input>
             </label>
 
-            <button onClick={submitHandler} type={'submit'}>
+            <button
+              onClick={submitHandler}
+              type={'submit'}
+            >
               Submit
             </button>
           </div>
         </div>
       </form>
-      {/* <Dropdown isRemote={isRemote} /> */}
     </div>
   );
 };
