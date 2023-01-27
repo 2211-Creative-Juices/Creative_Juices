@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const usersRouter = express.Router();
 const { getUserByUsername, getAllUsers, createUser } = require('../db');
-
+const { JWT_SECRET = 'donottell' } = process.env;
 //Register
 usersRouter.use((req, res, next) => {
   console.log('Request being made to users');
@@ -43,6 +43,7 @@ usersRouter.post('/register', async (req, res, next) => {
         zipcode,
         email,
       });
+      console.log('this is user in usersapi, ', user);
       if (!user) {
         next({
           name: 'NoUserExistsError',
@@ -54,12 +55,13 @@ usersRouter.post('/register', async (req, res, next) => {
             id: user.id,
             username: user.username,
           },
-          process.env.JWT_SECRET,
+          JWT_SECRET,
           {
             expiresIn: '1w',
           }
         );
-
+        console.log('this is token in reg', token);
+        console.log('this is JWTsectre', JWT_SECRET);
         res.send({
           message: 'Thanks for signing up!',
           user,
@@ -82,7 +84,7 @@ usersRouter.post('/login', async (req, res, next) => {
     const match = await bcrypt.compare(password, hashedPassword);
     const token = jwt.sign(
       { id: user.id, username: user.username },
-      process.env.JWT_SECRET
+      JWT_SECRET
     );
 
     if (user && match) {

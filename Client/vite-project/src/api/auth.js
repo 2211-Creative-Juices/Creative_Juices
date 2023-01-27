@@ -1,4 +1,5 @@
-const APIURL = `https://creative-juices.fly.dev/api`;
+// const APIURL = `https://creative-juices.fly.dev/api`;
+const BASE_API = `http://localhost:8080/api`;
 
 export const authenticateUser = async (
   username,
@@ -12,7 +13,7 @@ export const authenticateUser = async (
 
   if (method === 'login') {
     try {
-      const response = await fetch(`${APIURL}/users/${method}`, {
+      const response = await fetch(`${BASE_API}/users/${method}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +38,7 @@ export const authenticateUser = async (
     }
   } else {
     try {
-      const response = await fetch(`${APIURL}/users/${method}`, {
+      const response = await fetch(`${BASE_API}/users/${method}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +72,7 @@ export const me = async () => {
     const token = window.localStorage.getItem('juice-token');
 
     if (token) {
-      const response = await fetch(`${APIURL}/users/me`, {
+      const response = await fetch(`${BASE_API}/users/me`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

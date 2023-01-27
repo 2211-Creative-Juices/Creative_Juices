@@ -1,9 +1,10 @@
 import React from 'react';
-const APIURL = `https://creative-juices.fly.dev/api`;
+// const APIURL = `https://creative-juices.fly.dev/api`;
+const BASE_API = `http://localhost:8080/api`;
 
 export const getAllServices = async () => {
   try {
-    const response = await fetch(`${APIURL}/services`);
+    const response = await fetch(`${BASE_API}/services`);
     const results = await response.json();
     return results;
   } catch (error) {
@@ -29,7 +30,7 @@ export const createService = async (
   console.log('CS number of guests', guests);
   console.log('CS cost:', cost);
   try {
-    const response = await fetch(`${APIURL}/services`, {
+    const response = await fetch(`${BASE_API}/services`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

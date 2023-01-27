@@ -26,6 +26,7 @@ async function createService({
     console.log('first create service: ', service);
     return service;
   } catch (error) {
+    console.error('this is error in createservices', error);
     throw error;
   }
 }

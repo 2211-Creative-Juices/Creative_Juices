@@ -21,7 +21,8 @@ servicesRouter.get('/', async (req, res, next) => {
 
 // POST /api/services
 
-servicesRouter.post('/', requireUser, async (req, res, next) => {
+servicesRouter.post('/create', requireUser, async (req, res, next) => {
+  console.log('this is req.body', req.body);
   const {
     name,
     type,
@@ -33,11 +34,21 @@ servicesRouter.post('/', requireUser, async (req, res, next) => {
     notes,
     isactive,
   } = req.body;
-  if (req.user) console.log(req.user);
+  if (req.user);
   {
     try {
-      console.log('this our reqbod:', req.body);
-      const { newService } = await createService(req.body);
+      // console.log('this our reqbod:', req.body);
+      const newService = await createService({
+        name,
+        type,
+        isremote,
+        guests,
+        cost,
+        location,
+        date,
+        notes,
+        isactive,
+      });
       console.log('heyyyyyyyy newservice:', newService);
       res.send(newService);
     } catch (error) {

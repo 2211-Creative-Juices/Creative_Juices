@@ -67,7 +67,7 @@ async function createTables() {
     
     CREATE TABLE services (
       id SERIAL PRIMARY KEY,
-      name varchar(255) NOT NULL,
+      name varchar(255),
       type varchar(255) NOT NULL,
       isremote BOOLEAN DEFAULT false,
       guests INT,
@@ -275,48 +275,48 @@ async function testDB() {
 
     // *******************USER TESTS******************//
 
-    const userByUsername = await getUserByUsername('ashley');
-    console.log('testing getUserByUsername', userByUsername);
+    // const userByUsername = await getUserByUsername('ashley');
+    // console.log('testing getUserByUsername', userByUsername);
 
-    const allUsers = await getAllUsers();
-    console.log('These are all the users!', allUsers);
+    // const allUsers = await getAllUsers();
+    // console.log('These are all the users!', allUsers);
 
-    const userById = await getUserById(1);
-    console.log('testing getUserById', userById);
+    // const userById = await getUserById(1);
+    // console.log('testing getUserById', userById);
 
-    const userByUser = await getUser('ashley', 'ashley1!');
-    console.log('testing getUser', userByUser);
+    // const userByUser = await getUser('ashley', 'ashley1!');
+    // console.log('testing getUser', userByUser);
 
-    const userByEmail = await getUserByEmail('ashley@gmail.com');
-    console.log('testing getUserByemail', userByEmail);
+    // const userByEmail = await getUserByEmail('ashley@gmail.com');
+    // console.log('testing getUserByemail', userByEmail);
 
-    const updatedUser = await updateUser(allUsers[3].id, {
-      name: 'sandy',
-      username: 'rockstar',
-      password: 'lemons!',
-      zipcode: '12324',
-      email: 'sandy@gmail.com',
-    });
-    console.log('testing updateUsers', updatedUser);
+    // const updatedUser = await updateUser(allUsers[3].id, {
+    //   name: 'sandy',
+    //   username: 'rockstar',
+    //   password: 'lemons!',
+    //   zipcode: '12324',
+    //   email: 'sandy@gmail.com',
+    // });
+    // console.log('testing updateUsers', updatedUser);
 
-    const attachedUserServ = await attachServicesToUser(allUsers);
-    console.log(
-      'these are all the users w services attached:',
-      attachedUserServ
-    );
+    // const attachedUserServ = await attachServicesToUser(allUsers);
+    // console.log(
+    //   'these are all the users w services attached:',
+    //   attachedUserServ
+    // );
 
-    const attachedUserBundle = await attachBundleToUser(allUsers);
-    console.log(
-      'these are all the users w bundles attached:',
-      attachedUserBundle
-    );
-    console.log(
-      'these are all the users w bundles attached BUNDLES:',
-      attachedUserBundle[0].bundles
-    );
+    // const attachedUserBundle = await attachBundleToUser(allUsers);
+    // console.log(
+    //   'these are all the users w bundles attached:',
+    //   attachedUserBundle
+    // );
+    // console.log(
+    //   'these are all the users w bundles attached BUNDLES:',
+    //   attachedUserBundle[0].bundles
+    // );
 
-    const updatedPassword = await updateUserPassword(1, 'melons');
-    console.log('this is my updated password', updatedPassword);
+    // const updatedPassword = await updateUserPassword(1, 'melons');
+    // console.log('this is my updated password', updatedPassword);
 
     console.log('finished testing database!');
   } catch (error) {
