@@ -23,6 +23,7 @@ async function createService({
           `,
       [name, type, isremote, guests, cost, location, date, notes, isactive]
     );
+    console.log('first create service: ', service);
     return service;
   } catch (error) {
     throw error;

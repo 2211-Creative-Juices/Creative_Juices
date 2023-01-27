@@ -21,6 +21,13 @@ export const createService = async (
   date,
   notes
 ) => {
+  console.log('CS token:', token);
+  console.log('CS this is the selected loca:', location);
+  console.log('CS this is the selected type:', type);
+  console.log('CS this is the set date:', date);
+  console.log('CS these are the notes', notes);
+  console.log('CS number of guests', guests);
+  console.log('CS cost:', cost);
   try {
     const response = await fetch(`${APIURL}/services`, {
       method: 'POST',
@@ -40,8 +47,10 @@ export const createService = async (
     });
 
     const results = await response.json();
+    console.log('look at our results:', results);
     return results;
   } catch (error) {
+    console.error('what a horrible happening:', error);
     throw error;
   }
 };

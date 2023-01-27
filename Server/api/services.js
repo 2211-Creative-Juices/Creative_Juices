@@ -33,12 +33,17 @@ servicesRouter.post('/', requireUser, async (req, res, next) => {
     notes,
     isactive,
   } = req.body;
-
-  try {
-    const newService = await createService(req.body);
-    res.send(newService);
-  } catch (error) {
-    next(error);
+  if (req.user) console.log(req.user);
+  {
+    try {
+      console.log('this our reqbod:', req.body);
+      const { newService } = await createService(req.body);
+      console.log('heyyyyyyyy newservice:', newService);
+      res.send(newService);
+    } catch (error) {
+      console.error('this is new services error: ', error);
+      next(error);
+    }
   }
 });
 
