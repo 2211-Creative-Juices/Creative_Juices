@@ -57,6 +57,16 @@ async function createTables() {
     console.log('Starting to build tables...');
 
     await client.query(`
+
+    CREATE TABLE orders (
+      id SERIAL PRIMARY KEY,
+      orderdate varchar(255) NOT NULL,
+     "purchasorId" INTEGER REFERENCES users.id,
+     isComplete BOOLEAN default false,
+     inCart BOOLEAN default false,
+     totalAmount MONEY,
+     UNIQUE("purchasorID")
+    )
     
     CREATE TABLE bundlekit (
       id SERIAL PRIMARY KEY,
