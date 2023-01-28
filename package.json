@@ -6,7 +6,10 @@
     "seed:dev": "nodemon Server/db/seed.js",
     "seed": "node Server/db/seed.js",
     "start": "node index.js",
-    "start:dev": "(npm run build --prefix Client/vite-project & npm run preview --prefix Client/vite-project) & nodemon index.js"
+    "start:build": "(npm run build  & npm run preview --prefix Client/vite-project) & nodemon index.js",
+    "start:dev": "npm run dev --prefix Client/vite-project  & nodemon index.js",
+    "build": "npm run build --prefix Client/vite-project"
+
   },
   "keywords": [],
   "author": "",

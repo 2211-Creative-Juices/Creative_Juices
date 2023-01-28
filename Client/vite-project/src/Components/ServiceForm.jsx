@@ -29,28 +29,29 @@ const ServiceForm = ({ service, setService }) => {
   const [isKid, setIsKidChecked] = useState(false);
 
   const submitHandler = async (e) => {
+    console.log('thi is isAdult', adult);
     try {
       e.preventDefault();
       if (isHome.length > 0) {
         setLocation(isHome);
       }
-      e.preventDefault();
+
       if (isCoffee.length > 0) {
         setLocation(isCoffee);
       }
-      e.preventDefault();
+
       if (isBrewery.length > 0) {
         setLocation(isBrewery);
       }
-      e.preventDefault();
+
       if (isOther.length > 0) {
         setLocation(isOther);
       }
-      e.preventDefault();
-      if (adult.length > 0) {
-        setType(adult);
+
+      if (adult) {
+        await setType(adult);
       }
-      e.preventDefault();
+
       if (kid.length > 0) {
         setType(kid);
       }
@@ -92,10 +93,11 @@ const ServiceForm = ({ service, setService }) => {
                 label='Adult'
                 value='adult'
                 type='checkbox'
-                checked={isAdult}
+                // checked={isAdult}
                 onChange={(e) => {
-                  setIsAdultChecked(e.target.checked);
+                  setIsAdultChecked(!isAdult);
                   setAdult(e.target.value);
+                  // adult ? setType(adult) : setType('');
                 }}
               ></input>
             </label>{' '}
@@ -213,10 +215,7 @@ const ServiceForm = ({ service, setService }) => {
               ></input>
             </label>
 
-            <button
-              onClick={submitHandler}
-              type={'submit'}
-            >
+            <button onClick={submitHandler} type={'submit'}>
               Submit
             </button>
           </div>

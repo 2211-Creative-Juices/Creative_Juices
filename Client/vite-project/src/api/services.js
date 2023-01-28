@@ -1,6 +1,6 @@
 import React from 'react';
 // const APIURL = `https://creative-juices.fly.dev/api`;
-const BASE_API = `http://localhost:8080/api`;
+const BASE_API = `/api`;
 
 export const getAllServices = async () => {
   try {

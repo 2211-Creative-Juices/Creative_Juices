@@ -2,9 +2,10 @@ const express = require('express');
 const { requireUser } = require('./utils');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { JWT_SECRET } = process.env;
 const usersRouter = express.Router();
 const { getUserByUsername, getAllUsers, createUser } = require('../db');
-const { JWT_SECRET = 'donottell' } = process.env;
+// const { JWT_SECRET = 'donottell' } = process.env;
 //Register
 usersRouter.use((req, res, next) => {
   console.log('Request being made to users');
