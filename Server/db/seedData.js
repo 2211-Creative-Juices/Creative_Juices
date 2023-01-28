@@ -35,11 +35,14 @@ const {
   updateBundle,
 } = require('./bundleKits');
 
+const { addUsersToOrders } = require('./orders');
+
 async function dropTables() {
   try {
     console.log('Dropping All Tables!..');
 
     await client.query(`
+    DROP TABLE IF EXISTS orders;
     DROP TABLE IF EXISTS users;
     DROP TABLE IF EXISTS services;
     DROP TABLE IF EXISTS bundlekit;
@@ -58,16 +61,6 @@ async function createTables() {
 
     await client.query(`
 
-    CREATE TABLE orders (
-      id SERIAL PRIMARY KEY,
-      orderdate varchar(255) NOT NULL,
-     "purchasorId" INTEGER REFERENCES users.id,
-     isComplete BOOLEAN default false,
-     inCart BOOLEAN default false,
-     totalAmount MONEY,
-     UNIQUE("purchasorID")
-    )
-    
     CREATE TABLE bundlekit (
       id SERIAL PRIMARY KEY,
       bundlename varchar(255) NOT NULL,
@@ -100,12 +93,42 @@ async function createTables() {
       "bundlekitId" INTEGER REFERENCES bundlekit(id),
       UNIQUE (username, email)
     );
-    
+
+    CREATE TABLE orders (
+      id SERIAL PRIMARY KEY,
+      orderdate varchar(255),
+     "purchaserId" INTEGER REFERENCES users(id),
+     iscomplete BOOLEAN default false,
+     incart BOOLEAN default false,
+     totalamount DECIMAL,
+     UNIQUE("purchaserId")
+    );
     `);
 
     console.log('All tables created!');
   } catch (error) {
     console.error('Error creating tables!');
+    throw error;
+  }
+}
+
+async function createFakeOrder() {
+  try {
+    const fakeOrder = [
+      {
+        orderdate: '1-12-23',
+        purchaserId: 2,
+        iscomplete: false,
+        incart: true,
+        totalamount: 100.0,
+      },
+    ];
+    const order = await Promise.all(fakeOrder.map(addUsersToOrders));
+    console.log('Order created:');
+    console.log(order);
+    console.log('Finished creating Order!');
+  } catch (error) {
+    console.error('Error creating fakeOrder');
     throw error;
   }
 }
@@ -228,7 +251,14 @@ async function createFakeUsers() {
 
 async function testDB() {
   try {
+    //*******************ORDER TEST********************//
+
+    // console.log('starting to test order');
+    // const allOrders = await addUsersToOrders();
+    // console.log('testing addUsersToOrders', allOrders);
+
     //*******************BUNDLE KIT TEST********************//
+
     console.log('starting to test bundle kit');
     const allBundles = await getAllBundles();
     console.log('testing get all bundles', allBundles);
@@ -342,6 +372,7 @@ async function rebuildDB() {
     await createFakeBundle();
     await createFakeServices();
     await createFakeUsers();
+    await createFakeOrder();
 
     await testDB();
     //await initial stuff
