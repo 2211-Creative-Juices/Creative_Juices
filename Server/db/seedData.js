@@ -35,7 +35,12 @@ const {
   updateBundle,
 } = require('./bundleKits');
 
-const { addUsersToOrders } = require('./orders');
+const {
+  createOrder,
+  getOrderById,
+  getAllOrders,
+  attachUserToOrder,
+} = require('./orders');
 
 async function dropTables() {
   try {
@@ -123,7 +128,7 @@ async function createFakeOrder() {
         totalamount: 100.0,
       },
     ];
-    const order = await Promise.all(fakeOrder.map(addUsersToOrders));
+    const order = await Promise.all(fakeOrder.map(createOrder));
     console.log('Order created:');
     console.log(order);
     console.log('Finished creating Order!');
@@ -253,9 +258,19 @@ async function testDB() {
   try {
     //*******************ORDER TEST********************//
 
-    // console.log('starting to test order');
-    // const allOrders = await addUsersToOrders();
-    // console.log('testing addUsersToOrders', allOrders);
+    console.log('starting to test order');
+    const allOrders = await getAllOrders();
+    console.log('testing get all orders:', allOrders);
+
+    const orderById = await getOrderById(1);
+    console.log('testing get order by id:', orderById);
+
+    const attachUserOrder = await attachUserToOrder(allOrders);
+    console.log('testing attach user to order:', attachUserOrder);
+    console.log(
+      'these are all the orders w users attached order:',
+      attachUserOrder[0].usersinfo
+    );
 
     //*******************BUNDLE KIT TEST********************//
 
@@ -318,8 +333,8 @@ async function testDB() {
     // const userByUsername = await getUserByUsername('ashley');
     // console.log('testing getUserByUsername', userByUsername);
 
-    // const allUsers = await getAllUsers();
-    // console.log('These are all the users!', allUsers);
+    const allUsers = await getAllUsers();
+    console.log('These are all the users!', allUsers);
 
     // const userById = await getUserById(1);
     // console.log('testing getUserById', userById);
@@ -345,15 +360,15 @@ async function testDB() {
     //   attachedUserServ
     // );
 
-    // const attachedUserBundle = await attachBundleToUser(allUsers);
-    // console.log(
-    //   'these are all the users w bundles attached:',
-    //   attachedUserBundle
-    // );
-    // console.log(
-    //   'these are all the users w bundles attached BUNDLES:',
-    //   attachedUserBundle[0].bundles
-    // );
+    const attachedUserBundle = await attachBundleToUser(allUsers);
+    console.log(
+      'these are all the users w bundles attached:',
+      attachedUserBundle
+    );
+    console.log(
+      'these are all the users w bundles attached BUNDLES:',
+      attachedUserBundle[0].bundles
+    );
 
     // const updatedPassword = await updateUserPassword(1, 'melons');
     // console.log('this is my updated password', updatedPassword);
