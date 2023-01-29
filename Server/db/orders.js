@@ -1,4 +1,5 @@
 const client = require('./client');
+// const { getAllUsers } = require('./users');
 
 async function getAllOrders() {
   try {
@@ -56,9 +57,10 @@ async function attachUserToOrder(orders) {
   const ordersToReturn = [...orders];
   try {
     const { rows: usersinfo } = await client.query(`
-        SELECT *
+        SELECT * 
         FROM users
         JOIN orders ON users.id = orders."purchaserId"
+        WHERE orders."purchaserId" = users.id
         `);
 
     for (const order of ordersToReturn) {
@@ -77,9 +79,27 @@ async function attachUserToOrder(orders) {
   }
 }
 
+async function getAllOrdersByUser({ username }) {
+  try {
+    const { rows: order } = await client.query(
+      `
+            SELECT orders.*
+            FROM orders
+            JOIN users on orders."purchaserId" = users.id
+            WHERE username = $1 AND orders."purchaserId" = users.id
+            `,
+      [username]
+    );
+    return attachUserToOrder(order);
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createOrder,
   getOrderById,
   attachUserToOrder,
   getAllOrders,
+  getAllOrdersByUser,
 };

@@ -40,6 +40,7 @@ const {
   getOrderById,
   getAllOrders,
   attachUserToOrder,
+  getAllOrdersByUser,
 } = require('./orders');
 
 async function dropTables() {
@@ -106,7 +107,7 @@ async function createTables() {
      iscomplete BOOLEAN default false,
      incart BOOLEAN default false,
      totalamount DECIMAL,
-     UNIQUE("purchaserId")
+     UNIQUE ("purchaserId")
     );
     `);
 
@@ -256,22 +257,6 @@ async function createFakeUsers() {
 
 async function testDB() {
   try {
-    //*******************ORDER TEST********************//
-
-    console.log('starting to test order');
-    const allOrders = await getAllOrders();
-    console.log('testing get all orders:', allOrders);
-
-    const orderById = await getOrderById(1);
-    console.log('testing get order by id:', orderById);
-
-    const attachUserOrder = await attachUserToOrder(allOrders);
-    console.log('testing attach user to order:', attachUserOrder);
-    console.log(
-      'these are all the orders w users attached order:',
-      attachUserOrder[0].usersinfo
-    );
-
     //*******************BUNDLE KIT TEST********************//
 
     console.log('starting to test bundle kit');
@@ -330,35 +315,35 @@ async function testDB() {
 
     // *******************USER TESTS******************//
 
-    // const userByUsername = await getUserByUsername('ashley');
-    // console.log('testing getUserByUsername', userByUsername);
+    const userByUsername = await getUserByUsername('ashley');
+    console.log('testing getUserByUsername', userByUsername);
 
     const allUsers = await getAllUsers();
     console.log('These are all the users!', allUsers);
 
-    // const userById = await getUserById(1);
-    // console.log('testing getUserById', userById);
+    const userById = await getUserById(1);
+    console.log('testing getUserById', userById);
 
-    // const userByUser = await getUser('ashley', 'ashley1!');
-    // console.log('testing getUser', userByUser);
+    const userByUser = await getUser('ashley', 'ashley1!');
+    console.log('testing getUser', userByUser);
 
-    // const userByEmail = await getUserByEmail('ashley@gmail.com');
-    // console.log('testing getUserByemail', userByEmail);
+    const userByEmail = await getUserByEmail('ashley@gmail.com');
+    console.log('testing getUserByemail', userByEmail);
 
-    // const updatedUser = await updateUser(allUsers[3].id, {
-    //   name: 'sandy',
-    //   username: 'rockstar',
-    //   password: 'lemons!',
-    //   zipcode: '12324',
-    //   email: 'sandy@gmail.com',
-    // });
-    // console.log('testing updateUsers', updatedUser);
+    const updatedUser = await updateUser(allUsers[3].id, {
+      name: 'sandy',
+      username: 'rockstar',
+      password: 'lemons!',
+      zipcode: '12324',
+      email: 'sandy@gmail.com',
+    });
+    console.log('testing updateUsers', updatedUser);
 
-    // const attachedUserServ = await attachServicesToUser(allUsers);
-    // console.log(
-    //   'these are all the users w services attached:',
-    //   attachedUserServ
-    // );
+    const attachedUserServ = await attachServicesToUser(allUsers);
+    console.log(
+      'these are all the users w services attached:',
+      attachedUserServ[4].services
+    );
 
     const attachedUserBundle = await attachBundleToUser(allUsers);
     console.log(
@@ -367,11 +352,30 @@ async function testDB() {
     );
     console.log(
       'these are all the users w bundles attached BUNDLES:',
-      attachedUserBundle[0].bundles
+      attachedUserBundle[3].bundles
     );
 
     // const updatedPassword = await updateUserPassword(1, 'melons');
     // console.log('this is my updated password', updatedPassword);
+
+    //*******************ORDER TEST********************//
+
+    console.log('starting to test order');
+    const allOrders = await getAllOrders();
+    console.log('testing get all orders:', allOrders);
+
+    const orderById = await getOrderById(1);
+    console.log('testing get order by id:', orderById);
+
+    const attachUserOrder = await attachUserToOrder(allOrders);
+    console.log('testing attach user to order:', attachUserOrder);
+    console.log(
+      'these are all the orders w users attached user',
+      attachUserOrder[0].usersinfo
+    );
+
+    const ordersbyUser = await getAllOrdersByUser('megan');
+    console.log('this is getall orders by username', ordersbyUser);
 
     console.log('finished testing database!');
   } catch (error) {
