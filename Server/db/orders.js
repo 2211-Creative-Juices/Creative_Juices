@@ -57,7 +57,7 @@ async function attachUserToOrder(orders) {
   const ordersToReturn = [...orders];
   try {
     const { rows: usersinfo } = await client.query(`
-        SELECT * 
+        SELECT users.* 
         FROM users
         JOIN orders ON users.id = orders."purchaserId"
         WHERE orders."purchaserId" = users.id

@@ -374,8 +374,16 @@ async function testDB() {
       attachUserOrder[0].usersinfo
     );
 
-    const ordersbyUser = await getAllOrdersByUser('megan');
+    const ordersbyUser = await getAllOrdersByUser('shelleyadmin');
     console.log('this is getall orders by username', ordersbyUser);
+    const ordersbyMegan = await getAllOrdersByUser('megan');
+    console.log('this is getall orders by username', ordersbyMegan);
+    const ordersbyChelsea = await getAllOrdersByUser('Chelsea');
+    console.log('this is getall orders by username', ordersbyChelsea);
+    const ordersbyPhilip = await getAllOrdersByUser('philip');
+    console.log('this is getall orders by username', ordersbyPhilip);
+    const ordersbySandy = await getAllOrdersByUser('rockstar');
+    console.log('this is getall orders by username', ordersbySandy);
 
     console.log('finished testing database!');
   } catch (error) {
