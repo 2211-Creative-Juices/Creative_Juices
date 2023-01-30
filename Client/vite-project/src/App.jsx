@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { getAllServices } from './api/services';
 import { getAllBundles } from './api/bundles';
+import { getAllOrders } from './api/orders';
 import {
   AllServices,
   NavBar,
@@ -11,6 +12,7 @@ import {
   About,
   ServiceForm,
 } from './Components/Index';
+import UserCart from './CartComponents/UserCart';
 import { Signup, Login } from './Components/AuthForm';
 import { useAuth } from './custom-hooks';
 
@@ -20,6 +22,7 @@ function App() {
   const { token, isLoggedIn, logout, user } = useAuth();
   const [services, setServices] = useState([]);
   const [bundles, setBundles] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchedServices = async () => {
@@ -37,6 +40,14 @@ function App() {
     fetchedBundles();
   }, []);
 
+  useEffect(() => {
+    const fetchedOrders = async () => {
+      const allOrders = await getAllOrders();
+      setOrders(allOrders);
+    };
+    fetchedOrders();
+  }, []);
+
   return (
     <div className='App'>
       <NavBar />
@@ -51,8 +62,9 @@ function App() {
       <div>
         <Home />
         <About />
+        <UserCart orders={orders} />
         <AllServices services={services} />
-        <ServiceForm/>
+        <ServiceForm />
         <AllBundles bundles={bundles} />
       </div>
     </div>
