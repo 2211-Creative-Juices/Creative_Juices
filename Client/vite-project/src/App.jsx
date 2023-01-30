@@ -5,7 +5,6 @@ import { getAllServices } from './api/services';
 import { getAllBundles } from './api/bundles';
 import { getAllOrders } from './api/orders';
 import {
-  AllServices,
   NavBar,
   Home,
   AllBundles,
@@ -55,16 +54,22 @@ function App() {
       <div>
         <button onClick={logout}>Logout</button>
         <Routes>
-          <Route path='/login' element={Login} />
-          <Route path='/signup' element={Signup} />
+          <Route
+            path='/login'
+            element={Login}
+          />
+          <Route
+            path='/signup'
+            element={Signup}
+          />
         </Routes>
       </div>
       <div>
         <Home />
         <About />
         <UserCart orders={orders} />
-        <AllServices services={services} />
-        <ServiceForm />
+
+        <ServiceForm services={services} />
         <AllBundles bundles={bundles} />
       </div>
     </div>

@@ -1,9 +1,9 @@
 import { useAuth } from '../custom-hooks';
 import { React, useState } from 'react';
 import { createService } from '../api/services';
-import { AuthContext } from '../context/AuthContext';
+import AllServices from './Services';
 
-const ServiceForm = ({ service, setService }) => {
+const ServiceForm = ({ services, setService }) => {
   const user = useAuth();
   const [date, setDate] = useState('');
   const [notes, setNotes] = useState('');
@@ -215,12 +215,18 @@ const ServiceForm = ({ service, setService }) => {
               ></input>
             </label>
 
-            <button onClick={submitHandler} type={'submit'}>
+            <button
+              onClick={submitHandler}
+              type={'submit'}
+            >
               Submit
             </button>
           </div>
         </div>
       </form>
+      <div>
+        <AllServices services={services} />
+      </div>
     </div>
   );
 };

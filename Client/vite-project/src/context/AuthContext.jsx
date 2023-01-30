@@ -13,7 +13,7 @@ export default function AuthProvider({ children }) {
     settoken(localStorage['juice-token'] || '');
     if (!localStorage['juice-token']) {
       const getMe = async () => {
-        const result = await me(localStorage['juice-token']);
+        const result = await me(localStorage['juice-token'], username, id);
         setUser(result);
       };
       getMe();
