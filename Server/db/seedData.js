@@ -108,8 +108,7 @@ async function createTables() {
      "purchaserId" INTEGER REFERENCES users(id),
      iscomplete BOOLEAN default false,
      incart BOOLEAN default false,
-     totalamount DECIMAL,
-     UNIQUE ("purchaserId")
+     totalamount DECIMAL
     );
     `);
 

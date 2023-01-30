@@ -21,13 +21,14 @@ ordersRouter.get('/', async (req, res, next) => {
 });
 
 ordersRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
-  const id = req.params.purchaserId;
+  let id = req.params.purchaserId;
   console.log('Req Params', req.params);
 
   try {
     if ((id = req.user.id)) {
-      const username = req.user.username;
-      const getOrderForMe = getAllOrdersByUser(username);
+      let username = req.user.username;
+      let getOrderForMe = getAllOrdersByUser(username);
+      console.log('this is getorderforme', getOrderForMe);
       res.send(getOrderForMe);
     }
   } catch (error) {
