@@ -22,7 +22,7 @@ servicesRouter.get('/', async (req, res, next) => {
 // POST /api/services
 
 servicesRouter.post('/create', requireUser, async (req, res, next) => {
-  console.log('this is req.body', req.body);
+  // console.log('this is req.body', req.body);
   const {
     name,
     type,

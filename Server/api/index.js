@@ -48,4 +48,7 @@ apiRouter.use('/services', servicesRouter);
 const bundlesRouter = require('./bundles');
 apiRouter.use('/bundles', bundlesRouter);
 
+const ordersRouter = require('./orders');
+apiRouter.use('/orders', ordersRouter);
+
 module.exports = apiRouter;
