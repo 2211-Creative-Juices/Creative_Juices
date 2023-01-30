@@ -1,8 +1,9 @@
 const express = require('express');
 const {
   getAllBundles,
-  createBundle,
+  createBundleKit,
   getBundleById,
+  getBundleByPurchaserId,
   updateBundle,
 } = require('../db');
 
@@ -19,13 +20,26 @@ bundlesRouter.get('/', async (req, res, next) => {
   }
 });
 
+bundlesRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
+  let id = req.params.purchaserId;
+  try {
+    if ((id = req.user.id)) {
+      let getBundlesForMe = await getBundleByPurchaserId(id);
+      console.log('this is get bundles for me', getBundlesForMe);
+      res.send(getBundlesForMe);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 // POST /api/bundles
 
 bundlesRouter.post('/', requireUser, async (req, res, next) => {
   const { bundlename, quantity, bundlecost } = req.body;
 
   try {
-    const newBundle = await createBundle(req.body);
+    const newBundle = await createBundleKit(req.body);
     res.send(newBundle);
   } catch (error) {
     next(error);

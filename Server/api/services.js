@@ -4,6 +4,7 @@ const {
   createService,
   getServiceById,
   updateService,
+  getServiceByPurchaserId,
 } = require('../db');
 const { requireUser } = require('./utils');
 const servicesRouter = express.Router();
@@ -14,6 +15,19 @@ servicesRouter.get('/', async (req, res, next) => {
   try {
     const services = await getAllServices();
     res.send(services);
+  } catch (error) {
+    next(error);
+  }
+});
+
+servicesRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
+  let id = req.params.purchaserId;
+  try {
+    if ((id = req.user.id)) {
+      let getServicesForMe = await getServiceByPurchaserId(id);
+      console.log('this is get services for me', getServicesForMe);
+      res.send(getServicesForMe);
+    }
   } catch (error) {
     next(error);
   }

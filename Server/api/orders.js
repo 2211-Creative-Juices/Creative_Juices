@@ -27,7 +27,7 @@ ordersRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
   try {
     if ((id = req.user.id)) {
       let username = req.user.username;
-      let getOrderForMe = getAllOrdersByUser(username);
+      let getOrderForMe = await getAllOrdersByUser(username);
       console.log('this is getorderforme', getOrderForMe);
       res.send(getOrderForMe);
     }
