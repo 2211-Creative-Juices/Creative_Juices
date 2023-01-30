@@ -81,7 +81,7 @@ const ServiceForm = ({ service, setService }) => {
   };
   return (
     <div id='service-form'>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={(e) => submitHandler(e)}>
         <div id='service-form-inputs'>
           <div>
             {' '}
@@ -215,10 +215,7 @@ const ServiceForm = ({ service, setService }) => {
               ></input>
             </label>
 
-            <button
-              onClick={submitHandler}
-              type={'submit'}
-            >
+            <button onClick={submitHandler} type={'submit'}>
               Submit
             </button>
           </div>
