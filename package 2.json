@@ -1,0 +1,31 @@
+{
+  "name": "creative-juices",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "seed:dev": "nodemon Server/db/seed.js",
+    "seed": "node Server/db/seed.js",
+    "start": "node index.js",
+    "start:build": "(npm run build  & npm run preview --prefix Client/vite-project) & nodemon index.js",
+    "start:dev": "npm run dev --prefix Client/vite-project  & nodemon index.js",
+    "build": "npm run build --prefix Client/vite-project"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "chalk": "^4.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "description": ""
+}
