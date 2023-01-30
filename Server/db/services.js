@@ -2,7 +2,6 @@ const client = require('./client');
 // const {attachServicesToUser} = require('/users')
 
 async function createService({
-  name,
   type,
   isremote,
   guests,
@@ -10,18 +9,17 @@ async function createService({
   location,
   date,
   notes,
-  isactive,
 }) {
   try {
     const {
       rows: [service],
     } = await client.query(
       `
-          INSERT INTO services (name, type, isremote, guests, cost, location, date, notes, isactive)
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+          INSERT INTO services (type, isremote, guests, cost, location, date, notes)
+          VALUES ($1, $2, $3, $4, $5, $6, $7)
           RETURNING *;
           `,
-      [name, type, isremote, guests, cost, location, date, notes, isactive]
+      [type, isremote, guests, cost, location, date, notes]
     );
     console.log('first create service: ', service);
     return service;
