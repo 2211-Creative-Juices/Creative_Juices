@@ -46,7 +46,7 @@ async function getServiceByUser(username) {
   try {
     const { rows: service } = await client.query(
       `
-    SELECT *
+    SELECT services.*
     FROM services
     JOIN users ON services.id = users."serviceId"
     WHERE username = $1;
