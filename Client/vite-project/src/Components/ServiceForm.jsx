@@ -24,9 +24,9 @@ const ServiceForm = ({ service, setService }) => {
   const [isOther, setOtherLocation] = useState('');
   const [isOtherChecked, setOtherIsChecked] = useState(false);
   const [adult, setAdult] = useState('');
-  const [isAdult, setIsAdultChecked] = useState(false);
-  const [kid, setKid] = useState('');
-  const [isKid, setIsKidChecked] = useState(false);
+  const [isAdultChecked, setIsAdultChecked] = useState(false);
+  // const [kid, setKid] = useState('');
+  const [isKidChecked, setIsKidChecked] = useState(false);
 
   const submitHandler = async (e) => {
     console.log('thi is isAdult', adult);
@@ -48,13 +48,13 @@ const ServiceForm = ({ service, setService }) => {
         setLocation(isOther);
       }
 
-      if (adult) {
-        await setType(adult);
-      }
+      // if (adult) {
+      //   await setType(adult);
+      // }
 
-      if (kid.length > 0) {
-        setType(kid);
-      }
+      // if (kid.length > 0) {
+      //   setType(kid);
+      // }
       console.log('this is the selected loca:', location);
       console.log('this is the selected type:', type);
       console.log('this is the set date:', date);
@@ -95,9 +95,9 @@ const ServiceForm = ({ service, setService }) => {
                 type='checkbox'
                 // checked={isAdult}
                 onChange={(e) => {
-                  setIsAdultChecked(!isAdult);
-                  setAdult(e.target.value);
-                  // adult ? setType(adult) : setType('');
+                  setIsAdultChecked(!isAdultChecked);
+                  setType(e.target.value);
+                  isKidChecked && setIsKidChecked(!isKidChecked);
                 }}
               ></input>
             </label>{' '}
@@ -109,10 +109,10 @@ const ServiceForm = ({ service, setService }) => {
                 label='Kid'
                 value='kid'
                 type='checkbox'
-                checked={isKid}
+                checked={isKidChecked}
                 onChange={(e) => {
-                  setIsKidChecked(e.target.checked);
-                  setKid(e.target.value);
+                  setType(e.target.value);
+                  setIsKidChecked(!isKidChecked);
                 }}
               ></input>
             </label>

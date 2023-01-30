@@ -35,25 +35,15 @@ servicesRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
 
 // POST /api/services
 
-servicesRouter.post('/create', requireUser, async (req, res, next) => {
+servicesRouter.post('/', requireUser, async (req, res, next) => {
   // console.log('this is req.body', req.body);
-  const {
-    name,
-    type,
-    isremote,
-    guests,
-    cost,
-    location,
-    date,
-    notes,
-    isactive,
-  } = req.body;
+  console.log('server api/services/create is where I am');
+  const { type, isremote, guests, cost, location, date, notes } = req.body;
   if (req.user);
   {
     try {
       // console.log('this our reqbod:', req.body);
       const newService = await createService({
-        name,
         type,
         isremote,
         guests,
@@ -61,7 +51,6 @@ servicesRouter.post('/create', requireUser, async (req, res, next) => {
         location,
         date,
         notes,
-        isactive,
       });
       console.log('heyyyyyyyy newservice:', newService);
       res.send(newService);
