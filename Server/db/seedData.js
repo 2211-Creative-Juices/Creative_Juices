@@ -26,6 +26,7 @@ const {
   updateService,
   getServiceByActive,
   getServiceIdByUser,
+  getServiceByPurchaserId,
 } = require('./services');
 const {
   createBundleKit,
@@ -33,6 +34,7 @@ const {
   getBundleByUser,
   getBundleById,
   updateBundle,
+  getBundleByPurchaserId,
 } = require('./bundleKits');
 
 const {
@@ -330,14 +332,14 @@ async function testDB() {
     const userByEmail = await getUserByEmail('ashley@gmail.com');
     console.log('testing getUserByemail', userByEmail);
 
-    const updatedUser = await updateUser(allUsers[3].id, {
-      name: 'sandy',
-      username: 'rockstar',
-      password: 'lemons!',
-      zipcode: '12324',
-      email: 'sandy@gmail.com',
-    });
-    console.log('testing updateUsers', updatedUser);
+    // const updatedUser = await updateUser(allUsers[3].id, {
+    //   name: 'sandy',
+    //   username: 'rockstar',
+    //   password: 'lemons!',
+    //   zipcode: '12324',
+    //   email: 'sandy@gmail.com',
+    // });
+    // console.log('testing updateUsers', updatedUser);
 
     const attachedUserServ = await attachServicesToUser(allUsers);
     console.log(
@@ -384,6 +386,12 @@ async function testDB() {
     console.log('this is getall orders by username', ordersbyPhilip);
     const ordersbySandy = await getAllOrdersByUser('rockstar');
     console.log('this is getall orders by username', ordersbySandy);
+
+    const serviceByPurOrd = await getServiceByPurchaserId(2);
+    console.log('this is the service by purchaser id', serviceByPurOrd);
+
+    const bundByPurOrd = await getBundleByPurchaserId(2);
+    console.log('this is the bundle kit by purchaser id', bundByPurOrd);
 
     console.log('finished testing database!');
   } catch (error) {

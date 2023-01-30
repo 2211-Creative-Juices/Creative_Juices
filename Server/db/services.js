@@ -148,6 +148,26 @@ async function getServiceIdByUser(username) {
   }
 }
 
+async function getServiceByPurchaserId(id) {
+  console.log('this is the purchaser Id:', id);
+  try {
+    const {
+      rows: [service],
+    } = await client.query(
+      `
+    SELECT services.* FROM services
+    JOIN users on services.id = users."serviceId" 
+    JOIN orders on orders."purchaserId" = users.id 
+    WHERE orders."purchaserId" = ${id};
+    `
+    );
+
+    return service;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 async function updateService(id, { ...fields }) {
   console.log('id:', id, 'update fields:', fields);
   const setString = Object.keys(fields)
@@ -212,4 +232,5 @@ module.exports = {
   updateService,
   getServiceByActive,
   getServiceIdByUser,
+  getServiceByPurchaserId,
 };

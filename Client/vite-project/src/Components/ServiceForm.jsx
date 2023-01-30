@@ -215,7 +215,10 @@ const ServiceForm = ({ service, setService }) => {
               ></input>
             </label>
 
-            <button onClick={submitHandler} type={'submit'}>
+            <button
+              onClick={submitHandler}
+              type={'submit'}
+            >
               Submit
             </button>
           </div>

@@ -67,6 +67,26 @@ async function getBundleById(id) {
   }
 }
 
+async function getBundleByPurchaserId(id) {
+  console.log('this is the purchaser Id:', id);
+  try {
+    const {
+      rows: [bundle],
+    } = await client.query(
+      `
+    SELECT bundlekit.* FROM bundlekit
+    JOIN users on bundlekit.id = users."bundlekitId" 
+    JOIN orders on orders."purchaserId" = users.id 
+    WHERE orders."purchaserId" = ${id};
+    `
+    );
+
+    return bundle;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 async function updateBundle(id, { ...fields }) {
   console.log('id:', id, 'update fields:', fields);
   const setString = Object.keys(fields)
@@ -99,4 +119,5 @@ module.exports = {
   getBundleByUser,
   getBundleById,
   updateBundle,
+  getBundleByPurchaserId,
 };

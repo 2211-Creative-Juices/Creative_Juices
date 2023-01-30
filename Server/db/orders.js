@@ -79,22 +79,31 @@ async function attachUserToOrder(orders) {
   }
 }
 
-async function getAllOrdersByUser({ username }) {
+async function getAllOrdersByUser(username) {
+  console.log('username:', username);
   try {
-    const { rows: order } = await client.query(
+    const { rows: orders } = await client.query(
       `
             SELECT orders.*
             FROM orders
-            JOIN users on orders."purchaserId" = users.id
-            WHERE username = $1 AND orders."purchaserId" = users.id
+            JOIN users ON orders."purchaserId" = users.id
+            WHERE users.username = $1 AND orders."purchaserId" = users.id
             `,
       [username]
     );
-    return attachUserToOrder(order);
+
+    console.log('this is the order', orders);
+
+    const allOrders = await attachUserToOrder(orders);
+
+    return allOrders;
   } catch (error) {
     throw error;
   }
 }
+
+//getServicesByOrder
+//getBundlesByOrder
 
 module.exports = {
   createOrder,
