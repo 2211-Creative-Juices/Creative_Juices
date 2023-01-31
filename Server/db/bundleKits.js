@@ -67,6 +67,23 @@ async function getBundleById(id) {
   }
 }
 
+async function getBundleByOrderId(id) {
+  try {
+    const { rows: bundle } = await client.query(
+      `
+    SELECT *
+    FROM bundlekit
+    JOIN orders ON bundlekit.id = orders."bundlekitId"
+    WHERE orders."bundlekitId" = ${id};
+    `
+    );
+    console.log('These are our bundles by order id :', bundle);
+    return bundle;
+  } catch (error) {
+    throw error;
+  }
+}
+
 // attachBundleToOrder;
 // async function attachBundleToOrder(orders) {
 //   const ordersToReturn = [...orders];
@@ -144,4 +161,5 @@ module.exports = {
   getBundleByUser,
   getBundleById,
   updateBundle,
+  getBundleByOrderId,
 };
