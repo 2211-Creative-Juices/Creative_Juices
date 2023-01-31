@@ -11,11 +11,13 @@ export default function AuthProvider({ children }) {
 
   useEffect(() => {
     settoken(localStorage['juice-token'] || '');
+
     if (localStorage['juice-token']) {
       const getMe = async () => {
         const result = await me(localStorage['juice-token']);
-        console.log("~~~~~~~$$$$$~~~~~~~", result);
+        console.log('~~~~~~~$$$$$~~~~~~~', result);
         setUser(result);
+        console.log('this is user!!!', user);
       };
       getMe();
     }
@@ -27,7 +29,8 @@ export default function AuthProvider({ children }) {
     delete localStorage['juice-token'];
     updateAuthStatus();
   };
-console.log("~~~~~~~~~~~~", user);
+
+  console.log('~~~~~~~~~~~~', user);
   const providerValue = {
     token,
     isLoggedIn: !!token,
