@@ -4,7 +4,12 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { JWT_SECRET } = process.env;
 const usersRouter = express.Router();
-const { getUserByUsername, getAllUsers, createUser } = require('../db');
+const {
+  getUserByUsername,
+  getAllUsers,
+  createUser,
+  getServiceByUser,
+} = require('../db');
 // const { JWT_SECRET = 'donottell' } = process.env;
 //Register
 usersRouter.use((req, res, next) => {
@@ -16,6 +21,21 @@ usersRouter.get('/', async (req, res) => {
   const users = await getAllUsers();
   console.log('these are my users', users);
   res.send({ users });
+});
+
+usersRouter.get('/:username/services', requireUser, async (req, res, next) => {
+  const myUsername = req.params.username;
+  console.log('These are the params', req.params);
+  try {
+    const user = await getUserByUsername(myUsername);
+    if (req.user && req.user.id === user.id) {
+      const userServices = await getServiceByUser(myUsername);
+      res.send(userServices);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 });
 
 //REGISTER /api/users/register

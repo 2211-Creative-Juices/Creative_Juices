@@ -34,17 +34,6 @@ servicesRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
   }
 });
 
-servicesRouter.get('/:username', requireUser, async (req, res, next) => {
-  let username = req.user.username;
-  try {
-    let getServicesByMe = await getServiceByUser(username);
-    console.log('&&&&&&&&&&this is services be me', getServicesByMe);
-    res.send(getServicesByMe);
-  } catch (error) {
-    next(error);
-  }
-});
-
 // POST /api/services
 
 servicesRouter.post('/', requireUser, async (req, res, next) => {
