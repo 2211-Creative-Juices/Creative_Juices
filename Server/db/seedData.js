@@ -13,8 +13,8 @@ const {
   getAllUsers,
   updateUser,
   updateUserPassword,
-  attachServicesToUser,
-  attachBundleToUser,
+  // attachServicesToUser,
+  // attachBundleToUser,
 } = require('./users');
 const {
   createService,
@@ -25,8 +25,8 @@ const {
   getServiceByDate,
   updateService,
   getServiceByActive,
-  getServiceIdByUser,
-  getServiceByPurchaserId,
+  // getServiceIdByUser,
+  // getServiceByPurchaserId,
 } = require('./services');
 const {
   createBundleKit,
@@ -34,7 +34,6 @@ const {
   getBundleByUser,
   getBundleById,
   updateBundle,
-  getBundleByPurchaserId,
 } = require('./bundleKits');
 
 const {
@@ -51,9 +50,9 @@ async function dropTables() {
 
     await client.query(`
     DROP TABLE IF EXISTS orders;
-    DROP TABLE IF EXISTS users;
     DROP TABLE IF EXISTS services;
     DROP TABLE IF EXISTS bundlekit;
+    DROP TABLE IF EXISTS users;
     `);
 
     console.log('All Tables Dropped!..');
@@ -68,6 +67,16 @@ async function createTables() {
     console.log('Starting to build tables...');
 
     await client.query(`
+CREATE TABLE users (
+      id SERIAL PRIMARY KEY,
+      name varchar(255) NOT NULL,
+      username varchar(255) NOT NULL,
+      password varchar(255) NOT NULL,
+      zipcode INT NOT NULL,
+      email varchar(255) NOT NULL,
+      isadmin BOOLEAN DEFAULT false,
+      UNIQUE (username, email)
+    );
 
     CREATE TABLE bundlekit (
       id SERIAL PRIMARY KEY,
@@ -89,26 +98,14 @@ async function createTables() {
       isactive BOOLEAN DEFAULT true
     );
 
-    CREATE TABLE users (
-      id SERIAL PRIMARY KEY,
-      name varchar(255) NOT NULL,
-      username varchar(255) NOT NULL,
-      password varchar(255) NOT NULL,
-      zipcode INT NOT NULL,
-      email varchar(255) NOT NULL,
-      isadmin BOOLEAN DEFAULT false,
-      "serviceId" INTEGER REFERENCES services(id),
-      "bundlekitId" INTEGER REFERENCES bundlekit(id),
-      UNIQUE (username, email)
-    );
-
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
       orderdate varchar(255),
      "purchaserId" INTEGER REFERENCES users(id),
      iscomplete BOOLEAN default false,
      incart BOOLEAN default false,
-     totalamount DECIMAL
+     "serviceId" INTEGER REFERENCES services(id),
+     "bundlekitId" INTEGER REFERENCES bundlekit(id)
     );
     `);
 
@@ -127,7 +124,8 @@ async function createFakeOrder() {
         purchaserId: 2,
         iscomplete: false,
         incart: true,
-        totalamount: 100.0,
+        serviceId: 2,
+        bundlekitId: 1,
       },
     ];
     const order = await Promise.all(fakeOrder.map(createOrder));
@@ -199,8 +197,6 @@ async function createFakeUsers() {
   try {
     const fakeUsers = [
       {
-        serviceId: 2,
-        bundlekitId: 1,
         name: 'ashley',
         username: 'ashley',
         password: 'ashley1!',
@@ -208,8 +204,6 @@ async function createFakeUsers() {
         email: 'ashley@gmail.com',
       },
       {
-        serviceId: 1,
-        bundlekitId: 1,
         name: 'megan',
         username: 'megan',
         password: 'megan1!',
@@ -217,8 +211,6 @@ async function createFakeUsers() {
         email: 'megan@gmail.com',
       },
       {
-        serviceId: 1,
-        bundlekitId: 1,
         name: 'chelsea',
         username: 'chelsea',
         password: 'chelsea1!',
@@ -226,7 +218,6 @@ async function createFakeUsers() {
         email: 'chelsea@gmail.com',
       },
       {
-        serviceId: 2,
         name: 'philip',
         username: 'philip',
         password: 'philip1!',
@@ -260,8 +251,8 @@ async function testDB() {
     const allBundles = await getAllBundles();
     console.log('testing get all bundles', allBundles);
 
-    const userBund = await getBundleByUser('chelsea');
-    console.log('testing getBundleByUser', userBund);
+    // const userBund = await getBundleByUser('chelsea');
+    // console.log('testing getBundleByUser', userBund);
 
     const idBund = await getBundleById(1);
     console.log('testing getBundleById', idBund);
@@ -279,8 +270,8 @@ async function testDB() {
     const allServices = await getAllServices();
     console.log('testing getAllServices', allServices);
 
-    const serviceByUser = await getServiceByUser('megan');
-    console.log('testing getServiceByUser', serviceByUser);
+    // const serviceByUser = await getServiceByUser('megan');
+    // console.log('testing getServiceByUser', serviceByUser);
 
     const serviceById = await getServiceById(1);
     console.log('testing getServiceById', serviceById);
@@ -294,8 +285,8 @@ async function testDB() {
     const serviceByActive = await getServiceByActive(true);
     console.log('testing getServiceByActive', serviceByActive);
 
-    const serviceIdByUser = await getServiceIdByUser('ashley');
-    console.log('testing getServiceIdByUser', serviceIdByUser);
+    // const serviceIdByUser = await getServiceIdByUser('ashley');
+    // console.log('testing getServiceIdByUser', serviceIdByUser);
 
     // const updatedService = await updateService(allServices[0].id, {
     //   name: 'Paint n Sip',
@@ -336,21 +327,21 @@ async function testDB() {
     // });
     // console.log('testing updateUsers', updatedUser);
 
-    const attachedUserServ = await attachServicesToUser(allUsers);
-    console.log(
-      'these are all the users w services attached:',
-      attachedUserServ[4].services
-    );
+    // const attachedUserServ = await attachServicesToUser(allUsers);
+    // console.log(
+    //   'these are all the users w services attached:',
+    //   attachedUserServ[4].services
+    // );
 
-    const attachedUserBundle = await attachBundleToUser(allUsers);
-    console.log(
-      'these are all the users w bundles attached:',
-      attachedUserBundle
-    );
-    console.log(
-      'these are all the users w bundles attached BUNDLES:',
-      attachedUserBundle[3].bundles
-    );
+    // const attachedUserBundle = await attachBundleToUser(allUsers);
+    // console.log(
+    //   'these are all the users w bundles attached:',
+    //   attachedUserBundle
+    // );
+    // console.log(
+    //   'these are all the users w bundles attached BUNDLES:',
+    //   attachedUserBundle[3].bundles
+    // );
 
     // const updatedPassword = await updateUserPassword(1, 'melons');
     // console.log('this is my updated password', updatedPassword);
@@ -364,29 +355,32 @@ async function testDB() {
     const orderById = await getOrderById(1);
     console.log('testing get order by id:', orderById);
 
-    const attachUserOrder = await attachUserToOrder(allOrders);
-    console.log('testing attach user to order:', attachUserOrder);
-    console.log(
-      'these are all the orders w users attached user',
-      attachUserOrder[0].usersinfo
-    );
+    // const orderBundle = await attachBundleToOrder(allOrders);
+    // console.log('testing attach bundle to order:', orderBundle);
 
-    const ordersbyUser = await getAllOrdersByUser('shelleyadmin');
-    console.log('this is getall orders by username', ordersbyUser);
-    const ordersbyMegan = await getAllOrdersByUser('megan');
-    console.log('this is getall orders by username', ordersbyMegan);
-    const ordersbyChelsea = await getAllOrdersByUser('Chelsea');
-    console.log('this is getall orders by username', ordersbyChelsea);
-    const ordersbyPhilip = await getAllOrdersByUser('philip');
-    console.log('this is getall orders by username', ordersbyPhilip);
-    const ordersbySandy = await getAllOrdersByUser('rockstar');
-    console.log('this is getall orders by username', ordersbySandy);
+    // const attachUserOrder = await attachUserToOrder(allOrders);
+    // console.log('testing attach user to order:', attachUserOrder);
+    // console.log(
+    //   'these are all the orders w users attached user',
+    //   attachUserOrder[0].usersinfo
+    // );
 
-    const serviceByPurOrd = await getServiceByPurchaserId(2);
-    console.log('this is the service by purchaser id', serviceByPurOrd);
+    // const ordersbyUser = await getAllOrdersByUser('shelleyadmin');
+    // console.log('this is getall orders by username', ordersbyUser);
+    // const ordersbyMegan = await getAllOrdersByUser('megan');
+    // console.log('this is getall orders by username', ordersbyMegan);
+    // const ordersbyChelsea = await getAllOrdersByUser('Chelsea');
+    // console.log('this is getall orders by username', ordersbyChelsea);
+    // const ordersbyPhilip = await getAllOrdersByUser('philip');
+    // console.log('this is getall orders by username', ordersbyPhilip);
+    // const ordersbySandy = await getAllOrdersByUser('rockstar');
+    // console.log('this is getall orders by username', ordersbySandy);
 
-    const bundByPurOrd = await getBundleByPurchaserId(2);
-    console.log('this is the bundle kit by purchaser id', bundByPurOrd);
+    // const serviceByPurOrd = await getServiceByPurchaserId(2);
+    // console.log('this is the service by purchaser id', serviceByPurOrd);
+
+    // const bundByPurOrd = await getBundleByPurchaserId(2);
+    // console.log('this is the bundle kit by purchaser id', bundByPurOrd);
 
     console.log('finished testing database!');
   } catch (error) {
@@ -399,9 +393,9 @@ async function rebuildDB() {
   try {
     await dropTables();
     await createTables();
+    await createFakeUsers();
     await createFakeBundle();
     await createFakeServices();
-    await createFakeUsers();
     await createFakeOrder();
 
     await testDB();

@@ -128,43 +128,43 @@ async function getServiceByActive(isactive) {
 }
 
 //getServiceIdbyUser
-async function getServiceIdByUser(username) {
-  try {
-    const {
-      rows: [service],
-    } = await client.query(
-      `
-    SELECT "serviceId" FROM users
-    WHERE username = $1;
-    `,
-      [username]
-    );
+// async function getServiceIdByUser(username) {
+//   try {
+//     const {
+//       rows: [service],
+//     } = await client.query(
+//       `
+//     SELECT "serviceId" FROM users
+//     WHERE username = $1;
+//     `,
+//       [username]
+//     );
 
-    return service;
-  } catch (error) {
-    throw error;
-  }
-}
+//     return service;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
-async function getServiceByPurchaserId(id) {
-  console.log('this is the purchaser Id:', id);
-  try {
-    const {
-      rows: [service],
-    } = await client.query(
-      `
-    SELECT services.* FROM services
-    JOIN users on services.id = users."serviceId" 
-    JOIN orders on orders."purchaserId" = users.id 
-    WHERE orders."purchaserId" = ${id};
-    `
-    );
+// async function getServiceByPurchaserId(id) {
+//   console.log('this is the purchaser Id:', id);
+//   try {
+//     const {
+//       rows: [service],
+//     } = await client.query(
+//       `
+//     SELECT services.* FROM services
+//     JOIN users on services.id = users."serviceId"
+//     JOIN orders on orders."purchaserId" = users.id
+//     WHERE orders."purchaserId" = ${id};
+//     `
+//     );
 
-    return service;
-  } catch (error) {
-    console.error(error);
-  }
-}
+//     return service;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 
 async function updateService(id, { ...fields }) {
   console.log('id:', id, 'update fields:', fields);
@@ -229,6 +229,6 @@ module.exports = {
   getServiceByDate,
   updateService,
   getServiceByActive,
-  getServiceIdByUser,
-  getServiceByPurchaserId,
+  // getServiceIdByUser,
+  // getServiceByPurchaserId,
 };
