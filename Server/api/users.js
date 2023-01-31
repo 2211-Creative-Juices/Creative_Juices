@@ -38,6 +38,23 @@ usersRouter.get('/:username/services', requireUser, async (req, res, next) => {
   }
 });
 
+usersRouter.get('/:purchaserId/orders', requireUser, async (req, res, next) => {
+  let id = req.params.purchaserId;
+  console.log('Req Params', req.params);
+  try {
+    const myUsername = req.params.username;
+    const user = await getUserByUsername(myUsername);
+    if ((id = user.id)) {
+      let getOrderForMe = await getAllOrdersByUser(myUsername);
+      console.log('this is getorderforme', getOrderForMe);
+      res.send(getOrderForMe);
+    }
+  } catch (error) {
+    console.error('getOrdersForMe', error);
+    next(error);
+  }
+});
+
 //REGISTER /api/users/register
 
 usersRouter.post('/register', async (req, res, next) => {

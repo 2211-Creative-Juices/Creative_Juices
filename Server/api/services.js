@@ -26,7 +26,7 @@ servicesRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
   try {
     if ((id = req.user.id)) {
       let getServicesForMe = await getServiceByPurchaserId(id);
-      console.log('this is get services for me', getServicesForMe);
+      // console.log('this is get services for me', getServicesForMe);
       res.send(getServicesForMe);
     }
   } catch (error) {
@@ -38,7 +38,7 @@ servicesRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
 
 servicesRouter.post('/', requireUser, async (req, res, next) => {
   // console.log('this is req.body', req.body);
-  console.log('server api/services/create is where I am');
+  // console.log('server api/services/create is where I am');
   const { type, isremote, guests, cost, location, date, notes } = req.body;
   if (req.user);
   {
@@ -53,10 +53,10 @@ servicesRouter.post('/', requireUser, async (req, res, next) => {
         date,
         notes,
       });
-      console.log('heyyyyyyyy newservice:', newService);
+      // console.log('heyyyyyyyy newservice:', newService);
       res.send(newService);
     } catch (error) {
-      console.error('this is new services error: ', error);
+      // console.error('this is new services error: ', error);
       next(error);
     }
   }

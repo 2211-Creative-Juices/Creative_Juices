@@ -12,8 +12,10 @@ export const getAllOrders = async () => {
 };
 
 export const getOrderByPurchaserId = async (token, purchaserId) => {
+  console.log('accessing get order by purchaser id honhon: ', purchaserId);
+  console.log('accessing get order by purchaser id TOKEN honhon: ', token);
   try {
-    const response = await fetch(`${BASE_API}/orders/${purchaserId}`, {
+    const response = await fetch(`${BASE_API}/users/${purchaserId}/orders`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,

@@ -5,8 +5,8 @@ import { useAuth } from '../custom-hooks';
 const AllServices = ({ services }) => {
   const user = useAuth();
   const [myServices, setMyServices] = useState([]);
-  console.log('this is token:', user.token);
-  console.log('@@@@@@this is user:', user.user.username);
+  // console.log('this is token:', user.token);
+  // console.log('@@@@@@this is user:', user.user.username);
 
   // let purchaserId = orders.purchaserId;
 
@@ -14,11 +14,11 @@ const AllServices = ({ services }) => {
     const getAllMyServices = async () => {
       const allMyServices = await getMyServices(user.token, user.user.username);
       setMyServices(allMyServices);
-      console.log('#####this is my all my services:', allMyServices);
+      // console.log('#####this is my all my services:', allMyServices);
     };
     getAllMyServices();
   }, [user.user.username]);
-console.log("********* this is my services:", myServices);
+// console.log("********* this is my services:", myServices);
   return (
     <div id='services-container'>
       <h2 id='services-header'>Services</h2>

@@ -13,7 +13,7 @@ export const getAllServices = async () => {
 };
 
 export const getMyServices = async (token, username) => {
-  console.log('token and user:', token, username);
+  // console.log('token and user:', token, username);
 
   try {
     const response = await fetch(`${BASE_API}/users/${username}/services`, {
@@ -23,7 +23,7 @@ export const getMyServices = async (token, username) => {
       },
     });
     const results = await response.json();
-    console.log('this is results in services for me api', results);
+    // console.log('this is results in services for me api', results);
     return results;
   } catch (error) {
     console.error(error);
@@ -40,13 +40,13 @@ export const createService = async (
   date,
   notes
 ) => {
-  console.log('CS token:', token);
-  console.log('CS this is the selected loca:', location);
-  console.log('CS this is the selected type:', type);
-  console.log('CS this is the set date:', date);
-  console.log('CS these are the notes', notes);
-  console.log('CS number of guests', guests);
-  console.log('CS cost:', cost);
+  // console.log('CS token:', token);
+  // console.log('CS this is the selected loca:', location);
+  // console.log('CS this is the selected type:', type);
+  // console.log('CS this is the set date:', date);
+  // console.log('CS these are the notes', notes);
+  // console.log('CS number of guests', guests);
+  // console.log('CS cost:', cost);
   try {
     const response = await fetch(`${BASE_API}/services`, {
       method: 'POST',
@@ -66,10 +66,10 @@ export const createService = async (
     });
 
     const results = await response.json();
-    console.log('look at our results:', results);
+    // console.log('look at our results:', results);
     return results;
   } catch (error) {
-    console.error('what a horrible happening:', error);
+    // console.error('what a horrible happening:', error);
     throw error;
   }
 };
