@@ -67,25 +67,50 @@ async function getBundleById(id) {
   }
 }
 
-async function getBundleByPurchaserId(id) {
-  console.log('this is the purchaser Id:', id);
-  try {
-    const {
-      rows: [bundle],
-    } = await client.query(
-      `
-    SELECT bundlekit.* FROM bundlekit
-    JOIN users on bundlekit.id = users."bundlekitId" 
-    JOIN orders on orders."purchaserId" = users.id 
-    WHERE orders."purchaserId" = ${id};
-    `
-    );
+// attachBundleToOrder;
+// async function attachBundleToOrder(orders) {
+//   const ordersToReturn = [...orders];
+//   console.log('these are the orders to return', ordersToReturn);
 
-    return bundle;
-  } catch (error) {
-    console.error(error);
-  }
-}
+//   try {
+//     const { rows: bundles } = await client.query(`
+//     SELECT *
+//     FROM bundlekit
+//     JOIN orders ON bundlekit.id = orders."bundlekitId"
+//     `);
+
+//     for (const order of ordersToReturn) {
+//       const bundlesToAdd = bundles.filter(
+//         (bundle) => bundle.id === orders.bundlekitId
+//       );
+//       console.log('this is bundles to Add', bundlesToAdd);
+//       order.bundles = bundlesToAdd;
+//     }
+//     return ordersToReturn;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
+// async function getBundleByPurchaserId(id) {
+//   console.log('this is the purchaser Id:', id);
+//   try {
+//     const {
+//       rows: [bundle],
+//     } = await client.query(
+//       `
+//     SELECT bundlekit.* FROM bundlekit
+//     JOIN users on bundlekit.id = users."bundlekitId"
+//     JOIN orders on orders."purchaserId" = users.id
+//     WHERE orders."purchaserId" = ${id};
+//     `
+//     );
+
+//     return bundle;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 
 async function updateBundle(id, { ...fields }) {
   console.log('id:', id, 'update fields:', fields);
@@ -119,5 +144,4 @@ module.exports = {
   getBundleByUser,
   getBundleById,
   updateBundle,
-  getBundleByPurchaserId,
 };

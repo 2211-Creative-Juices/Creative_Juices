@@ -18,18 +18,19 @@ async function createOrder({
   purchaserId,
   iscomplete,
   incart,
-  totalamount,
+  serviceId,
+  bundlekitId,
 }) {
   try {
     const {
       rows: [order],
     } = await client.query(
       `
-            INSERT INTO orders (orderdate, "purchaserId", iscomplete, incart, totalamount)
-            VALUES ($1, $2, $3, $4, $5)
+            INSERT INTO orders (orderdate, "purchaserId", iscomplete, incart, "serviceId", "bundlekitId")
+            VALUES ($1, $2, $3, $4, $5, $6)
             RETURNING *;
             `,
-      [orderdate, purchaserId, iscomplete, incart, totalamount]
+      [orderdate, purchaserId, iscomplete, incart, serviceId, bundlekitId]
     );
     console.log('this is the order:', order);
     return order;
