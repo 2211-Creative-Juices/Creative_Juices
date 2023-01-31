@@ -166,6 +166,24 @@ async function getServiceByActive(isactive) {
 //   }
 // }
 
+async function getServicesByOrderId(id) {
+  console.log('this is services by order id ID', id);
+  try {
+    const {
+      rows: [services],
+    } = await client.query(
+      `
+        SELECT * From services 
+        JOIN services on orders."servicesId" = orders.id
+        WHERE orders."servicesId" = ${id}
+        `
+    );
+    return services;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 async function updateService(id, { ...fields }) {
   console.log('id:', id, 'update fields:', fields);
   const setString = Object.keys(fields)
@@ -229,6 +247,7 @@ module.exports = {
   getServiceByDate,
   updateService,
   getServiceByActive,
+  getServicesByOrderId,
   // getServiceIdByUser,
   // getServiceByPurchaserId,
 };

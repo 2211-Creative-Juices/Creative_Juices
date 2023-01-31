@@ -50,9 +50,9 @@ async function dropTables() {
 
     await client.query(`
     DROP TABLE IF EXISTS orders;
+    DROP TABLE IF EXISTS users;
     DROP TABLE IF EXISTS services;
     DROP TABLE IF EXISTS bundlekit;
-    DROP TABLE IF EXISTS users;
     `);
 
     console.log('All Tables Dropped!..');

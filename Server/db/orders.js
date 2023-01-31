@@ -54,38 +54,38 @@ async function getOrderById(orderid) {
   }
 }
 
-async function attachUserToOrder(orders) {
-  const ordersToReturn = [...orders];
-  try {
-    const { rows: usersinfo } = await client.query(`
-        SELECT users.* 
-        FROM users
-        JOIN orders ON users.id = orders."purchaserId"
-        WHERE orders."purchaserId" = users.id
-        `);
+// async function attachUserToOrder(orders) {
+//   const ordersToReturn = [...orders];
+//   try {
+//     const { rows: usersinfo } = await client.query(`
+//         SELECT users.*
+//         FROM users
+//         JOIN orders ON users.id = orders."purchaserId"
+//         WHERE orders."purchaserId" = users.id
+//         `);
 
-    for (const order of ordersToReturn) {
-      const usersToAdd = usersinfo.filter(
-        (user) => user.id === order.purchaserId
-      );
-      order.usersinfo = usersToAdd;
-      console.log('this is the user to add:', usersToAdd);
-    }
+//     for (const order of ordersToReturn) {
+//       const usersToAdd = usersinfo.filter(
+//         (user) => user.id === order.purchaserId
+//       );
+//       order.usersinfo = usersToAdd;
+//       console.log('this is the user to add:', usersToAdd);
+//     }
 
-    console.log('this is the order to return:', ordersToReturn);
-    return ordersToReturn;
-  } catch (error) {
-    console.log('this is the attach user to order error:', error);
-    throw error;
-  }
-}
+//     console.log('this is the order to return:', ordersToReturn);
+//     return ordersToReturn;
+//   } catch (error) {
+//     console.log('this is the attach user to order error:', error);
+//     throw error;
+//   }
+// }
 
 async function getAllOrdersByUser(username) {
   console.log('username:', username);
   try {
     const { rows: orders } = await client.query(
       `
-            SELECT orders.*
+            SELECT *
             FROM orders
             JOIN users ON orders."purchaserId" = users.id
             WHERE users.username = $1 AND orders."purchaserId" = users.id
@@ -95,9 +95,9 @@ async function getAllOrdersByUser(username) {
 
     console.log('this is the order', orders);
 
-    const allOrders = await attachUserToOrder(orders);
+    // const allOrders = await attachUserToOrder(orders);
 
-    return allOrders;
+    return orders;
   } catch (error) {
     throw error;
   }
@@ -109,7 +109,7 @@ async function getAllOrdersByUser(username) {
 module.exports = {
   createOrder,
   getOrderById,
-  attachUserToOrder,
+  // attachUserToOrder,
   getAllOrders,
   getAllOrdersByUser,
 };
