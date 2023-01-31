@@ -80,9 +80,9 @@ export const me = async () => {
         },
       });
 
-      const { username, id } = await response.json();
-      console.log('hey look it is me: ', username, id);
-      return { username, id };
+      const data = await response.json();
+      console.log('hey look it is me: ', data);
+      return data;
     }
     return;
   } catch (error) {

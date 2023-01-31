@@ -43,9 +43,12 @@ function App() {
     const fetchedOrders = async () => {
       const allOrders = await getAllOrders();
       setOrders(allOrders);
+      console.log('all the orders in App', allOrders);
     };
     fetchedOrders();
-  }, []);
+  }, [user.token]);
+
+  console.log('SERVICES INAPP:', services);
 
   return (
     <div className='App'>
