@@ -5,8 +5,9 @@ import { useAuth } from '../custom-hooks';
 const AllServices = ({ services }) => {
   const user = useAuth();
   const [myServices, setMyServices] = useState([]);
-  console.log('this is token:', user.token);
-  console.log('@@@@@@this is user ID:', user.user.id);
+  console.log('this is myServices!:', myServices);
+  // console.log('this is token:', user.token);
+  // console.log('@@@@@@this is user ID:', user.user.id);
   let userId = user.user.id;
 
   // let purchaserId = orders.purchaserId;
@@ -14,10 +15,12 @@ const AllServices = ({ services }) => {
   useEffect(() => {
     const getAllMyServices = async () => {
       const allMyServices = await getServicesByUser(user.token, userId);
-      setMyServices([allMyServices, ...myServices]);
-      //console.log('#####this is my all my services:', allMyServices);
+      setMyServices(allMyServices, ...myServices);
+      console.log('#####this is my all my services:', allMyServices);
     };
-    getAllMyServices();
+    if (user.user.id) {
+      getAllMyServices();
+    }
   }, [userId]);
   // console.log("********* this is my services:", myServices);
   return (

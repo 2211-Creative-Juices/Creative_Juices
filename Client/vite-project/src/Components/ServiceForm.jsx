@@ -55,13 +55,13 @@ const ServiceForm = ({ services, setService }) => {
       // if (kid.length > 0) {
       //   setType(kid);
       // }
-      console.log('this is the selected loca:', location);
-      console.log('this is the selected type:', type);
-      console.log('this is the set date:', date);
-      console.log('these are the notes', notes);
-      console.log('number of guests', guests);
-      console.log('user:', user);
-      console.log('cost:', cost);
+      // console.log('this is the selected loca:', location);
+      // console.log('this is the selected type:', type);
+      // console.log('this is the set date:', date);
+      // console.log('these are the notes', notes);
+      // console.log('number of guests', guests);
+      // console.log('user:', user);
+      // console.log('cost:', cost);
 
       const newService = await createService(
         user.token,
@@ -74,7 +74,7 @@ const ServiceForm = ({ services, setService }) => {
         notes
       );
 
-      console.log('this is the new service!', newService);
+      // console.log('this is the new service!', newService);
     } catch (error) {
       console.error(error);
     }
