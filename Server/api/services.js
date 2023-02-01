@@ -4,8 +4,9 @@ const {
   createService,
   getServiceById,
   updateService,
-  getServiceByPurchaserId,
-  getServiceByUser,
+  // getServiceByPurchaserId,
+  // getServicesByUser,
+  getServicesByOrderId,
 } = require('../db');
 const { requireUser } = require('./utils');
 const servicesRouter = express.Router();
@@ -20,14 +21,29 @@ servicesRouter.get('/', async (req, res, next) => {
     next(error);
   }
 });
+// if the one in users doesnt work
 
-servicesRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
-  let id = req.params.purchaserId;
+// servicesRouter.get('/:userId', requireUser, async (req, res, next) => {
+//   let id = req.params;
+//   try {
+//     if ((id = req.user.id)) {
+//       let getServicesForMe = await getServicesByUser(id);
+//       // console.log('this is get services for me', getServicesForMe);
+//       res.send(getServicesForMe);
+//     }
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+servicesRouter.get('/:orderId', requireUser, async (req, res, next) => {
+  let id = req.params;
+  console.log('this is req.params', req.params);
   try {
-    if ((id = req.user.id)) {
-      let getServicesForMe = await getServiceByPurchaserId(id);
+    if (req.user) {
+      let getServicesByOrder = await getServicesByOrderId(id);
       // console.log('this is get services for me', getServicesForMe);
-      res.send(getServicesForMe);
+      res.send(getServicesByOrder);
     }
   } catch (error) {
     next(error);

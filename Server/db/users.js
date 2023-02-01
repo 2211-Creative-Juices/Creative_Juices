@@ -120,52 +120,6 @@ async function getUserByEmail(email) {
   }
 }
 
-//attachServiceToUser
-// async function attachServicesToUser(users) {
-//   const usersToReturn = [...users];
-
-//   try {
-//     const { rows: services } = await client.query(`
-//     SELECT *
-//     FROM services
-//     JOIN users ON services.id = users."serviceId"
-//     `);
-
-//     for (const user of usersToReturn) {
-//       const servicesToAdd = services.filter(
-//         (service) => service.id === user.serviceId
-//       );
-//       user.services = servicesToAdd;
-//     }
-//     return usersToReturn;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-
-//attachBundleToUser
-// async function attachBundleToUser(users) {
-//   const usersToReturn = [...users];
-
-//   try {
-//     const { rows: bundles } = await client.query(`
-//     SELECT *
-//     FROM bundlekit
-//     JOIN users ON bundlekit.id = users."bundlekitId"
-//     `);
-
-//     for (const user of usersToReturn) {
-//       const bundlesToAdd = bundles.filter(
-//         (bundle) => bundle.id === user.bundlekitId
-//       );
-//       user.bundles = bundlesToAdd;
-//     }
-//     return usersToReturn;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-
 async function updateUser(id, { ...fields }) {
   const updatedHashedPassword = await bcrypt.hash(fields.password, saltRounds);
 
@@ -220,7 +174,6 @@ module.exports = {
   getUserByEmail,
   updateUser,
   updateUserPassword,
-  // attachServicesToUser,
+
   getAllUsers,
-  // attachBundleToUser,
 };

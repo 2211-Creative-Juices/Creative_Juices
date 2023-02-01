@@ -3,8 +3,9 @@ const {
   getAllBundles,
   createBundleKit,
   getBundleById,
-  getBundleByPurchaserId,
+  // getBundleByPurchaserId,
   updateBundle,
+  getBundleByOrderId,
 } = require('../db');
 
 const { requireUser } = require('./utils');
@@ -20,18 +21,45 @@ bundlesRouter.get('/', async (req, res, next) => {
   }
 });
 
-bundlesRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
-  let id = req.params.purchaserId;
+// servicesRouter.get('/:userId', requireUser, async (req, res, next) => {
+//   let id = req.params;
+//   try {
+//     if ((id = req.user.id)) {
+//       let getServicesForMe = await getServicesByUser(id);
+//       // console.log('this is get services for me', getServicesForMe);
+//       res.send(getServicesForMe);
+//     }
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+bundlesRouter.get('/:orderId', requireUser, async (req, res, next) => {
+  let id = req.params;
+  console.log('this is req.params', req.params);
   try {
-    if ((id = req.user.id)) {
-      let getBundlesForMe = await getBundleByPurchaserId(id);
-      console.log('this is get bundles for me', getBundlesForMe);
-      res.send(getBundlesForMe);
+    if (req.user) {
+      let getBundlesByOrder = await getBundleByOrderId(id);
+      // console.log('this is get services for me', getServicesForMe);
+      res.send(getBundlesByOrder);
     }
   } catch (error) {
     next(error);
   }
 });
+
+// bundlesRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
+//   let id = req.params.purchaserId;
+//   try {
+//     if ((id = req.user.id)) {
+//       let getBundlesForMe = await getBundleByPurchaserId(id);
+//       console.log('this is get bundles for me', getBundlesForMe);
+//       res.send(getBundlesForMe);
+//     }
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 // POST /api/bundles
 
