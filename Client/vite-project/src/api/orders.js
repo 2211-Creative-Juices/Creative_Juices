@@ -33,8 +33,8 @@ export const createNewOrder = async (
   token,
   orderDate,
   purchaserId,
-  isinCart,
-  serviceId
+  serviceId,
+  bundlekitId
 ) => {
   try {
     const response = await fetch(`${BASE_API}/orders/`, {
@@ -46,8 +46,8 @@ export const createNewOrder = async (
       body: JSON.stringify({
         orderDate,
         purchaserId,
-        isinCart,
         serviceId,
+        bundlekitId,
       }),
     });
     const newOrder = await response.json();
