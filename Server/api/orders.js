@@ -7,6 +7,7 @@ const {
   getAllOrders,
   getOrderById,
   getAllOrdersByUser,
+  updateOrder,
 } = require('../db/orders');
 const ordersRouter = express.Router();
 const { requireUser } = require('./utils');
@@ -87,6 +88,41 @@ ordersRouter.post('/', requireUser, async (req, res, next) => {
       console.error('this is new order error:', error);
       next(error);
     }
+  }
+});
+
+//PATCH /api/orders/:orderId
+ordersRouter.patch('/:orderId', requireUser, async (req, res, next) => {
+  const { orderdate, purchaserId, iscomplete, incart, serviceId, bundlekitId } =
+    req.body;
+  console.log('this is the req.body for update orders', req.body);
+
+  const id = req.params.orderId;
+  console.log('these are the params for update order', req.params);
+
+  try {
+    const ogOrder = await getOrderById(id);
+
+    if (!ogOrder) {
+      next({
+        error: 'error',
+        name: 'NoOrderFoundError',
+        message: `Order ${id} not found`,
+      });
+    } else {
+      const updatedOrder = await updateOrder(id, {
+        orderdate,
+        purchaserId,
+        iscomplete,
+        incart,
+        serviceId,
+        bundlekitId,
+      });
+
+      res.send(updatedOrder);
+    }
+  } catch (error) {
+    next(error);
   }
 });
 
