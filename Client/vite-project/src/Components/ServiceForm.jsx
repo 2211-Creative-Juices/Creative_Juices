@@ -15,6 +15,7 @@ const ServiceForm = ({ services, todaysDate }) => {
   const [isActive, setIsActive] = useState(false);
   const [isRemote, setIsRemote] = useState(false);
   const [guests, setGuests] = useState(0);
+  // const [isinCart, setisinCart] = useState(false);
 
   //************* CHECK BOX STATE **************/
   const [isBrewery, setBreweryLocation] = useState('');
@@ -91,14 +92,14 @@ const ServiceForm = ({ services, todaysDate }) => {
       console.log('NEW dateeeeee', todaysOrderDate);
       let purchaserId = user.user.id;
       console.log('NEW users.users.id', user.user.id);
-      let isinCart = true;
       // let bundlekitId = 0;
-      // console.log('NEW bundlekit', bundlekitId);
+      // let isintheCart = setisinCart(true);
+      // console.log('NEW isintheCart', isintheCart);
       const newOrder = await createNewOrder(
         user.token,
         todaysOrderDate,
         purchaserId,
-        isinCart,
+        isintheCart,
         serviceId
         // bundlekitId
       );
