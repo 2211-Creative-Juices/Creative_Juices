@@ -103,6 +103,32 @@ async function getAllOrdersByUser(username) {
   }
 }
 
+async function updateOrder(id, { ...fields }) {
+  console.log('id:', id, 'update fields:', fields);
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(', ');
+
+  try {
+    const {
+      rows: [order],
+    } = await client.query(
+      `
+    UPDATE orders
+    SET ${setString}
+    WHERE id = ${id}
+    RETURNING *;
+    `,
+
+      Object.values(fields)
+    );
+    console.log('These are my update order: ', order);
+    return order;
+  } catch (error) {
+    throw error;
+  }
+}
+
 //getServicesByOrder
 //getBundlesByOrder
 
@@ -112,4 +138,5 @@ module.exports = {
   // attachUserToOrder,
   getAllOrders,
   getAllOrdersByUser,
+  updateOrder,
 };
