@@ -23,17 +23,18 @@ const AllServices = ({ services }) => {
     }
   }, [userId]);
   // console.log("********* this is my services:", myServices);
+
+  let latestService = myServices.slice(-1);
+  console.log('THIS IS MY LATEST SERVICE', latestService);
+
   return (
     <div id='services-container'>
       <h2 id='services-header'>Services</h2>
       <div id='services-map-container'>
         {myServices &&
-          myServices.map((service) => {
+          latestService.map((service) => {
             return (
-              <div
-                key={service.id}
-                className='service'
-              >
+              <div key={service.id} className='service'>
                 <h3>Service:</h3>
                 <p>Service Type: {service.type}</p>
                 <p>In-Person/Virtual: {service.isremote}</p>
