@@ -39,7 +39,7 @@ const UserCart = ({ orders }) => {
                 <p>Order Date: {order.orderdate}</p>
                 <p>Fullfilled?: {order.iscomplete}</p>
                 <p>ServiceID: {order.serviceId}</p>
-                <p>BK ID: {order.bundlekitId}</p>
+                {/* <p>BK ID: {order.bundlekitId}</p> */}
               </div>
             );
           })}
