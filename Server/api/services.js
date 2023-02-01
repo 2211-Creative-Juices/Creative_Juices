@@ -34,8 +34,6 @@ servicesRouter.get('/:serviceId', requireUser, async (req, res, next) => {
   }
 });
 
-//// this route is not working
-
 servicesRouter.get('/:userId/service', requireUser, async (req, res, next) => {
   let id = req.params.userId;
   console.log('These are the params', req.params.userId);
