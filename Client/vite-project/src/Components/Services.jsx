@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { getMyServices } from '../api/services';
+import { getServicesByUser } from '../api/services';
 import { useAuth } from '../custom-hooks';
 
 const AllServices = ({ services }) => {
   const user = useAuth();
   const [myServices, setMyServices] = useState([]);
   console.log('this is token:', user.token);
-  console.log('@@@@@@this is user:', user.user.username);
-  let myUsername = user.user.username;
+  console.log('@@@@@@this is user ID:', user.user.id);
+  let userId = user.user.id;
 
   // let purchaserId = orders.purchaserId;
 
   useEffect(() => {
     const getAllMyServices = async () => {
-      const allMyServices = await getMyServices(user.token, myUsername);
-      setMyServices(allMyServices);
+      const allMyServices = await getServicesByUser(user.token, userId);
+      setMyServices([allMyServices, ...myServices]);
       //console.log('#####this is my all my services:', allMyServices);
     };
     getAllMyServices();
-  }, [myUsername]);
+  }, [userId]);
   // console.log("********* this is my services:", myServices);
   return (
     <div id='services-container'>
@@ -27,7 +27,10 @@ const AllServices = ({ services }) => {
         {myServices &&
           myServices.map((service) => {
             return (
-              <div key={service.id} className='service'>
+              <div
+                key={service.id}
+                className='service'
+              >
                 <h3>Service:</h3>
                 <p>Service Type: {service.type}</p>
                 <p>In-Person/Virtual: {service.isremote}</p>

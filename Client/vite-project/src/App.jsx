@@ -29,15 +29,20 @@ function App() {
       setServices(allServices);
     };
     fetchedServices();
-  }, []);
-
-  useEffect(() => {
     const fetchedBundles = async () => {
       const allBundles = await getAllBundles();
       setBundles(allBundles);
     };
     fetchedBundles();
   }, []);
+
+  // useEffect(() => {
+  //   const fetchedBundles = async () => {
+  //     const allBundles = await getAllBundles();
+  //     setBundles(allBundles);
+  //   };
+  //   fetchedBundles();
+  // }, []);
 
   useEffect(() => {
     const fetchedOrders = async () => {
@@ -57,8 +62,14 @@ function App() {
       <div>
         <button onClick={logout}>Logout</button>
         <Routes>
-          <Route path='/login' element={Login} />
-          <Route path='/signup' element={Signup} />
+          <Route
+            path='/login'
+            element={Login}
+          />
+          <Route
+            path='/signup'
+            element={Signup}
+          />
         </Routes>
       </div>
       <div>

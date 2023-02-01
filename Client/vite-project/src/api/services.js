@@ -12,11 +12,11 @@ export const getAllServices = async () => {
   }
 };
 
-export const getMyServices = async (token, username) => {
-  console.log('VERY IMPORTANT token and user:', token, username);
+export const getServicesByUser = async (token, id) => {
+  console.log('VERY IMPORTANT token and user:', token, id);
 
   try {
-    const response = await fetch(`${BASE_API}/users/${username}/services`, {
+    const response = await fetch(`${BASE_API}/services/${id}/service`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
