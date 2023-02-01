@@ -21,24 +21,22 @@ servicesRouter.get('/', async (req, res, next) => {
     next(error);
   }
 });
-// if the one in users doesnt work
 
-// servicesRouter.get('/:userId', requireUser, async (req, res, next) => {
-//   let id = req.params;
-//   try {
-//     if ((id = req.user.id)) {
-//       let getServicesForMe = await getServicesByUser(id);
-//       // console.log('this is get services for me', getServicesForMe);
-//       res.send(getServicesForMe);
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+servicesRouter.get('/:serviceId', requireUser, async (req, res, next) => {
+  let id = req.params.serviceId;
+  try {
+    if (req.user) {
+      const serviceById = await getServiceById(id);
+      res.send(serviceById);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
-servicesRouter.get('/:orderId', requireUser, async (req, res, next) => {
-  let id = req.params;
-  console.log('this is req.params', req.params);
+servicesRouter.get('/:orderId/order', requireUser, async (req, res, next) => {
+  let id = req.params.orderId;
+  console.log('this is req.params', req.params.orderId);
   try {
     if (req.user) {
       let getServicesByOrder = await getServicesByOrderId(id);
