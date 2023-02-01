@@ -108,7 +108,7 @@ CREATE TABLE users (
       orderdate varchar(255),
      "purchaserId" INTEGER REFERENCES users(id),
      iscomplete BOOLEAN default false,
-     incart BOOLEAN default false,
+     incart BOOLEAN default true,
      "serviceId" INTEGER REFERENCES services(id) DEFAULT null,
      "bundlekitId" INTEGER REFERENCES bundlekit(id) DEFAULT null
     );
