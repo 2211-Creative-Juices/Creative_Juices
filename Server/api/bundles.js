@@ -34,14 +34,28 @@ bundlesRouter.get('/', async (req, res, next) => {
 //   }
 // });
 
-bundlesRouter.get('/:orderId', requireUser, async (req, res, next) => {
-  let id = req.params;
+bundlesRouter.get('/:orderId/order', requireUser, async (req, res, next) => {
+  let id = req.params.orderId;
   console.log('this is req.params', req.params);
   try {
     if (req.user) {
       let getBundlesByOrder = await getBundleByOrderId(id);
       // console.log('this is get services for me', getServicesForMe);
       res.send(getBundlesByOrder);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+bundlesRouter.get('/:bundlekitId', requireUser, async (req, res, next) => {
+  let id = req.params.bundlekitId;
+  console.log('this is req.params for get by bundle id', req.params);
+  try {
+    if (req.user) {
+      const getBundlesById = await getBundleById(id);
+      // console.log('this is get services for me', getServicesForMe);
+      res.send(getBundlesById);
     }
   } catch (error) {
     next(error);
