@@ -25,7 +25,7 @@ export const authenticateUser = async (
         }),
       });
       const result = await response.json();
-      console.log(result);
+      console.log('THIS IS THE RESULT FROM LOGIN', result);
       if (!result.token) {
         return;
       } else {
@@ -85,6 +85,17 @@ export const me = async () => {
       return data;
     }
     return;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getAllUsers = async () => {
+  try {
+    const response = await fetch(`${BASE_API}/users`);
+    const results = await response.json();
+    // console.log('THESE ARE ALL THE USERS IN THE API CALL', results.users);
+    return results.users;
   } catch (error) {
     console.error(error);
   }
