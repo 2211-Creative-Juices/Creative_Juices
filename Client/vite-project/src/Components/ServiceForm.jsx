@@ -4,7 +4,7 @@ import { createService } from '../api/services';
 import { createNewOrder } from '../api/orders';
 import AllServices from './Services';
 
-const ServiceForm = ({ services, setService }) => {
+const ServiceForm = ({ services, todaysDate }) => {
   const user = useAuth();
   // const [orderDate, setOrderDate] = useState(new Date());
   const [date, setDate] = useState('');
@@ -72,7 +72,7 @@ const ServiceForm = ({ services, setService }) => {
       // console.log('user:', user);
       // console.log('cost:', cost);
 
-      const newService = await createService(
+      let newService = await createService(
         user.token,
         type,
         isRemote,
@@ -83,16 +83,26 @@ const ServiceForm = ({ services, setService }) => {
         notes
       );
 
-      if (newService.length > 0) {
-        let serviceId = services.id;
-        const newOrder = await createNewOrder(
-          user.token,
-          todaysOrderDate,
-          purchaserId,
-          serviceId,
-          bundlekitId
-        );
-      }
+      console.log('HTIS IS MY NEWSERVCIE', newService);
+
+      let serviceId = newService.id;
+      console.log('NEW SERVICEID', serviceId);
+      let todaysOrderDate = todaysDate;
+      console.log('NEW dateeeeee', todaysOrderDate);
+      let purchaserId = user.user.id;
+      console.log('NEW users.users.id', user.user.id);
+      let isinCart = true;
+      // let bundlekitId = 0;
+      // console.log('NEW bundlekit', bundlekitId);
+      const newOrder = await createNewOrder(
+        user.token,
+        todaysOrderDate,
+        purchaserId,
+        isinCart,
+        serviceId
+        // bundlekitId
+      );
+      console.log('THIS IS THE NEW ORDERBABYYYY', newOrder);
 
       // console.log('this is the new service!', newService);
     } catch (error) {

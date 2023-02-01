@@ -109,8 +109,8 @@ CREATE TABLE users (
      "purchaserId" INTEGER REFERENCES users(id),
      iscomplete BOOLEAN default false,
      incart BOOLEAN default false,
-     "serviceId" INTEGER REFERENCES services(id),
-     "bundlekitId" INTEGER REFERENCES bundlekit(id)
+     "serviceId" INTEGER REFERENCES services(id) DEFAULT null,
+     "bundlekitId" INTEGER REFERENCES bundlekit(id) DEFAULT null
     );
     `);
 
