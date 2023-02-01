@@ -28,6 +28,16 @@ function App() {
   const [bundles, setBundles] = useState([]);
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
+  const [todaysDate, setTodaysDate] = useState(new Date());
+
+  useEffect(() => {
+    let today = setInterval(() => setTodaysDate(new Date()), 86400000);
+    return function cleanup() {
+      clearInterval(today);
+    };
+  });
+
+  console.log('this is date', todaysDate);
 
   useEffect(() => {
     const fetchedServices = async () => {
@@ -81,12 +91,9 @@ function App() {
             />
             <Route
               path='/allorders'
-              element={<AdminOrders />}
+              element={<AdminOrders orders={orders} />}
             />
-            <Route
-              path='/allusers'
-              element={<AdminUsers users={users} />}
-            />
+            <Route path='/allusers' element={<AdminUsers users={users} />} />
           </Routes>
         </div>
         <Home />

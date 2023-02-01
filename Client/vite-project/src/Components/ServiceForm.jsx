@@ -1,10 +1,12 @@
 import { useAuth } from '../custom-hooks';
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { createService } from '../api/services';
+import { createNewOrder } from '../api/orders';
 import AllServices from './Services';
 
 const ServiceForm = ({ services, setService }) => {
   const user = useAuth();
+  // const [orderDate, setOrderDate] = useState(new Date());
   const [date, setDate] = useState('');
   const [notes, setNotes] = useState('');
   const [cost, setCost] = useState(0);
@@ -23,13 +25,12 @@ const ServiceForm = ({ services, setService }) => {
   const [isHomeChecked, setHomeIsChecked] = useState(false);
   const [isOther, setOtherLocation] = useState('');
   const [isOtherChecked, setOtherIsChecked] = useState(false);
-  const [adult, setAdult] = useState('');
+  // const [adult, setAdult] = useState('');
   const [isAdultChecked, setIsAdultChecked] = useState(false);
   // const [kid, setKid] = useState('');
   const [isKidChecked, setIsKidChecked] = useState(false);
 
   const submitHandler = async (e) => {
-    console.log('thi is isAdult', adult);
     try {
       e.preventDefault();
       if (isHome.length > 0) {
@@ -48,6 +49,14 @@ const ServiceForm = ({ services, setService }) => {
         setLocation(isOther);
       }
 
+      // useEffect(() => {
+      //   var timer = setInterval(() => setOrderDate(new Date()), 1000);
+      //   return function cleanup() {
+      //     clearInterval(timer);
+      //   };
+      // });
+
+      // const todaysOrderDate = orderDate;
       // if (adult) {
       //   await setType(adult);
       // }
@@ -73,6 +82,17 @@ const ServiceForm = ({ services, setService }) => {
         date,
         notes
       );
+
+      if (newService.length > 0) {
+        let serviceId = services.id;
+        const newOrder = await createNewOrder(
+          user.token,
+          todaysOrderDate,
+          purchaserId,
+          serviceId,
+          bundlekitId
+        );
+      }
 
       // console.log('this is the new service!', newService);
     } catch (error) {
@@ -113,6 +133,7 @@ const ServiceForm = ({ services, setService }) => {
                 onChange={(e) => {
                   setType(e.target.value);
                   setIsKidChecked(!isKidChecked);
+                  isAdultChecked && setIsAdultChecked(!isAdultChecked);
                 }}
               ></input>
             </label>
@@ -215,10 +236,7 @@ const ServiceForm = ({ services, setService }) => {
               ></input>
             </label>
 
-            <button
-              onClick={submitHandler}
-              type={'submit'}
-            >
+            <button onClick={submitHandler} type={'submit'}>
               Submit
             </button>
           </div>
