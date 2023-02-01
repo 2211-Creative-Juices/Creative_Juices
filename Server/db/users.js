@@ -34,12 +34,12 @@ async function createUser({
 
 async function getAllUsers() {
   try {
-    const { rows } = await client.query(
+    const { rows: user } = await client.query(
       `
       SELECT * FROM users;
     `
     );
-    return rows;
+    return user;
   } catch (error) {
     console.log('error gettingAllUsers');
     throw error;
@@ -89,7 +89,7 @@ async function getUserById(id) {
     const {
       rows: [user],
     } = await client.query(`
-    SELECT id, username, zipcode, email, name
+    SELECT id, username, zipcode, email, name, isadmin
     FROM users
     WHERE id=${id}`);
 
