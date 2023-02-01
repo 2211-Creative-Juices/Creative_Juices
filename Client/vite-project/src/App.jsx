@@ -15,7 +15,8 @@ import {
 } from './Components/Index';
 import UserCart from './CartComponents/UserCart';
 import AdminServices from './AdminComponents/AdminServices';
-import AdminOrders from './AdminComponents/AdminOrders';
+import IsCompleteOrd from './AdminComponents/IsCompleteOrd';
+import NotCompleteOrd from './AdminComponents/NotCompleteOrd';
 import AdminUsers from './AdminComponents/AdminUsers';
 import { Signup, Login } from './Components/AuthForm';
 import { useAuth } from './custom-hooks';
@@ -78,8 +79,14 @@ function App() {
       <div>
         <button onClick={logout}>Logout</button>
         <Routes>
-          <Route path='/login' element={Login} />
-          <Route path='/signup' element={Signup} />
+          <Route
+            path='/login'
+            element={Login}
+          />
+          <Route
+            path='/signup'
+            element={Signup}
+          />
         </Routes>
       </div>
       <div>
@@ -90,17 +97,27 @@ function App() {
               element={<AdminServices services={services} />}
             />
             <Route
-              path='/allorders'
-              element={<AdminOrders orders={orders} />}
+              path='/completedorders'
+              element={<IsCompleteOrd orders={orders} />}
             />
-            <Route path='/allusers' element={<AdminUsers users={users} />} />
+            <Route
+              path='/incompleteorders'
+              element={<NotCompleteOrd orders={orders} />}
+            />
+            <Route
+              path='/allusers'
+              element={<AdminUsers users={users} />}
+            />
           </Routes>
         </div>
         <Home />
         <About />
         <UserCart orders={orders} />
 
-        <ServiceForm services={services} />
+        <ServiceForm
+          services={services}
+          todaysDate={todaysDate}
+        />
         <AllBundles bundles={bundles} />
       </div>
     </div>
