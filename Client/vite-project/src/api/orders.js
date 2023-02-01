@@ -31,6 +31,7 @@ export const getAllTheOrdersByUser = async (token, username) => {
 
 export const createNewOrder = async (
   token,
+  orderDate,
   purchaserId,
   serviceId,
   bundlekitId
@@ -43,6 +44,7 @@ export const createNewOrder = async (
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
+        orderDate,
         purchaserId,
         serviceId,
         bundlekitId,
