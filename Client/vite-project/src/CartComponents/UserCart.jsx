@@ -21,7 +21,6 @@ const UserCart = ({ orders }) => {
       setMyOrders(allMyOrders, ...myOrders);
       console.log('these are my orders', allMyOrders);
     };
-
     if (user.user.id && orders[0].incart === true) {
       getAllMyOrders();
     }
