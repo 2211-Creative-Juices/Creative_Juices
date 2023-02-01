@@ -6,17 +6,14 @@ const IsCompleteOrd = ({ orders }) => {
   console.log('these are admin all orders', orders);
   return (
     <div id='orders-container'>
-      <h2 id='orders-header'>Orders</h2>
+      <h2 id='orders-header'>Completed Orders</h2>
       <div id='orders-map-container'>
         {orders &&
           orders.map((order) => {
             if (order.iscomplete === true) {
               return (
-                <div
-                  key={order.id}
-                  className='order'
-                >
-                  <h3>Order:</h3>
+                <div key={order.id} className='order'>
+                  <h3>Completed Orders:</h3>
                   <p>Order Date: {order.orderdate}</p>
                   <p>Purchaser ID: {order.purchaserId}</p>
                   <p>Service ID: {order.serviceId}</p>

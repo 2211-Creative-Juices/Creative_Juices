@@ -132,4 +132,5 @@ module.exports = {
   getAllOrders,
   getAllOrdersByUser,
   updateOrder,
+  // getOrdersByIsNotComplete,
 };

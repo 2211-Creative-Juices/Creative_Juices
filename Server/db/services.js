@@ -184,6 +184,30 @@ async function getServicesByOrderId(id) {
   }
 }
 
+async function attachServicesToOrder(orders) {
+  const ordersToReturn = [...orders];
+  console.log('these are the orders to return', ordersToReturn);
+
+  try {
+    const { rows: services } = await client.query(`
+    SELECT *
+    FROM services
+    JOIN orders ON services.id = orders."serviceId"
+    `);
+
+    for (const order of ordersToReturn) {
+      const servicesToAdd = services.filter(
+        (service) => service.id === orders.serviceId
+      );
+      console.log('this is services to Add', servicesToAdd);
+      order.services = servicesToAdd;
+    }
+    return ordersToReturn;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function updateService(id, { ...fields }) {
   console.log('id:', id, 'update fields:', fields);
   const setString = Object.keys(fields)
@@ -249,6 +273,7 @@ module.exports = {
   getServiceByActive,
   getServicesByOrderId,
   getServicesByUser,
+  attachServicesToOrder,
   // getServiceIdByUser,
   // getServiceByPurchaserId,
 };

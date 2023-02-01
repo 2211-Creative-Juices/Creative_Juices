@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const navLinks = [
   { navLinkId: 'Home', scrollToId: 'home-container' },
@@ -48,6 +49,9 @@ const NavBar = () => {
             setActiveNavLinkId={setActiveNavLinkId}
           />
         ))}
+        <button>
+          <Link to='/usercart'>CART</Link>
+        </button>
       </nav>
     </div>
   );

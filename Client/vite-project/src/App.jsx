@@ -79,14 +79,8 @@ function App() {
       <div>
         <button onClick={logout}>Logout</button>
         <Routes>
-          <Route
-            path='/login'
-            element={Login}
-          />
-          <Route
-            path='/signup'
-            element={Signup}
-          />
+          <Route path='/login' element={Login} />
+          <Route path='/signup' element={Signup} />
         </Routes>
       </div>
       <div>
@@ -104,22 +98,18 @@ function App() {
               path='/incompleteorders'
               element={<NotCompleteOrd orders={orders} />}
             />
-            <Route
-              path='/allusers'
-              element={<AdminUsers users={users} />}
-            />
+            <Route path='/allusers' element={<AdminUsers users={users} />} />
           </Routes>
         </div>
         <Home />
         <About />
-        <UserCart orders={orders} />
 
-        <ServiceForm
-          services={services}
-          todaysDate={todaysDate}
-        />
+        <ServiceForm services={services} todaysDate={todaysDate} />
         <AllBundles bundles={bundles} />
       </div>
+      <Routes>
+        <Route path='/usercart' element={<UserCart orders={orders} />}></Route>
+      </Routes>
     </div>
   );
 }

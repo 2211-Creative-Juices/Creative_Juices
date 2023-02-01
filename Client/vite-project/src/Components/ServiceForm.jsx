@@ -6,72 +6,25 @@ import AllServices from './Services';
 
 const ServiceForm = ({ services, todaysDate }) => {
   const user = useAuth();
-  // const [orderDate, setOrderDate] = useState(new Date());
   const [date, setDate] = useState('');
   const [notes, setNotes] = useState('');
   const [cost, setCost] = useState(0);
   const [location, setLocation] = useState('');
   const [type, setType] = useState('');
-  const [isActive, setIsActive] = useState(false);
   const [isRemote, setIsRemote] = useState(false);
   const [guests, setGuests] = useState(0);
-  // const [isinCart, setisinCart] = useState(false);
 
   //************* CHECK BOX STATE **************/
-  const [isBrewery, setBreweryLocation] = useState('');
   const [isBreweryChecked, setBreweryIsChecked] = useState(false);
-  const [isCoffee, setCoffeeLocation] = useState('');
   const [isCoffeeChecked, setCoffeeIsChecked] = useState(false);
-  const [isHome, setHomeLocation] = useState('');
   const [isHomeChecked, setHomeIsChecked] = useState(false);
-  const [isOther, setOtherLocation] = useState('');
   const [isOtherChecked, setOtherIsChecked] = useState(false);
-  // const [adult, setAdult] = useState('');
   const [isAdultChecked, setIsAdultChecked] = useState(false);
-  // const [kid, setKid] = useState('');
   const [isKidChecked, setIsKidChecked] = useState(false);
 
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
-      if (isHome.length > 0) {
-        setLocation(isHome);
-      }
-
-      if (isCoffee.length > 0) {
-        setLocation(isCoffee);
-      }
-
-      if (isBrewery.length > 0) {
-        setLocation(isBrewery);
-      }
-
-      if (isOther.length > 0) {
-        setLocation(isOther);
-      }
-
-      // useEffect(() => {
-      //   var timer = setInterval(() => setOrderDate(new Date()), 1000);
-      //   return function cleanup() {
-      //     clearInterval(timer);
-      //   };
-      // });
-
-      // const todaysOrderDate = orderDate;
-      // if (adult) {
-      //   await setType(adult);
-      // }
-
-      // if (kid.length > 0) {
-      //   setType(kid);
-      // }
-      // console.log('this is the selected loca:', location);
-      // console.log('this is the selected type:', type);
-      // console.log('this is the set date:', date);
-      // console.log('these are the notes', notes);
-      // console.log('number of guests', guests);
-      // console.log('user:', user);
-      // console.log('cost:', cost);
 
       let newService = await createService(
         user.token,
@@ -124,7 +77,7 @@ const ServiceForm = ({ services, todaysDate }) => {
                 label='Adult'
                 value='adult'
                 type='checkbox'
-                // checked={isAdult}
+                checked={isAdultChecked}
                 onChange={(e) => {
                   setIsAdultChecked(!isAdultChecked);
                   setType(e.target.value);
@@ -174,8 +127,11 @@ const ServiceForm = ({ services, todaysDate }) => {
                 type='checkbox'
                 checked={isBreweryChecked}
                 onChange={(e) => {
-                  setBreweryIsChecked(e.target.checked);
-                  setBreweryLocation(e.target.value);
+                  setBreweryIsChecked(!isBreweryChecked);
+                  setLocation(e.target.value);
+                  isOtherChecked && setOtherIsChecked(!isOtherChecked);
+                  isCoffeeChecked && setCoffeeIsChecked(!isCoffeeChecked);
+                  isHomeChecked && setHomeIsChecked(!isHomeChecked);
                 }}
               ></input>
             </label>
@@ -188,8 +144,11 @@ const ServiceForm = ({ services, todaysDate }) => {
                 type='checkbox'
                 checked={isCoffeeChecked}
                 onChange={(e) => {
-                  setCoffeeIsChecked(e.target.checked);
-                  setCoffeeLocation(e.target.value);
+                  setCoffeeIsChecked(!isCoffeeChecked);
+                  setLocation(e.target.value);
+                  isBreweryChecked && setBreweryIsChecked(!isBreweryChecked);
+                  isOtherChecked && setOtherIsChecked(!isOtherChecked);
+                  isHomeChecked && setHomeIsChecked(!isHomeChecked);
                 }}
               ></input>
             </label>
@@ -202,8 +161,11 @@ const ServiceForm = ({ services, todaysDate }) => {
                 type='checkbox'
                 checked={isHomeChecked}
                 onChange={(e) => {
-                  setHomeIsChecked(e.target.checked);
-                  setHomeLocation(e.target.value);
+                  setHomeIsChecked(!isHomeChecked);
+                  setLocation(e.target.value);
+                  isBreweryChecked && setBreweryIsChecked(!isBreweryChecked);
+                  isOtherChecked && setOtherIsChecked(!isOtherChecked);
+                  isCoffeeChecked && setCoffeeIsChecked(!isCoffeeChecked);
                 }}
               ></input>
             </label>
@@ -216,8 +178,11 @@ const ServiceForm = ({ services, todaysDate }) => {
                 type='checkbox'
                 checked={isOtherChecked}
                 onChange={(e) => {
-                  setOtherIsChecked(e.target.checked);
-                  setOtherLocation(e.target.value);
+                  setOtherIsChecked(!isOtherChecked);
+                  setLocation(e.target.value);
+                  isBreweryChecked && setBreweryIsChecked(!isBreweryChecked);
+                  isCoffeeChecked && setCoffeeIsChecked(!isCoffeeChecked);
+                  isHomeChecked && setHomeIsChecked(!isHomeChecked);
                 }}
               ></input>
             </label>

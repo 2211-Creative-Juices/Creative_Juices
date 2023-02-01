@@ -28,6 +28,7 @@ const {
   getServiceByDate,
   updateService,
   getServiceByActive,
+  attachServicesToOrder,
 
   // getServiceIdByUser,
   // getServiceByPurchaserId,
@@ -47,6 +48,7 @@ const {
   getAllOrders,
   // attachUserToOrder,
   getAllOrdersByUser,
+  getOrdersByIsNotComplete,
 } = require('./orders');
 
 async function dropTables() {
@@ -367,12 +369,12 @@ async function testDB() {
     // const orderBundle = await attachBundleToOrder(allOrders);
     // console.log('testing attach bundle to order:', orderBundle);
 
-    // const attachUserOrder = await attachUserToOrder(allOrders);
-    // console.log('testing attach user to order:', attachUserOrder);
-    // console.log(
-    //   'these are all the orders w users attached user',
-    //   attachUserOrder[0].usersinfo
-    // );
+    const attachServiceOrder = await attachServicesToOrder(allOrders);
+    console.log('testing attach services to order:', attachServiceOrder);
+    console.log(
+      'these are all the orders w services attached',
+      attachServiceOrder[0]
+    );
 
     // const ordersbyUser = await getAllOrdersByUser('shelleyadmin');
     // console.log('this is getall orders by username', ordersbyUser);

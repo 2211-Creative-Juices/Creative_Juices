@@ -8,7 +8,9 @@ const {
   getOrderById,
   getAllOrdersByUser,
   updateOrder,
+  // getOrdersByIsNotComplete,
 } = require('../db/orders');
+const { attachServicesToOrder } = require('../db/services');
 const ordersRouter = express.Router();
 const { requireUser } = require('./utils');
 
@@ -42,6 +44,7 @@ ordersRouter.get('/:username/orders', requireUser, async (req, res, next) => {
   try {
     if (req.user) {
       const userOrders = await getAllOrdersByUser(myOwnUsername);
+      // const attachedServicesOrders = await attachServicesToOrder(userOrders);
       res.send(userOrders);
     }
   } catch (error) {
