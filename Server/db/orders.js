@@ -13,24 +13,17 @@ async function getAllOrders() {
   }
 }
 
-async function createOrder({
-  orderdate,
-  purchaserId,
-  iscomplete,
-  incart,
-  serviceId,
-  bundlekitId,
-}) {
+async function createOrder({ orderdate, purchaserId, serviceId, bundlekitId }) {
   try {
     const {
       rows: [order],
     } = await client.query(
       `
-            INSERT INTO orders (orderdate, "purchaserId", iscomplete, incart, "serviceId", "bundlekitId")
-            VALUES ($1, $2, $3, $4, $5, $6)
+            INSERT INTO orders (orderdate, "purchaserId", "serviceId", "bundlekitId")
+            VALUES ($1, $2, $3, $4)
             RETURNING *;
             `,
-      [orderdate, purchaserId, iscomplete, incart, serviceId, bundlekitId]
+      [orderdate, purchaserId, serviceId, bundlekitId]
     );
     console.log('this is the order:', order);
     return order;

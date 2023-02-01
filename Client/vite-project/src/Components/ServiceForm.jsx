@@ -99,7 +99,7 @@ const ServiceForm = ({ services, todaysDate }) => {
         user.token,
         todaysOrderDate,
         purchaserId,
-        isintheCart,
+
         serviceId
         // bundlekitId
       );

@@ -127,8 +127,6 @@ async function createFakeOrder() {
       {
         orderdate: '1-12-23',
         purchaserId: 2,
-        iscomplete: false,
-        incart: true,
         serviceId: 2,
         bundlekitId: 1,
       },
