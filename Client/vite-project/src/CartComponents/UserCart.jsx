@@ -5,35 +5,35 @@ import { useAuth } from '../custom-hooks';
 
 const UserCart = ({ orders }) => {
   const user = useAuth();
-  const [myOrders, setMyOrders] = useState([]);
-  console.log('orders outside useEffect', orders);
+  // const [myOrders, setMyOrders] = useState([]);
+  // console.log('orders outside useEffect', orders);
 
-  if (user.token) {
-    console.log('thisis orders in UserCart', orders);
-    const singleOrder = orders[0];
-    console.log('THIS is purchaserID: ', singleOrder);
-    console.log('THIS is user.token: ', user.token);
+  // if (user.token) {
+  //   console.log('thisis orders in UserCart', orders);
+  //   const singleOrder = orders[0];
+  //   console.log('THIS is purchaserID: ', singleOrder);
+  //   console.log('THIS is user.token: ', user.token);
 
-    useEffect(() => {
-      const getAllMyOrders = async () => {
-        const allMyOrders = await getOrderByPurchaserId(
-          user.token,
-          singleOrder
-        );
-        setMyOrders(allMyOrders);
-        console.log('these are my orders', allMyOrders);
-      };
+  //   useEffect(() => {
+  //     const getAllMyOrders = async () => {
+  //       const allMyOrders = await getOrderByPurchaserId(
+  //         user.token,
+  //         singleOrder
+  //       );
+  //       setMyOrders(allMyOrders);
+  //       console.log('these are my orders', allMyOrders);
+  //     };
 
-      if (user.id === orders[0].purchaserId && orders[0].incart === true) {
-        getAllMyOrders();
-      }
-    }, [orders[0].purchaserId]);
+  //     if (user.id === orders[0].purchaserId && orders[0].incart === true) {
+  //       getAllMyOrders();
+  //     }
+  //   }, [orders[0].purchaserId]);
 
-    return (
-      <div>
-        {' '}
-        This will be Order by Purchaser Id
-        <div id='order-info'>
+  return (
+    <div>
+      {' '}
+      This will be Order by Purchaser Id
+      {/* <div id='order-info'>
           {myOrders &&
             myOrders.map((order) => {
               return (
@@ -47,12 +47,12 @@ const UserCart = ({ orders }) => {
                 </div>
               );
             })}
-        </div>
-      </div>
-    );
-  } else {
-    return <div>Please Log in</div>;
-  }
+        </div> */}
+    </div>
+  );
+  // } else {
+  //   return <div>Please Log in</div>;
+  // }
 };
 
 export default UserCart;

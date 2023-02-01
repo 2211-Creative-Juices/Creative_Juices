@@ -71,10 +71,10 @@ async function getBundleByOrderId(id) {
   try {
     const { rows: bundle } = await client.query(
       `
-    SELECT *
+    SELECT bundlekit.*
     FROM bundlekit
     JOIN orders ON bundlekit.id = orders."bundlekitId"
-    WHERE orders."bundlekitId" = ${id};
+    WHERE orders.id = ${id};
     `
     );
     console.log('These are our bundles by order id :', bundle);

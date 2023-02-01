@@ -42,23 +42,23 @@ async function getAllServices() {
   }
 }
 
-async function getServiceByUser(username) {
-  try {
-    const { rows: service } = await client.query(
-      `
-    SELECT services.*
-    FROM services
-    JOIN users ON services.id = users."serviceId"
-    WHERE username = $1;
-    `,
-      [username]
-    );
-    console.log('These are our services by username :', service);
-    return service;
-  } catch (error) {
-    throw error;
-  }
-}
+// async function getServiceByUser(username) {
+//   try {
+//     const { rows: service } = await client.query(
+//       `
+//     SELECT services.*
+//     FROM services
+//     JOIN users ON services.id = users."serviceId"
+//     WHERE username = $1;
+//     `,
+//       [username]
+//     );
+//     console.log('These are our services by username :', service);
+//     return service;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 async function getServiceById(id) {
   try {
@@ -127,24 +127,26 @@ async function getServiceByActive(isactive) {
   }
 }
 
-//getServiceIdbyUser
-// async function getServiceIdByUser(username) {
-//   try {
-//     const {
-//       rows: [service],
-//     } = await client.query(
-//       `
-//     SELECT "serviceId" FROM users
-//     WHERE username = $1;
-//     `,
-//       [username]
-//     );
+// getServiceIdbyUser;
 
-//     return service;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
+async function getServicesByUser(id) {
+  try {
+    const {
+      rows: [service],
+    } = await client.query(
+      `
+    SELECT * FROM services
+    JOIN orders on services.id = orders."serviceId"
+    JOIN users on orders."purchaserId" = users.id
+    WHERE users.id = ${id}
+    `
+    );
+
+    return service;
+  } catch (error) {
+    throw error;
+  }
+}
 
 // async function getServiceByPurchaserId(id) {
 //   console.log('this is the purchaser Id:', id);
@@ -169,15 +171,15 @@ async function getServiceByActive(isactive) {
 async function getServicesByOrderId(id) {
   console.log('this is services by order id ID', id);
   try {
-    const {
-      rows: [services],
-    } = await client.query(
+    const { rows: services } = await client.query(
       `
-        SELECT * From services 
-        JOIN services on orders."servicesId" = orders.id
-        WHERE orders."servicesId" = ${id}
+        SELECT services.* 
+        From services 
+        JOIN orders on orders."serviceId" = services.id
+        WHERE orders.id = ${id};
         `
     );
+    console.log('these are our SERVICES by order id', services);
     return services;
   } catch (error) {
     console.error(error);
@@ -241,13 +243,14 @@ async function updateService(id, { ...fields }) {
 module.exports = {
   createService,
   getAllServices,
-  getServiceByUser,
+  // getServiceByUser,
   getServiceById,
   getServiceByName,
   getServiceByDate,
   updateService,
   getServiceByActive,
   getServicesByOrderId,
+  getServicesByUser,
   // getServiceIdByUser,
   // getServiceByPurchaserId,
 };

@@ -8,7 +8,9 @@ const {
   getUserByUsername,
   getAllUsers,
   createUser,
-  getServiceByUser,
+  getUserById,
+  getAllOrdersByUser,
+  getServicesByUserId,
 } = require('../db');
 // const { JWT_SECRET = 'donottell' } = process.env;
 //Register
@@ -23,13 +25,13 @@ usersRouter.get('/', async (req, res) => {
   res.send({ users });
 });
 
-usersRouter.get('/:username/services', requireUser, async (req, res, next) => {
-  const myUsername = req.params.username;
+usersRouter.get('/:userId/services', requireUser, async (req, res, next) => {
+  const userId = req.params;
   console.log('These are the params', req.params);
   try {
-    const user = await getUserByUsername(myUsername);
+    const user = await getUserById(userId);
     if (req.user && req.user.id === user.id) {
-      const userServices = await getServiceByUser(myUsername);
+      const userServices = await getServicesByUserId(userId);
       res.send(userServices);
     }
   } catch (error) {
@@ -38,22 +40,37 @@ usersRouter.get('/:username/services', requireUser, async (req, res, next) => {
   }
 });
 
-usersRouter.get('/:purchaserId/orders', requireUser, async (req, res, next) => {
-  let id = req.params.purchaserId;
-  console.log('Req Params', req.params);
+usersRouter.get('/:username/orders', requireUser, async (req, res, next) => {
+  const myOwnUsername = req.params.username;
+  console.log('These are the params', req.params);
   try {
-    const myUsername = req.params.username;
-    const user = await getUserByUsername(myUsername);
-    if ((id = user.id)) {
-      let getOrderForMe = await getAllOrdersByUser(myUsername);
-      console.log('this is getorderforme', getOrderForMe);
-      res.send(getOrderForMe);
+    const user = await getUserByUsername(myOwnUsername);
+    if (req.user && req.user.id === user.id) {
+      const userOrders = await getAllOrdersByUser(myOwnUsername);
+      res.send(userOrders);
     }
   } catch (error) {
-    console.error('getOrdersForMe', error);
+    console.error(error);
     next(error);
   }
 });
+
+// usersRouter.get('/:purchaserId/orders', requireUser, async (req, res, next) => {
+//   let id = req.params.purchaserId;
+//   console.log('Req Params', req.params);
+//   try {
+//     const myUsername = req.params.username;
+//     const user = await getUserByUsername(myUsername);
+//     if ((id = user.id)) {
+//       let getOrderForMe = await getAllOrdersByUser(myUsername);
+//       console.log('this is getorderforme', getOrderForMe);
+//       res.send(getOrderForMe);
+//     }
+//   } catch (error) {
+//     console.error('getOrdersForMe', error);
+//     next(error);
+//   }
+// });
 
 //REGISTER /api/users/register
 

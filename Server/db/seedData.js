@@ -13,18 +13,22 @@ const {
   getAllUsers,
   updateUser,
   updateUserPassword,
+
   // attachServicesToUser,
   // attachBundleToUser,
 } = require('./users');
 const {
   createService,
   getAllServices,
-  getServiceByUser,
+  // getServiceByUser,
+  getServicesByOrderId,
+  getServicesByUser,
   getServiceById,
   getServiceByName,
   getServiceByDate,
   updateService,
   getServiceByActive,
+
   // getServiceIdByUser,
   // getServiceByPurchaserId,
 } = require('./services');
@@ -32,6 +36,7 @@ const {
   createBundleKit,
   getAllBundles,
   getBundleByUser,
+  getBundleByOrderId,
   getBundleById,
   updateBundle,
 } = require('./bundleKits');
@@ -257,6 +262,9 @@ async function testDB() {
     const idBund = await getBundleById(1);
     console.log('testing getBundleById', idBund);
 
+    const bundleByOrderId = await getBundleByOrderId(1);
+    console.log('testing getServiceIdByUser', bundleByOrderId);
+
     const updatedBund = await updateBundle(allBundles[0].id, {
       bundlename: 'fall fun!',
       quantity: 2,
@@ -270,8 +278,8 @@ async function testDB() {
     const allServices = await getAllServices();
     console.log('testing getAllServices', allServices);
 
-    // const serviceByUser = await getServiceByUser('megan');
-    // console.log('testing getServiceByUser', serviceByUser);
+    const serviceByUser = await getServicesByUser(2);
+    console.log('testing getServiceByUser', serviceByUser);
 
     const serviceById = await getServiceById(1);
     console.log('testing getServiceById', serviceById);
@@ -285,8 +293,8 @@ async function testDB() {
     const serviceByActive = await getServiceByActive(true);
     console.log('testing getServiceByActive', serviceByActive);
 
-    // const serviceIdByUser = await getServiceIdByUser('ashley');
-    // console.log('testing getServiceIdByUser', serviceIdByUser);
+    const serviceIdByOrderId = await getServicesByOrderId(1);
+    console.log('testing getServicesByOrderId', serviceIdByOrderId);
 
     // const updatedService = await updateService(allServices[0].id, {
     //   name: 'Paint n Sip',
