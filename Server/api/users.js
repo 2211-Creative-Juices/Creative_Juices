@@ -10,7 +10,7 @@ const {
   createUser,
   getUserById,
   getAllOrdersByUser,
-  getServicesByUserId,
+  getServicesByUser,
 } = require('../db');
 // const { JWT_SECRET = 'donottell' } = process.env;
 //Register
@@ -30,8 +30,9 @@ usersRouter.get('/:userId/services', requireUser, async (req, res, next) => {
   console.log('These are the params', req.params);
   try {
     const user = await getUserById(userId);
+    console.log('USERIN TRYCATCH', user);
     if (req.user && req.user.id === user.id) {
-      const userServices = await getServicesByUserId(userId);
+      const userServices = await getServicesByUser(userId);
       res.send(userServices);
     }
   } catch (error) {

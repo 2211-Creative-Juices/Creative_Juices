@@ -131,9 +131,7 @@ async function getServiceByActive(isactive) {
 
 async function getServicesByUser(id) {
   try {
-    const {
-      rows: [service],
-    } = await client.query(
+    const { rows: service } = await client.query(
       `
     SELECT * FROM services
     JOIN orders on services.id = orders."serviceId"
