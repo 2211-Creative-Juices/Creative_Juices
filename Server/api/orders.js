@@ -2,7 +2,12 @@ const express = require('express');
 const apiRouter = express.Router();
 const { JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
-const { createOrder, getAllOrders, getOrderById } = require('../db/orders');
+const {
+  createOrder,
+  getAllOrders,
+  getOrderById,
+  getAllOrdersByUser,
+} = require('../db/orders');
 const ordersRouter = express.Router();
 const { requireUser } = require('./utils');
 
@@ -26,6 +31,20 @@ ordersRouter.get('/:orderId', requireUser, async (req, res, next) => {
     }
   } catch (error) {
     console.error('error getting orderby ID', error);
+    next(error);
+  }
+});
+
+ordersRouter.get('/:username/orders', requireUser, async (req, res, next) => {
+  const myOwnUsername = req.params.username;
+  console.log('These are the params', req.params);
+  try {
+    if (req.user) {
+      const userOrders = await getAllOrdersByUser(myOwnUsername);
+      res.send(userOrders);
+    }
+  } catch (error) {
+    console.error(error);
     next(error);
   }
 });

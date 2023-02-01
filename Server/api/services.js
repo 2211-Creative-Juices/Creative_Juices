@@ -5,7 +5,7 @@ const {
   getServiceById,
   updateService,
   // getServiceByPurchaserId,
-  // getServicesByUser,
+  getServicesByUser,
   getServicesByOrderId,
 } = require('../db');
 const { requireUser } = require('./utils');
@@ -34,6 +34,22 @@ servicesRouter.get('/:serviceId', requireUser, async (req, res, next) => {
   }
 });
 
+//// this route is not working
+
+servicesRouter.get('/:userId/service', requireUser, async (req, res, next) => {
+  let id = req.params.userId;
+  console.log('These are the params', req.params.userId);
+  try {
+    if (req.user) {
+      const userServices = await getServicesByUser(id);
+      res.send(userServices);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 servicesRouter.get('/:orderId/order', requireUser, async (req, res, next) => {
   let id = req.params.orderId;
   console.log('this is req.params', req.params.orderId);
@@ -47,6 +63,24 @@ servicesRouter.get('/:orderId/order', requireUser, async (req, res, next) => {
     next(error);
   }
 });
+
+// servicesRouter.get(
+//   '/:userId/usersservice',
+//   requireUser,
+//   async (req, res, next) => {
+//     let id = req.params.userId;
+//     console.log('These are the params', req.params);
+//     try {
+//       if (req.user) {
+//         let userServices = await getServicesByUser(id);
+//         res.send(userServices);
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       next(error);
+//     }
+//   }
+// );
 
 // POST /api/services
 

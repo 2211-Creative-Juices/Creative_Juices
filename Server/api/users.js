@@ -8,9 +8,9 @@ const {
   getUserByUsername,
   getAllUsers,
   createUser,
-  getUserById,
-  getAllOrdersByUser,
-  getServicesByUser,
+  // getUserById,
+  // getServicesByUser,
+  // getAllOrdersByUser,
 } = require('../db');
 // const { JWT_SECRET = 'donottell' } = process.env;
 //Register
@@ -23,37 +23,6 @@ usersRouter.get('/', async (req, res) => {
   const users = await getAllUsers();
   console.log('these are my users', users);
   res.send({ users });
-});
-
-usersRouter.get('/:userId/services', requireUser, async (req, res, next) => {
-  const userId = req.params;
-  console.log('These are the params', req.params);
-  try {
-    const user = await getUserById(userId);
-    console.log('USERIN TRYCATCH', user);
-    if (req.user && req.user.id === user.id) {
-      const userServices = await getServicesByUser(userId);
-      res.send(userServices);
-    }
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
-
-usersRouter.get('/:username/orders', requireUser, async (req, res, next) => {
-  const myOwnUsername = req.params.username;
-  console.log('These are the params', req.params);
-  try {
-    const user = await getUserByUsername(myOwnUsername);
-    if (req.user && req.user.id === user.id) {
-      const userOrders = await getAllOrdersByUser(myOwnUsername);
-      res.send(userOrders);
-    }
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
 });
 
 // usersRouter.get('/:purchaserId/orders', requireUser, async (req, res, next) => {
