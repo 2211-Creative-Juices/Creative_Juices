@@ -133,7 +133,7 @@ async function getServicesByUser(id) {
   try {
     const { rows: service } = await client.query(
       `
-    SELECT * FROM services
+    SELECT services.* FROM services
     JOIN orders on services.id = orders."serviceId"
     JOIN users on orders."purchaserId" = users.id
     WHERE users.id = ${id}

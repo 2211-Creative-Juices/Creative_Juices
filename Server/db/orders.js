@@ -85,7 +85,7 @@ async function getAllOrdersByUser(username) {
   try {
     const { rows: orders } = await client.query(
       `
-            SELECT *
+            SELECT orders.*
             FROM orders
             JOIN users ON orders."purchaserId" = users.id
             WHERE users.username = $1 AND orders."purchaserId" = users.id

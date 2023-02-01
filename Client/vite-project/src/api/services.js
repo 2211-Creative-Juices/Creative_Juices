@@ -13,7 +13,7 @@ export const getAllServices = async () => {
 };
 
 export const getMyServices = async (token, username) => {
-  // console.log('token and user:', token, username);
+  console.log('VERY IMPORTANT token and user:', token, username);
 
   try {
     const response = await fetch(`${BASE_API}/users/${username}/services`, {
@@ -23,7 +23,7 @@ export const getMyServices = async (token, username) => {
       },
     });
     const results = await response.json();
-    // console.log('this is results in services for me api', results);
+    console.log('this is results in services for me api', results);
     return results;
   } catch (error) {
     console.error(error);

@@ -45,7 +45,7 @@ const {
   createOrder,
   getOrderById,
   getAllOrders,
-  attachUserToOrder,
+  // attachUserToOrder,
   getAllOrdersByUser,
 } = require('./orders');
 
@@ -362,6 +362,9 @@ async function testDB() {
 
     const orderById = await getOrderById(1);
     console.log('testing get order by id:', orderById);
+
+    const allMyOrders = await getAllOrdersByUser('ashley');
+    console.log('testing get all orders:', allMyOrders);
 
     // const orderBundle = await attachBundleToOrder(allOrders);
     // console.log('testing attach bundle to order:', orderBundle);
