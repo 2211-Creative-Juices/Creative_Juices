@@ -11,7 +11,7 @@ export const getAllOrders = async () => {
   }
 };
 
-export const getAllTheOrderByUser = async (token, username) => {
+export const getAllTheOrdersByUser = async (token, username) => {
   console.log('accessing get order by purchaser id honhon: ', username);
   console.log('accessing get order by purchaser id TOKEN honhon: ', token);
   try {
@@ -29,20 +29,29 @@ export const getAllTheOrderByUser = async (token, username) => {
   }
 };
 
-// export const getOrderByPurchaserId = async (token, purchaserId) => {
-//   console.log('accessing get order by purchaser id honhon: ', purchaserId);
-//   console.log('accessing get order by purchaser id TOKEN honhon: ', token);
-//   try {
-//     const response = await fetch(`${BASE_API}/users/${purchaserId}/orders`, {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     const results = await response.json();
-//     console.log('this is results in ordersapi', results);
-//     return results;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+export const createNewOrder = async (
+  token,
+  purchaserId,
+  serviceId,
+  bundlekitId
+) => {
+  try {
+    const response = await fetch(`${BASE_API}/orders/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        purchaserId,
+        serviceId,
+        bundlekitId,
+      }),
+    });
+    const newOrder = await response.json();
+    console.log('this is new ROutine', newOrder);
+    return newOrder;
+  } catch (error) {
+    console.error(error);
+  }
+};

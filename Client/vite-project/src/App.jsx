@@ -62,14 +62,8 @@ function App() {
       <div>
         <button onClick={logout}>Logout</button>
         <Routes>
-          <Route
-            path='/login'
-            element={Login}
-          />
-          <Route
-            path='/signup'
-            element={Signup}
-          />
+          <Route path='/login' element={Login} />
+          <Route path='/signup' element={Signup} />
         </Routes>
       </div>
       <div>
