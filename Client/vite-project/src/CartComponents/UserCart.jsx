@@ -31,6 +31,7 @@ const UserCart = ({ orders }) => {
       <div id='orders-map-container'>
         {myOrders &&
           myOrders.map((order) => {
+            console.log('this is orders with bundles and such', order);
             if (order.iscomplete === false && order.incart === true)
               return (
                 <div key={order.id} className='myorders'>
@@ -39,6 +40,8 @@ const UserCart = ({ orders }) => {
                   <p>Fullfilled?: {order.iscomplete}</p>
                   <p>ServiceID: {order.serviceId}</p>
                   <p>BundleKitID: {order.bundlekitId}</p>
+                  <div> BUNDLE HERE:</div>
+
                   {/* <p>BK ID: {order.bundlekitId}</p> */}
 
                   {order.services.map((service) => {
@@ -52,6 +55,7 @@ const UserCart = ({ orders }) => {
                         <p>Location: {service.location}</p>
                         <p>Date: {service.date}</p>
                         <p>Notes: {service.notes}</p>
+
                         <button
                           onClick={async () => {
                             const ordInCart = order.incart;
