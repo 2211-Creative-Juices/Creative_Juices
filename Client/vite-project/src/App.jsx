@@ -67,7 +67,6 @@ function App() {
     };
       fetchedOrders();
   }, [user.token]);
-  
 
   console.log('USER INAPP:', user);
 
@@ -108,7 +107,7 @@ function App() {
             />
             <Route
               path='/incompleteorders'
-              element={<NotCompleteOrd orders={orders} />}
+              element={<NotCompleteOrd orders={orders} setOrders={setOrders}/>}
             />
             <Route path='/allusers' element={<AdminUsers users={users} />} />
             <Route

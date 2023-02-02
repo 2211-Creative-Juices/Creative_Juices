@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../custom-hooks';
-// import { updateOrder } from '../api/orders';
+import { updateOrder } from '../api/orders';
 
 const NotCompleteOrd = ({ orders }) => {
   const user = useAuth();
   console.log('these are admin all orders', orders);
 
-  const [isOrderComplete, setIsOrderComplete] = useState(false);
-
-  // const submitHandler = async (e) => {
-  //   try {
-  //     e.preventDefault();
-  //     console.log ("(currently false) is order completeeeeee", isOrderComplete)
-  //     const orderStatus = await updateOrder(user.token, orders.id, orders.iscomplete);
-  //     console.log("order statussssssssss: ", orderStatus);
-  //     if (orderStatus === false) {
-  //       setIsOrderComplete(true);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const [isOrderId, setIsOrderId] = useState(0);
 
   return (
     <div id='orders-container'>
@@ -28,7 +14,8 @@ const NotCompleteOrd = ({ orders }) => {
       <div id='orders-map-container'>
         {orders &&
           orders.map((order) => {
-            if (!order.iscomplete === true) {
+            if (!order.iscomplete) {
+              
               return (
                 <div key={order.id} className='order'>
                   <h3>Incomplete Orders:</h3>
@@ -37,7 +24,17 @@ const NotCompleteOrd = ({ orders }) => {
                   <p>Service ID: {order.serviceId}</p>
                   <p>Bundle Kit ID: {order.bundlekitId}</p>
                   <p>{order.iscomplete ? 'Complete!' : 'Not Complete'}</p>
-                  <button onClick={submitHandler} type={'submit'}>
+                  <button onClick={async () => {
+                  
+                    const ordComplete = order.iscomplete;
+                    console.log("ORDERIDIDIDIDODERDOEIRDO:", order.id);
+                    const updatedOrder= await updateOrder(user.token, order.id, order.orderdate, order.purchaserId, !ordComplete, order.incart, order.serviceId, order.bundlekitId);
+                    console.log("order statussssssssss: ", updatedOrder);
+                    console.log("isorder!!!!!compleeeete:", !ordComplete);
+                    console.log("IDIIDIDIDcompleeeete:", isOrderId);
+                  }
+
+                  } type={'submit'}>
                     Mark As Complete
                   </button>
                 </div>

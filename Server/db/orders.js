@@ -9,7 +9,7 @@ async function getAllOrders() {
   FROM orders;
   `);
 
-    return attachServicesToOrder(rows);
+    return rows;
   } catch (error) {
     throw error;
   }
