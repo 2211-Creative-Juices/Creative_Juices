@@ -84,11 +84,12 @@ function App() {
                 <div>
                   <NavBar />
                   <Home /> <About />
-                  <ServiceForm
-                    id='service-form'
-                    services={services}
-                    todaysDate={todaysDate}
-                  />{' '}
+                  <div id='service-form'>
+                    <ServiceForm
+                      services={services}
+                      todaysDate={todaysDate}
+                    />
+                  </div>
                   <AllBundles bundles={bundles} />
                   <button onClick={logout}>Logout</button>
                 </div>

@@ -40,9 +40,11 @@ const NotCompleteOrd = ({ orders }) => {
                         order.serviceId,
                         order.bundlekitId
                       );
-                      console.log('order statussssssssss: ', updatedOrder);
-                      console.log('isorder!!!!!compleeeete:', !ordComplete);
-                      console.log('IDIIDIDIDcompleeeete:', isOrderId);
+
+                      const reload = () => {
+                        window.location.href = '/incompleteorders';
+                      };
+                      reload();
                     }}
                     type={'submit'}
                   >
