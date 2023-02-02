@@ -80,10 +80,7 @@ usersRouter.post('/register', async (req, res, next) => {
             id: user.id,
             username: user.username,
           },
-          JWT_SECRET,
-          {
-            expiresIn: '1w',
-          }
+          JWT_SECRET
         );
         console.log('this is token in reg', token);
         console.log('this is JWTsectre', JWT_SECRET);

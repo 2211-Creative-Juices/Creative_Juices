@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import {
-  getAllTheOrdersByComplete,
+  // getAllTheOrdersByComplete,
   getAllTheOrdersByUser,
 } from '../api/orders';
 // import { getOrderByPurchaserId } from '../api/orders';

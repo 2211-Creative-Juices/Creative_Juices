@@ -69,7 +69,7 @@ export const authenticateUser = async (
 
 export const me = async () => {
   try {
-    const token = window.localStorage.getItem('juice-token');
+    const token = localStorage.getItem('juice-token');
 
     if (token) {
       const response = await fetch(`${BASE_API}/users/me`, {

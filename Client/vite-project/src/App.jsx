@@ -65,8 +65,10 @@ function App() {
       setOrders(allOrders);
       console.log('all the orders in App', allOrders);
     };
-    fetchedOrders();
-  }, [user.token]);
+    if (user.user) {
+      fetchedOrders();
+    }
+  }, []);
 
   console.log('USER INAPP:', user);
 
@@ -122,4 +124,3 @@ function App() {
 }
 
 export default App;
-

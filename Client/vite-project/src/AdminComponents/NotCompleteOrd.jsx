@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../custom-hooks';
-import {updateOrder} from '../api/orders'
+// import { updateOrder } from '../api/orders';
 
 const NotCompleteOrd = ({ orders }) => {
   const user = useAuth();
@@ -8,19 +8,19 @@ const NotCompleteOrd = ({ orders }) => {
 
   const [isOrderComplete, setIsOrderComplete] = useState(false);
 
-  const submitHandler = async (e) => {
-    try {
-      e.preventDefault();
-      console.log ("(currently false) is order completeeeeee", isOrderComplete)
-      const orderStatus = await updateOrder(user.token, orders.id, orders.iscomplete);
-      console.log("order statussssssssss: ", orderStatus);
-      if (orderStatus === false) {
-        setIsOrderComplete(true);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const submitHandler = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     console.log ("(currently false) is order completeeeeee", isOrderComplete)
+  //     const orderStatus = await updateOrder(user.token, orders.id, orders.iscomplete);
+  //     console.log("order statussssssssss: ", orderStatus);
+  //     if (orderStatus === false) {
+  //       setIsOrderComplete(true);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <div id='orders-container'>
