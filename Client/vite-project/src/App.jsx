@@ -12,6 +12,7 @@ import {
   About,
   ServiceForm,
   Dashboard,
+  UserNav,
 } from './Components/Index';
 import UserCart from './CartComponents/UserCart';
 import AdminServices from './AdminComponents/AdminServices';
@@ -65,7 +66,7 @@ function App() {
       setOrders(allOrders);
       console.log('all the orders in App', allOrders);
     };
-      fetchedOrders();
+    fetchedOrders();
   }, [user.token]);
 
   console.log('USER INAPP:', user);
@@ -73,9 +74,7 @@ function App() {
   // (!user.isadmin)
   return (
     <div className='App'>
-      <NavBar />
       {user.isadmin === true ? <Dashboard /> : null}
-      Creative Juices
       <div>
         <div>
           <Routes>
@@ -83,38 +82,89 @@ function App() {
               path='/'
               element={
                 <div>
+                  <NavBar />
                   <Home /> <About />
-                  <ServiceForm
-                    services={services}
-                    todaysDate={todaysDate}
-                  />{' '}
+                  <div id='service-form'>
+                    <ServiceForm
+                      services={services}
+                      todaysDate={todaysDate}
+                    />
+                  </div>
                   <AllBundles bundles={bundles} />
                   <button onClick={logout}>Logout</button>
                 </div>
               }
             ></Route>
 
-            <Route path='/login' element={Login} />
-            <Route path='/signup' element={Signup} />
+            <Route
+              path='/login'
+              element={
+                <div>
+                  <UserNav />
+                  {Login}
+                </div>
+              }
+            />
+            <Route
+              path='/signup'
+              element={
+                <div>
+                  <UserNav />
+                  {Signup}
+                </div>
+              }
+            />
 
             <Route
               path='/allservices'
-              element={<AdminServices services={services} />}
+              element={
+                <div>
+                  <UserNav />
+                  <AdminServices services={services} />
+                </div>
+              }
             />
             <Route
               path='/completedorders'
-              element={<IsCompleteOrd orders={orders} />}
+              element={
+                <div>
+                  <UserNav />
+                  <IsCompleteOrd orders={orders} />
+                </div>
+              }
             />
             <Route
               path='/incompleteorders'
-              element={<NotCompleteOrd orders={orders} setOrders={setOrders}/>}
+              element={
+                <div>
+                  <UserNav />
+                  <NotCompleteOrd
+                    orders={orders}
+                    setOrders={setOrders}
+                  />
+                </div>
+              }
             />
-            <Route path='/allusers' element={<AdminUsers users={users} />} />
+            <Route
+              path='/allusers'
+              element={
+                <div>
+                  <UserNav />
+                  <AdminUsers users={users} />
+                </div>
+              }
+            />
             <Route
               path='/usercart'
-              element={<UserCart orders={orders} />}
+              element={
+                <div>
+                  <UserNav />
+                  <UserCart orders={orders} />
+                </div>
+              }
             ></Route>
           </Routes>
+          <a href='#top'>Back to Top</a>
         </div>
       </div>
     </div>
