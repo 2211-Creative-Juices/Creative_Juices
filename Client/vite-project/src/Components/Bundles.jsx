@@ -1,22 +1,70 @@
 import React from 'react';
+import { useState } from 'react';
+import { useAuth } from '../custom-hooks';
+import { createABundle } from '../api/bundles';
+import { createNewOrder } from '../api/orders';
 
-const AllBundles = ({ bundles }) => {
+const AllBundles = ({ bundles, todaysDate }) => {
+  const [quantity, setQuantity] = useState(0);
+  const user = useAuth();
+
+  const submitHandler = async (e) => {
+    try {
+      e.preventDefault();
+
+      let newBundle = await createABundle(
+        user.token,
+        bundles.bundlename,
+        quantity,
+        bundles.cost
+      );
+      console.log('this is my newBUndles', newBundle);
+
+      let bundlekitId = newBundle.id;
+      console.log('NEW BUNDLEKITID', bundlekitId);
+      let todaysOrderDate = todaysDate;
+      console.log('NEW dateeeeee', todaysOrderDate);
+      let purchaserId = user.user.id;
+      console.log('NEW users.users.id', user.user.id);
+      let servicekitId = null;
+      // let bundlekitId = 0;
+      // let isintheCart = setisinCart(true);
+      // console.log('NEW isintheCart', isintheCart);
+      const newOrder = await createNewOrder(
+        user.token,
+        todaysOrderDate,
+        purchaserId,
+        servicekitId,
+        bundlekitId
+        // bundlekitId
+      );
+      console.log('THIS IS THE NEW ORDER WITH BUNDLE!!!', newOrder);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div id='bundles-container'>
-      <h2 id='bundles-header'>Bundles</h2>
-      <div id='bundles-map-container'>
-        {bundles &&
-          bundles.map((bundle) => {
-            return (
-              <div key={bundle.id} className='bundle'>
-                <h3>Bundle Name: {bundle.bundlename}</h3>
-                <p>DESCRIPTION</p>
-                <p>Quantity: {bundle.quantity}</p>
-                <p>Bundle Cost: {bundle.bundlecost}</p>
-              </div>
-            );
-          })}
-      </div>
+      <p>BUNDLES DESCRIPTION</p>
+      <form onSubmit={(e) => submitHandler(e)}>
+        <div id='bundles-map-container'>
+          <label>
+            Number of Kits
+            <input
+              type='number'
+              value={quantity}
+              id='input'
+              onChange={(e) => {
+                setQuantity(e.target.value);
+              }}
+            ></input>
+          </label>
+          <button onClick={submitHandler} type={'submit'}>
+            Add Paint Kit to Cart
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

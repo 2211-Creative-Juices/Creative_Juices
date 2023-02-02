@@ -88,7 +88,7 @@ CREATE TABLE users (
 
     CREATE TABLE bundlekit (
       id SERIAL PRIMARY KEY,
-      bundlename varchar(255) NOT NULL,
+      bundlename varchar(255) DEFAULT 'Paint-Kit',
       quantity INT NOT NULL,
       bundlecost DECIMAL
     );
