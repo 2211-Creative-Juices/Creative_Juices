@@ -77,15 +77,26 @@ function App() {
       {user.isadmin === true ? <Dashboard /> : null}
       Creative Juices
       <div>
-        <button onClick={logout}>Logout</button>
-        <Routes>
-          <Route path='/login' element={Login} />
-          <Route path='/signup' element={Signup} />
-        </Routes>
-      </div>
-      <div>
         <div>
           <Routes>
+            <Route
+              path='/'
+              element={
+                <div>
+                  <Home /> <About />
+                  <ServiceForm
+                    services={services}
+                    todaysDate={todaysDate}
+                  />{' '}
+                  <AllBundles bundles={bundles} />
+                  <button onClick={logout}>Logout</button>
+                </div>
+              }
+            ></Route>
+
+            <Route path='/login' element={Login} />
+            <Route path='/signup' element={Signup} />
+
             <Route
               path='/allservices'
               element={<AdminServices services={services} />}
@@ -99,19 +110,16 @@ function App() {
               element={<NotCompleteOrd orders={orders} />}
             />
             <Route path='/allusers' element={<AdminUsers users={users} />} />
+            <Route
+              path='/usercart'
+              element={<UserCart orders={orders} />}
+            ></Route>
           </Routes>
         </div>
-        <Home />
-        <About />
-
-        <ServiceForm services={services} todaysDate={todaysDate} />
-        <AllBundles bundles={bundles} />
       </div>
-      <Routes>
-        <Route path='/usercart' element={<UserCart orders={orders} />}></Route>
-      </Routes>
     </div>
   );
 }
 
 export default App;
+

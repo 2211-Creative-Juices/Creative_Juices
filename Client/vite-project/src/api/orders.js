@@ -72,8 +72,43 @@ export const createNewOrder = async (
       }),
     });
     const newOrder = await response.json();
-    console.log('this is new ROutine', newOrder);
+    console.log('this is new ORDER', newOrder);
     return newOrder;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateOrder = async (
+  token,
+  orderId,
+  orderdate,
+  purchaserId,
+  iscomplete,
+  incart,
+  serviceId,
+  bundlekitId
+) => {
+  try {
+    const response = await fetch(`${BASE_API}/orders/${orderId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        orderdate,
+        orderId,
+        purchaserId,
+        iscomplete,
+        incart,
+        serviceId,
+        bundlekitId,
+      }),
+    });
+    const updatedOrder = await response.json();
+    console.log('this is our updated ORDER', updatedOrder);
+    return updatedOrder;
   } catch (error) {
     console.error(error);
   }
