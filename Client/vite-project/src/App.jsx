@@ -85,10 +85,7 @@ function App() {
                   <NavBar />
                   <Home /> <About />
                   <div id='service-form'>
-                    <ServiceForm
-                      services={services}
-                      todaysDate={todaysDate}
-                    />
+                    <ServiceForm services={services} todaysDate={todaysDate} />
                   </div>
                   <AllBundles bundles={bundles} />
                   <button onClick={logout}>Logout</button>
@@ -138,10 +135,7 @@ function App() {
               element={
                 <div>
                   <UserNav />
-                  <NotCompleteOrd
-                    orders={orders}
-                    setOrders={setOrders}
-                  />
+                  <NotCompleteOrd orders={orders} setOrders={setOrders} />
                 </div>
               }
             />
@@ -159,7 +153,7 @@ function App() {
               element={
                 <div>
                   <UserNav />
-                  <UserCart orders={orders} />
+                  <UserCart orders={orders} todaysDate={todaysDate} />
                 </div>
               }
             ></Route>
