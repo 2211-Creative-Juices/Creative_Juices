@@ -5,6 +5,7 @@ export const getAllOrders = async () => {
   try {
     const response = await fetch(`${BASE_API}/orders`);
     const results = await response.json();
+    console.log('get all orders orders orders: ', results);
     return results;
   } catch (error) {
     console.error(error);
@@ -79,37 +80,48 @@ export const createNewOrder = async (
   }
 };
 
-// export const updateOrder = async (
-//   token,
-//   orderId,
-//   orderdate,
-//   purchaserId,
-//   iscomplete,
-//   incart,
-//   serviceId,
-//   bundlekitId
-// ) => {
-//   try {
-//     const response = await fetch(`${BASE_API}/orders/${orderId}`, {
-//       method: 'PATCH',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify({
-//         orderdate,
-//         orderId,
-//         purchaserId,
-//         iscomplete,
-//         incart,
-//         serviceId,
-//         bundlekitId,
-//       }),
-//     });
-//     const updatedOrder = await response.json();
-//     console.log('this is our updated ORDER', updatedOrder);
-//     return updatedOrder;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+export const updateOrder = async (
+  token,
+  orderId,
+  orderdate,
+  purchaserId,
+  iscomplete,
+  incart,
+  serviceId,
+  bundlekitId
+) => {
+  console.log(
+    'THREEEEE THINGS:',
+    token,
+    token,
+    orderId,
+    orderdate,
+    purchaserId,
+    iscomplete,
+    incart,
+    serviceId,
+    bundlekitId
+  );
+  try {
+    const response = await fetch(`${BASE_API}/orders/${orderId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        orderdate,
+        purchaserId,
+        iscomplete,
+        incart,
+        serviceId,
+        bundlekitId,
+      }),
+    });
+    const updatedOrder = await response.json();
+    console.log('this is our updated ORDER******************', updatedOrder);
+    return updatedOrder;
+  } catch (error) {
+    console.error(error);
+  }
+};
