@@ -8,11 +8,9 @@ const AllBundles = ({ bundles }) => {
         {bundles &&
           bundles.map((bundle) => {
             return (
-              <div
-                key={bundle.id}
-                className='bundle'
-              >
+              <div key={bundle.id} className='bundle'>
                 <h3>Bundle Name: {bundle.bundlename}</h3>
+                <p>DESCRIPTION</p>
                 <p>Quantity: {bundle.quantity}</p>
                 <p>Bundle Cost: {bundle.bundlecost}</p>
               </div>
