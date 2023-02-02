@@ -1,10 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import {
-  // getAllTheOrdersByComplete,
-  getAllTheOrdersByUser,
-} from '../api/orders';
-// import { getOrderByPurchaserId } from '../api/orders';
+import OrderHistory from './OrderHistory';
+import { getAllTheOrdersByUser, updateOrder } from '../api/orders';
 import { useAuth } from '../custom-hooks';
 
 const UserCart = ({ orders }) => {
@@ -41,10 +38,10 @@ const UserCart = ({ orders }) => {
                   <p>Fullfilled?: {order.iscomplete}</p>
                   <p>ServiceID: {order.serviceId}</p>
                   {/* <p>BK ID: {order.bundlekitId}</p> */}
-                  <button>Remove From Cart</button>
+
                   {order.services.map((service) => {
-                    return(
-                      <div key={service.id} className="myservices">
+                    return (
+                      <div key={service.id} className='myservices'>
                         <h4>Services:</h4>
                         <p>Type: {service.type}</p>
                         <p>isremote: {service.isremote}</p>
@@ -53,12 +50,36 @@ const UserCart = ({ orders }) => {
                         <p>Location: {service.location}</p>
                         <p>Date: {service.date}</p>
                         <p>Notes: {service.notes}</p>
+                        <button
+                          onClick={async () => {
+                            const ordInCart = order.incart;
+                            const updatedOrdInCart = await updateOrder(
+                              user.token,
+                              order.id,
+                              order.orderdate,
+                              order.purchaserId,
+                              order.iscomplete,
+                              !ordInCart,
+                              order.serviceId,
+                              order.bundlekitId
+                            );
+                            console.log(
+                              'this is updatedOrdIN cart!!!!',
+                              updatedOrdInCart
+                            );
+                          }}
+                        >
+                          Remove From Cart
+                        </button>
                       </div>
-                    )
+                    );
                   })}
                 </div>
               );
           })}
+      </div>
+      <div>
+        <OrderHistory myOrders={myOrders} />
       </div>
     </div>
   );
