@@ -213,7 +213,7 @@ const ServiceForm = ({ services, todaysDate }) => {
             </label>
 
             <button onClick={submitHandler} type={'submit'}>
-              Submit
+              Add to Cart
             </button>
           </div>
         </div>

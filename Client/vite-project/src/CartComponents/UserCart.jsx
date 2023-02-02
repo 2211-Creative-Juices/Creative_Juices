@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import OrderHistory from './OrderHistory';
+import { getBundlesById } from '../api/bundles';
 import { getAllTheOrdersByUser, updateOrder } from '../api/orders';
 import { useAuth } from '../custom-hooks';
 
@@ -37,6 +38,7 @@ const UserCart = ({ orders }) => {
                   <p>Order Date: {order.orderdate}</p>
                   <p>Fullfilled?: {order.iscomplete}</p>
                   <p>ServiceID: {order.serviceId}</p>
+                  <p>BundleKitID: {order.bundlekitId}</p>
                   {/* <p>BK ID: {order.bundlekitId}</p> */}
 
                   {order.services.map((service) => {
