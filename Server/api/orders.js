@@ -2,6 +2,7 @@ const express = require('express');
 const apiRouter = express.Router();
 const { JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
+const { attachBundleToOrder } = require('../db/bundleKits');
 const {
   createOrder,
   getAllOrders,
@@ -17,6 +18,7 @@ const { requireUser } = require('./utils');
 ordersRouter.get('/', async (req, res, next) => {
   try {
     const orders = await getAllOrders();
+
     res.send(orders);
   } catch (error) {
     console.error('Error getting ordersRouter', error);
