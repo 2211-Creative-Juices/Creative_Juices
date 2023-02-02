@@ -1,5 +1,6 @@
 const client = require('./client');
-// const { getAllUsers } = require('./users');
+const { attachServicesToOrder } = require('./services');
+const { attachBundleToOrder } = require('./bundleKits');
 
 async function getAllOrders() {
   try {
@@ -7,7 +8,8 @@ async function getAllOrders() {
   SELECT *
   FROM orders;
   `);
-    return rows;
+
+    return attachServicesToOrder(rows);
   } catch (error) {
     throw error;
   }
@@ -41,7 +43,7 @@ async function getOrderById(orderid) {
     WHERE id = ${orderid};
     `);
     console.log('this is our get order by id:', order);
-    return order;
+    return attachServicesToOrder(order);
   } catch (error) {
     throw error;
   }
@@ -90,7 +92,7 @@ async function getAllOrdersByUser(username) {
 
     // const allOrders = await attachUserToOrder(orders);
 
-    return orders;
+    return attachServicesToOrder(orders);
   } catch (error) {
     throw error;
   }

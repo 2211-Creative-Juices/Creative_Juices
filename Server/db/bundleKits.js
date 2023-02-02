@@ -84,30 +84,29 @@ async function getBundleByOrderId(id) {
   }
 }
 
-// attachBundleToOrder;
-// async function attachBundleToOrder(orders) {
-//   const ordersToReturn = [...orders];
-//   console.log('these are the orders to return', ordersToReturn);
+async function attachBundleToOrder(orders) {
+  const ordersToReturn = [...orders];
+  console.log('these are the orders to return', ordersToReturn);
 
-//   try {
-//     const { rows: bundles } = await client.query(`
-//     SELECT *
-//     FROM bundlekit
-//     JOIN orders ON bundlekit.id = orders."bundlekitId"
-//     `);
+  try {
+    const { rows: bundles } = await client.query(`
+    SELECT bundlekit.*
+    FROM bundlekit
+    JOIN orders ON orders."bundlekitId" = bundlekit.id
+    `);
 
-//     for (const order of ordersToReturn) {
-//       const bundlesToAdd = bundles.filter(
-//         (bundle) => bundle.id === orders.bundlekitId
-//       );
-//       console.log('this is bundles to Add', bundlesToAdd);
-//       order.bundles = bundlesToAdd;
-//     }
-//     return ordersToReturn;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
+    for (const order of ordersToReturn) {
+      const bundlesToAdd = bundles.filter(
+        (bundle) => bundle.id === order.bundlekitId
+      );
+      console.log('this is bundles to Add', bundlesToAdd);
+      order.bundles = bundlesToAdd;
+    }
+    return ordersToReturn;
+  } catch (error) {
+    throw error;
+  }
+}
 
 // async function getBundleByPurchaserId(id) {
 //   console.log('this is the purchaser Id:', id);
@@ -162,4 +161,5 @@ module.exports = {
   getBundleById,
   updateBundle,
   getBundleByOrderId,
+  attachBundleToOrder,
 };

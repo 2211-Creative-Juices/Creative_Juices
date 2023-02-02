@@ -190,14 +190,14 @@ async function attachServicesToOrder(orders) {
 
   try {
     const { rows: services } = await client.query(`
-    SELECT *
+    SELECT services.*
     FROM services
-    JOIN orders ON services.id = orders."serviceId"
+    JOIN orders ON orders."serviceId" = services.id
     `);
 
     for (const order of ordersToReturn) {
       const servicesToAdd = services.filter(
-        (service) => service.id === orders.serviceId
+        (service) => service.id === order.serviceId
       );
       console.log('this is services to Add', servicesToAdd);
       order.services = servicesToAdd;

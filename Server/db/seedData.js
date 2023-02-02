@@ -40,6 +40,7 @@ const {
   getBundleByOrderId,
   getBundleById,
   updateBundle,
+  attachBundleToOrder,
 } = require('./bundleKits');
 
 const {
@@ -376,6 +377,12 @@ async function testDB() {
       attachServiceOrder[0]
     );
 
+    const attachBundlesOrder = await attachBundleToOrder(allOrders);
+    console.log('testing attach bundles to order:', attachBundlesOrder);
+    console.log(
+      'these are all the orders w bundles attached',
+      attachBundlesOrder[0]
+    );
     // const ordersbyUser = await getAllOrdersByUser('shelleyadmin');
     // console.log('this is getall orders by username', ordersbyUser);
     // const ordersbyMegan = await getAllOrdersByUser('megan');
