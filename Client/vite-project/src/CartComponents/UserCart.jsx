@@ -21,11 +21,11 @@ const UserCart = ({ orders }) => {
       setMyOrders(allMyOrders, ...myOrders);
       console.log('these are my orders', allMyOrders);
     };
-    if (user.user.id && orders[0].incart === true) {
+    if (user.user.id) {
       getAllMyOrders();
     }
-    console.log('87138941730487393487', myOrders);
   }, [user.user.username]);
+  console.log('87138941730487393487', myOrders);
 
   return (
     <div id='myorders-container'>
@@ -33,7 +33,7 @@ const UserCart = ({ orders }) => {
       <div id='orders-map-container'>
         {myOrders &&
           myOrders.map((order) => {
-            if (order.iscomplete === false)
+            if (order.iscomplete === false && order.incart === true)
               return (
                 <div key={order.id} className='myorders'>
                   <h3>Orders:</h3>
@@ -41,6 +41,21 @@ const UserCart = ({ orders }) => {
                   <p>Fullfilled?: {order.iscomplete}</p>
                   <p>ServiceID: {order.serviceId}</p>
                   {/* <p>BK ID: {order.bundlekitId}</p> */}
+                  <button>Remove From Cart</button>
+                  {order.services.map((service) => {
+                    return(
+                      <div key={service.id} className="myservices">
+                        <h4>Services:</h4>
+                        <p>Type: {service.type}</p>
+                        <p>isremote: {service.isremote}</p>
+                        <p>Guests: {service.guests}</p>
+                        <p>Cost: {service.cost}</p>
+                        <p>Location: {service.location}</p>
+                        <p>Date: {service.date}</p>
+                        <p>Notes: {service.notes}</p>
+                      </div>
+                    )
+                  })}
                 </div>
               );
           })}
