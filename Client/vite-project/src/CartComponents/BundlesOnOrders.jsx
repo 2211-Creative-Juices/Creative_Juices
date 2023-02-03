@@ -4,7 +4,7 @@ import { getBundlesById } from '../api/bundles';
 import { useState, useEffect } from 'react';
 import { getAllTheOrdersByUserWithBundKit } from '../api/orders';
 import { updateOrder } from '../api/orders';
-import MyFilledOrders from './MyFilledOrders';
+import MyFilledOrders from './index';
 
 const BundleOrder = ({ myOrders }) => {
   const user = useAuth();

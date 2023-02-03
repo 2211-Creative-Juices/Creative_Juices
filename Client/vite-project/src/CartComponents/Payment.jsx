@@ -14,18 +14,25 @@ const Checkout = () => {
             try {
               event.preventDefault();
               localStorage.setItem('shipping-Address', shippingAddress);
+              const redirUserCart = () => {
+                window.location.href = '/usercart';
+              };
+              redirUserCart();
             } catch (error) {
               console.error(error);
             }
           }}
         >
           <div>
-            <input
-              onChange={(e) => setShippingAddress(e.target.value)}
-              type='text'
-              name='address'
-              placeholder='Full Address Here: Name, Street, City, State, zipcode'
-            />
+            <label>
+              Enter A New Shipping Address Here:
+              <input
+                onChange={(e) => setShippingAddress(e.target.value)}
+                type='text'
+                name='address'
+                placeholder='Full Address Here: Name, Street, City, State, zipcode'
+              />
+            </label>
             <button>Set Shipping Address</button>
           </div>
         </form>

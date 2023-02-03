@@ -4,26 +4,51 @@ import { useAuth } from '../custom-hooks';
 const ShippingAddresses = () => {
   const user = useAuth();
   const [isDeleteChecked, setIsDeleteChecked] = useState(false);
+  const [addToSend, setAddToSend] = useState('');
+
+  const ifExistsAdd = localStorage.getItem('shipping-Address');
+
+  function displayAdd() {
+    let sendToAdd = JSON.stringify(ifExistsAdd);
+    setAddToSend(sendToAdd);
+    return (
+      <div>
+        <h2>Your Order is being sent to this address:</h2>
+        <div>{addToSend}</div>
+      </div>
+    );
+  }
 
   const submitHandler = async (e) => {
     try {
-      if (!isDeleteChecked) {
+      if (isDeleteChecked === true) {
         localStorage.removeItem('shipping-Address');
+        const redirUserCart = () => {
+          window.location.href = '/usercart';
+        };
+        redirUserCart();
+      } else {
+        displayAdd();
       }
     } catch (error) {
       console.error(error);
     }
   };
-  if (user.token) {
-    const availableAddress = localStorage.getItem('shipping-Address');
-    const readableAddress = JSON.stringify(availableAddress);
+  if (user.token && ifExistsAdd) {
+    const readableAddress = JSON.stringify(ifExistsAdd);
 
     return (
       <div>
-        <div></div>
+        <div>
+          {' '}
+          {addToSend === '' ? (
+            <p>Your Order Will Be Shipped Here! {readableAddress}</p>
+          ) : (
+            <p>Please Select an Address To Ship to</p>
+          )}
+        </div>
         <form>
-          <p></p>
-          <label>{readableAddress}</label>
+          <label>Click Here To remove A Saved Address {readableAddress}</label>
           <input
             id='deletedshippingadd'
             label='Delete Shipping Address:'
@@ -33,13 +58,14 @@ const ShippingAddresses = () => {
               setIsDeleteChecked(!isDeleteChecked);
             }}
           ></input>
-
-          <button onClick={submitHandler}>Remove</button>
+          <button onClick={submitHandler}>Select</button>
         </form>
+
+        <div></div>
       </div>
     );
   } else {
-    return <div>ERROR WITH ADDRESS</div>;
+    return <div>No Saved Addresses Found</div>;
   }
 };
 

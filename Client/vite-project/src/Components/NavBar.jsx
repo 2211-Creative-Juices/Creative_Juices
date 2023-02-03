@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import CartImage from '../CartComponents/CartNavImage';
 
 const navLinks = [
   { navLinkId: 'Home', scrollToId: 'home-container' },
@@ -34,7 +35,7 @@ const NavLink = ({
   );
 };
 
-const NavBar = () => {
+const NavBar = ({ orders }) => {
   const [activeNavLinkId, setActiveNavLinkId] = useState('');
 
   return (
@@ -49,9 +50,7 @@ const NavBar = () => {
             setActiveNavLinkId={setActiveNavLinkId}
           />
         ))}
-        <button>
-          <Link to='/usercart'>CART</Link>
-        </button>
+        <CartImage orders={orders} />
       </nav>
     </div>
   );
