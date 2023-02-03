@@ -30,26 +30,26 @@ export const getAllTheOrdersByUser = async (token, username) => {
   }
 };
 
-// export const getAllTheOrdersByComplete = async (token, iscomplete) => {
-//   console.log('accessing get order by purchaser id honhon: ', iscomplete);
-//   console.log('accessing get order by purchaser id TOKEN honhon: ', token);
-//   try {
-//     const response = await fetch(
-//       `${BASE_API}/orders/${iscomplete}/mycartorders`,
-//       {
-//         headers: {
-//           'Content-Type': 'application/json',
-//           Authorization: `Bearer ${token}`,
-//         },
-//       }
-//     );
-//     const results = await response.json();
-//     console.log('this is results in ordersapi', results);
-//     return results;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+export const getAllTheOrdersByUserWithBundKit = async (token, username) => {
+  console.log('accessing get order by purchaser id honhon: ', username);
+  console.log('accessing get order by purchaser id TOKEN honhon: ', token);
+  try {
+    const response = await fetch(
+      `${BASE_API}/orders/${username}/orders/bundles`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const results = await response.json();
+    console.log('this is results in ordersapi', results);
+    return results;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const createNewOrder = async (
   token,

@@ -1,10 +1,12 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import OrderHistory from './OrderHistory';
+import OrderHistoryServices from './OrderHistoryServices';
+import OrderHistoryBundles from './OrderHistoryBundles';
 import { getBundlesById } from '../api/bundles';
 import { getAllTheOrdersByUser, updateOrder } from '../api/orders';
 import { useAuth } from '../custom-hooks';
 import BundleOrder from './BundlesOnOrders';
+import MyFilledOrders from './MyFilledOrders';
 
 const UserCart = ({ orders }) => {
   const user = useAuth();
@@ -23,6 +25,12 @@ const UserCart = ({ orders }) => {
     if (user.user.id) {
       getAllMyOrders();
     }
+    // if (!user.token) {
+    //   const redirLogin = () => {
+    //     window.location.href = '/login';
+    //   };
+    //   redirLogin();
+    // }
   }, [user.user.username]);
   console.log('87138941730487393487', myOrders);
 
@@ -33,7 +41,11 @@ const UserCart = ({ orders }) => {
         {myOrders &&
           myOrders.map((order) => {
             console.log('this is orders with bundles and such', order);
-            if (order.iscomplete === false && order.incart === true)
+            if (
+              order.iscomplete === false &&
+              order.incart === true &&
+              order.bundlekitId === null
+            )
               return (
                 <div key={order.id} className='myorders'>
                   <h3>Orders:</h3>
@@ -87,9 +99,6 @@ const UserCart = ({ orders }) => {
       </div>
       <div>
         <BundleOrder myOrders={myOrders} />
-      </div>
-      <div>
-        <OrderHistory myOrders={myOrders} />
       </div>
     </div>
   );

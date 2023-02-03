@@ -98,6 +98,29 @@ async function getAllOrdersByUser(username) {
   }
 }
 
+async function getAllOrdersByUserWithBunds(username) {
+  console.log('username:', username);
+  try {
+    const { rows: orders } = await client.query(
+      `
+            SELECT orders.*
+            FROM orders
+            JOIN users ON orders."purchaserId" = users.id
+            WHERE users.username = $1 AND orders."purchaserId" = users.id
+            `,
+      [username]
+    );
+
+    console.log('this is the order', orders);
+
+    // const allOrders = await attachUserToOrder(orders);
+
+    return attachBundleToOrder(orders);
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function updateOrder(id, { ...fields }) {
   console.log('id:', id, 'update fields:', fields);
   const setString = Object.keys(fields)
@@ -133,6 +156,7 @@ module.exports = {
   // attachUserToOrder,
   getAllOrders,
   getAllOrdersByUser,
+  getAllOrdersByUserWithBunds,
   updateOrder,
   // getOrdersByIsNotComplete,
 };

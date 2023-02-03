@@ -1,33 +1,88 @@
 import React from 'react';
 import { useAuth } from '../custom-hooks';
 import { getBundlesById } from '../api/bundles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getAllTheOrdersByUserWithBundKit } from '../api/orders';
+import { updateOrder } from '../api/orders';
+import MyFilledOrders from './MyFilledOrders';
 
 const BundleOrder = ({ myOrders }) => {
   const user = useAuth();
-  const [newKitArray, setNewKitArray] = useState([]);
-  console.log('this is orders in bundles on orders', myOrders);
+  const [bundOrders, setBundOrders] = useState([]);
 
-  if (myOrders) {
-    async function getKits() {
-      //   let newKitArray = [];
-      for (const order of myOrders)
-        if (order.bundlekitId !== null && user.user.id === order.purchaserId) {
-          const orderKits = await getBundlesById(user.token, order.bundlekitId);
-          console.log('thisis orderkits!!!!!!', orderKits);
-          newKitArray.push(orderKits);
-          console.log('THIS IS NEWKITARRAY', newKitArray);
-          if ((order[i] = myOrders[i].length - 1)) {
-            break;
-          }
-        }
+  let username = user.user.username;
+
+  useEffect(() => {
+    const getAllMyOrdersWithBunds = async () => {
+      const orderAndMyBunds = await getAllTheOrdersByUserWithBundKit(
+        user.token,
+        username
+      );
+      setBundOrders(orderAndMyBunds, ...myOrders);
+      console.log('these are my orders', orderAndMyBunds);
+    };
+    if (user.user.id) {
+      getAllMyOrdersWithBunds();
     }
-    getKits();
-  }
+  }, [user.user.username]);
+  console.log('87138941730487393487', bundOrders);
+
   return (
-    <div>
-      <h2>My Orders</h2>
-      {/* <div>{newKitArray && newKitArray.map((kit) => {})}</div> */}
+    <div id='myorders-container'>
+      <h2 id='myorders-header'>My Orders</h2>
+      <div id='orders-map-container'>
+        {bundOrders &&
+          bundOrders.map((order) => {
+            console.log('this is orders with bundles and such', order);
+            if (
+              order.iscomplete === false &&
+              order.incart === true &&
+              order.serviceId === null
+            )
+              return (
+                <div key={order.id} className='myorders'>
+                  <h3>Orders:</h3>
+                  <p>Order Date: {order.orderdate}</p>
+                  <p>Fullfilled?: {order.iscomplete}</p>
+                  <p>BundleKitID: {order.bundlekitId}</p>
+                  <div> BUNDLE HERE:</div>
+
+                  {/* <p>BK ID: {order.bundlekitId}</p> */}
+
+                  {order.bundles.map((bundle) => {
+                    return (
+                      <div key={bundle.id} className='myservices'>
+                        <h4>Bundles:</h4>
+                        <p>quantity: {bundle.quantity}</p>
+                        <button
+                          onClick={async () => {
+                            const ordInCart = order.incart;
+                            const updatedOrdInCart = await updateOrder(
+                              user.token,
+                              order.id,
+                              order.orderdate,
+                              order.purchaserId,
+                              order.iscomplete,
+                              !ordInCart,
+                              order.serviceId,
+                              order.bundlekitId
+                            );
+                            console.log(
+                              'this is updatedOrdIN cart!!!!',
+                              updatedOrdInCart
+                            );
+                          }}
+                        >
+                          Remove From Cart
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+          })}
+      </div>
+      <MyFilledOrders bundOrders={bundOrders} myOrders={myOrders} />
     </div>
   );
 };
