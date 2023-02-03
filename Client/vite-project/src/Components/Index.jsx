@@ -7,3 +7,4 @@ export { default as ServiceForm } from './ServiceForm';
 export { default as Dashboard } from './Dashboard';
 export { default as UserNav } from './UserNav';
 export { default as ContactForm } from './Contact';
+export { default as Footer } from './Footer';

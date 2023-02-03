@@ -7,7 +7,7 @@ const navLinks = [
   { navLinkId: 'Services', scrollToId: 'services-container' },
   { navLinkId: 'Testimonials', scrollToId: 'testimonials-container' },
   { navLinkId: "FAQ's", scrollToId: 'faqs-container' },
-  { navLinkId: 'Contact', scrollToId: 'contact-container' },
+  { navLinkId: 'Contact', scrollToId: 'footer-container' },
 ];
 
 const NavLink = ({
@@ -38,7 +38,7 @@ const NavBar = () => {
   const [activeNavLinkId, setActiveNavLinkId] = useState('');
 
   return (
-    <div>
+    <div className='is-sticky'>
       <nav>
         {navLinks.map(({ navLinkId, scrollToId }) => (
           <NavLink
