@@ -4,6 +4,7 @@ import OrderHistory from './OrderHistory';
 import { getBundlesById } from '../api/bundles';
 import { getAllTheOrdersByUser, updateOrder } from '../api/orders';
 import { useAuth } from '../custom-hooks';
+import BundleOrder from './BundlesOnOrders';
 
 const UserCart = ({ orders }) => {
   const user = useAuth();
@@ -83,6 +84,9 @@ const UserCart = ({ orders }) => {
                 </div>
               );
           })}
+      </div>
+      <div>
+        <BundleOrder myOrders={myOrders} />
       </div>
       <div>
         <OrderHistory myOrders={myOrders} />
