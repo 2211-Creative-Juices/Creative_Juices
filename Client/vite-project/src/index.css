@@ -17,6 +17,10 @@
   text-align: center;
 }
 
+a {
+  color: white;
+}
+
 .service {
   border: 1pt white solid;
 }
@@ -24,11 +28,16 @@
 nav {
   display: flex;
   justify-content: space-evenly;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.618);
   align-items: center;
   color: black;
   cursor: pointer;
   padding: 1.5em;
+}
+
+.is-sticky {
+  position: sticky;
+  top: 0;
 }
 
 #home-container {
@@ -50,18 +59,38 @@ nav {
   background-color: grey;
 }
 
-.ContactForm {
-  background-color:mintcream;
-  text-align: center;
-  max-width: 300px;
-  border:#242424 solid 1pt;
+#footer-container {
+  border-top: 2pt white solid;
+  margin: 1rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: column;
+  justify-content: center;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
-.FormContactForm {
-  background-color:mintcream;
+.ContactForm-container {
+  display: flex;
+  justify-content: center;
   text-align: center;
-  
-  padding: 20px;
-  max-width: 200px;
-  
+  margin: auto;
+  border: #242424 solid 1pt;
+  padding: 0.5rem;
+  max-width: 14rem;
+}
+
+.ContactForm {
+  background-color: #242424;
+  border: 2pt white solid;
+  text-align: center;
+  padding: 2rem;
+  max-width: 14rem;
+}
+
+#form-textarea-control-opinion {
+  max-width: 12rem;
+  min-width: 12rem;
+  min-height: 8rem;
+  max-height: 14rem;
 }
