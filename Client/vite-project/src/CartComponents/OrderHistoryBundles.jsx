@@ -7,7 +7,6 @@ const OrderHistoryBundles = ({ bundOrders }) => {
       <div id='oldbundorders-map-container'>
         {bundOrders &&
           bundOrders.map((order) => {
-            console.log('this is orders with bundles and such', order);
             if (
               order.iscomplete === true &&
               order.incart === true &&

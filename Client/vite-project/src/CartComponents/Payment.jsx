@@ -1,26 +1,38 @@
 import React, { useState } from 'react';
+import { useAuth } from '../custom-hooks';
+import ShippingAddresses from './ShippingAddress';
 
 const Checkout = () => {
+  const user = useAuth();
   const [shippingAddress, setShippingAddress] = useState({});
-  return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor='name'>Full Name:</label>
-          <input type='text' name='fullname' />
-          <label htmlFor='address'>Street Address</label>
-          <input type='text' name='streetaddress' />
-          <label htmlFor='city'>city</label>
-          <input type='text' name='city' />
-          <label htmlFor='state'>State</label>
-          <input type='text' name='state' />
-          <label htmlFor='zip'>Zip Code</label>
-          <input type='text' name='zipcode' />
-          <button>Change</button>
-        </div>
-      </form>
-    </div>
-  );
+
+  if (user.token) {
+    return (
+      <div>
+        <form
+          onSubmit={async (event) => {
+            try {
+              event.preventDefault();
+              localStorage.setItem('shipping-Address', shippingAddress);
+            } catch (error) {
+              console.error(error);
+            }
+          }}
+        >
+          <div>
+            <input
+              onChange={(e) => setShippingAddress(e.target.value)}
+              type='text'
+              name='address'
+              placeholder='Full Address Here: Name, Street, City, State, zipcode'
+            />
+            <button>Set Shipping Address</button>
+          </div>
+        </form>
+        <ShippingAddresses />
+      </div>
+    );
+  }
 };
 
 export default Checkout;

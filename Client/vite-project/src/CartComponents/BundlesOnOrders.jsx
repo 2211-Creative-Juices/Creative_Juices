@@ -19,13 +19,11 @@ const BundleOrder = ({ myOrders }) => {
         username
       );
       setBundOrders(orderAndMyBunds, ...myOrders);
-      console.log('these are my orders', orderAndMyBunds);
     };
     if (user.user.id) {
       getAllMyOrdersWithBunds();
     }
   }, [user.user.username]);
-  console.log('87138941730487393487', bundOrders);
 
   return (
     <div id='myorders-container'>
@@ -33,7 +31,6 @@ const BundleOrder = ({ myOrders }) => {
       <div id='orders-map-container'>
         {bundOrders &&
           bundOrders.map((order) => {
-            console.log('this is orders with bundles and such', order);
             if (
               order.iscomplete === false &&
               order.incart === true &&

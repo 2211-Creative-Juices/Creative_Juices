@@ -7,6 +7,7 @@ import { getAllTheOrdersByUser, updateOrder } from '../api/orders';
 import { useAuth } from '../custom-hooks';
 import BundleOrder from './BundlesOnOrders';
 import MyFilledOrders from './MyFilledOrders';
+import Checkout from './Payment';
 
 const UserCart = ({ orders }) => {
   const user = useAuth();
@@ -40,7 +41,6 @@ const UserCart = ({ orders }) => {
       <div id='orders-map-container'>
         {myOrders &&
           myOrders.map((order) => {
-            console.log('this is orders with bundles and such', order);
             if (
               order.iscomplete === false &&
               order.incart === true &&
@@ -99,6 +99,9 @@ const UserCart = ({ orders }) => {
       </div>
       <div>
         <BundleOrder myOrders={myOrders} />
+      </div>
+      <div>
+        <Checkout />
       </div>
     </div>
   );
