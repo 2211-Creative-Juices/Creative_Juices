@@ -49,3 +49,19 @@ nav {
 .adminDash {
   background-color: grey;
 }
+
+.ContactForm {
+  background-color:mintcream;
+  text-align: center;
+  max-width: 300px;
+  border:#242424 solid 1pt;
+}
+
+.FormContactForm {
+  background-color:mintcream;
+  text-align: center;
+  
+  padding: 20px;
+  max-width: 200px;
+  
+}

@@ -13,6 +13,7 @@ import {
   ServiceForm,
   Dashboard,
   UserNav,
+  ContactForm,
 } from './Components/Index';
 import UserCart from './CartComponents/UserCart';
 import AdminServices from './AdminComponents/AdminServices';
@@ -88,6 +89,7 @@ function App() {
                     <ServiceForm services={services} todaysDate={todaysDate} />
                   </div>
                   <AllBundles bundles={bundles} />
+                  <ContactForm/>
                   <button onClick={logout}>Logout</button>
                 </div>
               }
