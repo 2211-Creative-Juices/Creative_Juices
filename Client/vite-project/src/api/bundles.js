@@ -21,6 +21,7 @@ export const getBundlesById = async (token, bundleId) => {
       },
     });
     const results = await response.json();
+    console.log('thisi s results in bundlesby ID', results);
     return results;
   } catch (error) {
     console.error(error);
@@ -33,13 +34,6 @@ export const createABundle = async (
   quantity,
   bundlecost
 ) => {
-  // console.log('CS token:', token);
-  // console.log('CS this is the selected loca:', location);
-  // console.log('CS this is the selected type:', type);
-  // console.log('CS this is the set date:', date);
-  // console.log('CS these are the notes', notes);
-  // console.log('CS number of guests', guests);
-  // console.log('CS cost:', cost);
   try {
     const response = await fetch(`${BASE_API}/bundles`, {
       method: 'POST',
