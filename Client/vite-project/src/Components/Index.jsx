@@ -6,3 +6,4 @@ export { default as About } from './About';
 export { default as ServiceForm } from './ServiceForm';
 export { default as Dashboard } from './Dashboard';
 export { default as UserNav } from './UserNav';
+export { default as ContactForm } from './Contact';

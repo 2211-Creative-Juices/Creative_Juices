@@ -2,6 +2,7 @@ import { useAuth } from '../custom-hooks';
 import { React, useState, useEffect } from 'react';
 import { createService } from '../api/services';
 import { createNewOrder } from '../api/orders';
+import { NavLink } from 'react-router-dom';
 import AllServices from './Services';
 
 const ServiceForm = ({ services, todaysDate }) => {
@@ -14,6 +15,12 @@ const ServiceForm = ({ services, todaysDate }) => {
   const [isRemote, setIsRemote] = useState(false);
   const [guests, setGuests] = useState(0);
 
+  //************* LOGIN/REGISTER STATE **************/
+  const [openPlease, setOpenPlease] = useState(false);
+  const handlePlease = () => {
+    setOpenPlease(!openPlease);
+  }
+
   //************* CHECK BOX STATE **************/
   const [isBreweryChecked, setBreweryIsChecked] = useState(false);
   const [isCoffeeChecked, setCoffeeIsChecked] = useState(false);
@@ -25,7 +32,7 @@ const ServiceForm = ({ services, todaysDate }) => {
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
-
+      if(user.token) {
       let newService = await createService(
         user.token,
         type,
@@ -57,12 +64,15 @@ const ServiceForm = ({ services, todaysDate }) => {
         // bundlekitId
       );
       console.log('THIS IS THE NEW ORDERBABYYYY', newOrder);
+      }
+      else {handlePlease()}
 
       // console.log('this is the new service!', newService);
     } catch (error) {
       console.error(error);
     }
   };
+  
   return (
     <div id='service-form'>
       <form onSubmit={(e) => submitHandler(e)}>
@@ -218,6 +228,16 @@ const ServiceForm = ({ services, todaysDate }) => {
           </div>
         </div>
       </form>
+      {openPlease ? (<div>Please <span>
+        <NavLink to="/signup">
+          register
+          </NavLink>
+          </span> or <span>
+          <NavLink to="/login">
+          log in
+          </NavLink>
+          </span>
+          </div>) : null}
       <div>
         <AllServices services={services} />
       </div>
