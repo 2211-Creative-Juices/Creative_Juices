@@ -8,6 +8,7 @@ const {
   getAllOrders,
   getOrderById,
   getAllOrdersByUser,
+  getAllOrdersByUserWithBunds,
   updateOrder,
   // getOrdersByIsNotComplete,
 } = require('../db/orders');
@@ -55,22 +56,24 @@ ordersRouter.get('/:username/orders', requireUser, async (req, res, next) => {
   }
 });
 
-// ordersRouter.get('/:purchaserId', requireUser, async (req, res, next) => {
-//   let id = req.params.purchaserId;
-//   console.log('Req Params', req.params);
-
-//   try {
-//     if ((id = req.user.id)) {
-//       let username = req.user.username;
-//       let getOrderForMe = await getAllOrdersByUser(username);
-//       console.log('this is getorderforme', getOrderForMe);
-//       res.send(getOrderForMe);
-//     }
-//   } catch (error) {
-//     console.error('getOrdersForMe', error);
-//     next(error);
-//   }
-// });
+ordersRouter.get(
+  '/:username/orders/bundles',
+  requireUser,
+  async (req, res, next) => {
+    const myOwnUsername = req.params.username;
+    console.log('These are the params', req.params);
+    try {
+      if (req.user) {
+        const userOrders = await getAllOrdersByUserWithBunds(myOwnUsername);
+        // const attachedServicesOrders = await attachServicesToOrder(userOrders);
+        res.send(userOrders);
+      }
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+  }
+);
 
 ordersRouter.post('/', requireUser, async (req, res, next) => {
   console.log('this is req.body', req.body);
