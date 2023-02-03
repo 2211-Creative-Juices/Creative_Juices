@@ -13,8 +13,8 @@ export const getAllOrders = async () => {
 };
 
 export const getAllTheOrdersByUser = async (token, username) => {
-  console.log('accessing get order by purchaser id honhon: ', username);
-  console.log('accessing get order by purchaser id TOKEN honhon: ', token);
+  // console.log('accessing get order by purchaser id honhon: ', username);
+  // console.log('accessing get order by purchaser id TOKEN honhon: ', token);
   try {
     const response = await fetch(`${BASE_API}/orders/${username}/orders`, {
       headers: {
@@ -31,8 +31,8 @@ export const getAllTheOrdersByUser = async (token, username) => {
 };
 
 export const getAllTheOrdersByUserWithBundKit = async (token, username) => {
-  console.log('accessing get order by purchaser id honhon: ', username);
-  console.log('accessing get order by purchaser id TOKEN honhon: ', token);
+  // console.log('accessing get order by purchaser id honhon: ', username);
+  // console.log('accessing get order by purchaser id TOKEN honhon: ', token);
   try {
     const response = await fetch(
       `${BASE_API}/orders/${username}/orders/bundles`,
