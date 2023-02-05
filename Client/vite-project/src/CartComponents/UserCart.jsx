@@ -7,7 +7,7 @@ import { getAllTheOrdersByUser, updateOrder } from '../api/orders';
 import { useAuth } from '../custom-hooks';
 import BundleOrder from './BundlesOnOrders';
 import MyFilledOrders from './MyFilledOrders';
-import Checkout from './Payment';
+import Checkout from './Checkout';
 import PayPalCheckout from './PayPalCheckout';
 
 const UserCart = ({ orders }) => {
