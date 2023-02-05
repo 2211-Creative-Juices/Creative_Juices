@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -28,7 +28,7 @@ a {
 nav {
   display: flex;
   justify-content: space-evenly;
-  background-color: rgba(255, 255, 255, 0.618);
+  background-color: rgba(42, 157, 143);
   align-items: center;
   color: black;
   cursor: pointer;
@@ -48,6 +48,9 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+#logo {
+  width: 25%;
 }
 #home-message {
   border: 2pt solid orangered;
