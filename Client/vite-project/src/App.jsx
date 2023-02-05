@@ -86,7 +86,7 @@ function App() {
                 <div>
                   <NavBar />
                   <Home /> <About />
-                  <div id='service-form'>
+                  <div id='service-form-app'>
                     <ServiceForm services={services} todaysDate={todaysDate} />
                   </div>
                   <AllBundles bundles={bundles} />

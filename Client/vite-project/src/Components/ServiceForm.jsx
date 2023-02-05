@@ -4,6 +4,7 @@ import { createService } from '../api/services';
 import { createNewOrder } from '../api/orders';
 import { NavLink } from 'react-router-dom';
 import AllServices from './Services';
+import cjtimelapse from "../assets/videos/cjtimelapse.mp4"
 
 const ServiceForm = ({ services, todaysDate }) => {
   const user = useAuth();
@@ -74,10 +75,10 @@ const ServiceForm = ({ services, todaysDate }) => {
   };
   
   return (
-    <div id='service-form'>
-      <form onSubmit={(e) => submitHandler(e)}>
+    <div id='service-container'>
+      <form id= 'service-form' onSubmit={(e) => submitHandler(e)}>
         <div id='service-form-inputs'>
-          <div>
+        <div id='type-box'>
             {' '}
             Type:
             <label>
@@ -126,7 +127,7 @@ const ServiceForm = ({ services, todaysDate }) => {
               ></input>
             </label>
           </div>
-          <div>
+          <div id='location-box'>
             Location
             <label>
               Brewery
@@ -197,19 +198,23 @@ const ServiceForm = ({ services, todaysDate }) => {
               ></input>
             </label>
           </div>
-          <div>
+            <div>
             <input
               value={date}
               type='text'
               placeholder='Date of Event'
               onChange={(e) => setDate(e.target.value)}
             ></input>
+            </div>
+            <div>
             <input
               value={notes}
               type='text'
               placeholder='Additional notes for Shelley'
               onChange={(e) => setNotes(e.target.value)}
             ></input>
+            </div>
+            <div>
             <label>
               Select Here to make it Virtual!
               <input
@@ -221,11 +226,10 @@ const ServiceForm = ({ services, todaysDate }) => {
                 }}
               ></input>
             </label>
-
+            </div>
             <button onClick={submitHandler} type={'submit'}>
               Add to Cart
             </button>
-          </div>
         </div>
       </form>
       {openPlease ? (<div>Please <span>
@@ -241,6 +245,12 @@ const ServiceForm = ({ services, todaysDate }) => {
       <div>
         <AllServices services={services} />
       </div>
+      {/* <div id='video-box'>
+      <video width="100%" height="100%" >
+  <source src={cjtimelapse.mp4} type='cjtimelapse/mp4'/>
+Your browser does not support the video tag.
+</video>
+      </div> */}
     </div>
   );
 };

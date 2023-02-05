@@ -5,8 +5,8 @@
   font-weight: 400;
   margin: 0 auto;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgba(38, 70, 83, 0.87);
+  background-color: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -22,13 +22,14 @@ a {
 }
 
 .service {
-  border: 1pt white solid;
+  border: 1pt rgb(0, 0, 0) solid;
 }
 
 nav {
   display: flex;
   justify-content: space-evenly;
-  background-color: rgba(42, 157, 143);
+  background-color: rgba(42, 157, 144, 0.591);
+
   align-items: center;
   color: black;
   cursor: pointer;
@@ -38,6 +39,28 @@ nav {
 .is-sticky {
   position: sticky;
   top: 0;
+}
+
+#about-container {
+background-color: rgb(233, 196, 106);
+color: rgba(0, 0, 0, 0.87);
+padding: 5em;
+}
+.about-content {
+width: 75%;
+display: flex;
+flex-direction: row;
+gap: 4em;
+}
+#prettyshelley {
+width: 500%;
+border: 4pt white solid;
+}
+#about-header {
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: bolder;
+  font-size: 30px;
+  margin-right: 10em;
 }
 
 #home-container {
@@ -60,6 +83,24 @@ nav {
 
 .adminDash {
   background-color: grey;
+}
+
+#service-container {
+  width: 30%;
+}
+
+#service-form {
+  padding: 2rem;
+  background-color: rgba(38, 70, 83);
+  color: #ffffff;
+  margin: 20px;
+  border-radius: 7%;
+  box-shadow: 0 0 2em hsl(231deg 62% 75%);
+}
+
+#service-form-inputs {
+  display: flex;
+  flex-direction: column;
 }
 
 #footer-container {
