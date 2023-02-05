@@ -8,6 +8,7 @@ import { useAuth } from '../custom-hooks';
 import BundleOrder from './BundlesOnOrders';
 import MyFilledOrders from './MyFilledOrders';
 import Checkout from './Payment';
+import PayPalCheckout from './PayPalCheckout';
 
 const UserCart = ({ orders }) => {
   const user = useAuth();
@@ -102,6 +103,9 @@ const UserCart = ({ orders }) => {
       </div>
       <div>
         <Checkout />
+      </div>
+      <div>
+        <PayPalCheckout />
       </div>
     </div>
   );
