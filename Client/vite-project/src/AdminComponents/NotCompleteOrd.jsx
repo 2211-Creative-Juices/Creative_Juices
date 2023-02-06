@@ -19,7 +19,7 @@ const NotCompleteOrd = ({ orders }) => {
               return (
                 <div
                   key={order.id}
-                  className='order'
+                  className='incomplete-orders'
                 >
                   <h3>Incomplete Orders:</h3>
                   <p>Order Date: {order.orderdate}</p>
