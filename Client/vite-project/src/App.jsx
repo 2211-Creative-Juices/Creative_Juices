@@ -10,6 +10,7 @@ import {
   Home,
   AllBundles,
   About,
+  Testimonials,
   ServiceForm,
   Dashboard,
   UserNav,
@@ -90,6 +91,7 @@ function App() {
                     <ServiceForm services={services} todaysDate={todaysDate} />
                   </div>
                   <AllBundles bundles={bundles} />
+                  <Testimonials/>
                   <button onClick={logout}>Logout</button>
                   <Footer />
                 </div>
@@ -162,6 +164,7 @@ function App() {
             ></Route>
           </Routes>
           <a href='#top'>Back to Top</a>
+          <div>©Copyright 2023 Creative Juices</div>
         </div>
       </div>
     </div>

@@ -45,6 +45,7 @@ nav {
 background-color: rgb(233, 196, 106);
 color: rgba(0, 0, 0, 0.87);
 padding: 5em;
+border-radius: 3%;
 }
 .about-content {
 width: 75%;
@@ -66,6 +67,8 @@ border: 4pt white solid;
 #home-container {
   padding: 10em;
   background-image: -webkit-image-set();
+  border-bottom-right-radius: 3%;
+  border-bottom-left-radius: 3%;
   background: center;
   background-size: cover;
   display: flex;
@@ -81,10 +84,6 @@ border: 4pt white solid;
   background-color: rgba(255, 166, 0, 0.472);
 }
 
-.adminDash {
-  background-color: grey;
-}
-
 #service-container {
   width: 30%;
 }
@@ -94,13 +93,39 @@ border: 4pt white solid;
   background-color: rgba(38, 70, 83);
   color: #ffffff;
   margin: 20px;
-  border-radius: 7%;
+  border-radius: 3%;
   box-shadow: 0 0 2em hsl(231deg 62% 75%);
 }
 
 #service-form-inputs {
   display: flex;
   flex-direction: column;
+}
+
+#testimonial1 {
+  width: 100%;
+  border: 4pt white solid;
+}
+
+#testimonials-header {
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: bolder;
+  font-size: 30px;
+  margin-right: 10em;
+}
+
+#testimonials-container {
+background-color: rgb(233, 196, 106);
+color: rgba(0, 0, 0, 0.87);
+padding: 5em;
+border-radius: 3%;
+}
+
+.testimonials-content {
+width: 75%;
+display: flex;
+flex-direction: row;
+gap: 4em;
 }
 
 #footer-container {
@@ -112,6 +137,10 @@ border: 4pt white solid;
   justify-content: center;
   justify-content: space-between;
   gap: 2rem;
+}
+
+#footer-logo {
+  width: 45%
 }
 
 .ContactForm-container {
