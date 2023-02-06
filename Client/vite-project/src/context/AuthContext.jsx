@@ -4,8 +4,7 @@ import { me } from '../api/auth';
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  const [token, settoken] = useState(''); //initially token is an empty string.
-  //if the empty string is found we should be logged out.
+  const [token, settoken] = useState('');
   const [shouldUpdate, setShouldUpdate] = useState(false);
   const [user, setUser] = useState({});
 
@@ -15,9 +14,7 @@ export default function AuthProvider({ children }) {
     if (localStorage['juice-token']) {
       const getMe = async () => {
         const result = await me(localStorage['juice-token']);
-        console.log('~~~~~~~$$$$$~~~~~~~', result);
         setUser(result);
-        console.log('this is user!!!', user);
       };
       getMe();
     }
@@ -27,10 +24,11 @@ export default function AuthProvider({ children }) {
 
   const logout = () => {
     delete localStorage['juice-token'];
+    delete localStorage['bundleCost'];
+    delete localStorage['serviceCost'];
     updateAuthStatus();
   };
 
-  console.log('~~~~~~~~~~~~', user);
   const providerValue = {
     token,
     isLoggedIn: !!token,

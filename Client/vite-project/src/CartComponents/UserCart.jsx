@@ -20,6 +20,10 @@ const UserCart = ({ orders }) => {
   const singleOrder = orders[0];
   console.log('this is single ORDER', singleOrder);
 
+  const redirCart = () => {
+    window.location.href = '/usercart';
+  };
+
   useEffect(() => {
     const getAllMyOrders = async () => {
       const allMyOrders = await getAllTheOrdersByUser(user.token, username);
@@ -29,12 +33,6 @@ const UserCart = ({ orders }) => {
     if (user.user.id) {
       getAllMyOrders();
     }
-    // if (!user.token) {
-    //   const redirLogin = () => {
-    //     window.location.href = '/login';
-    //   };
-    //   redirLogin();
-    // }
   }, [user.user.username]);
   console.log('87138941730487393487', myOrders);
 
@@ -49,18 +47,12 @@ const UserCart = ({ orders }) => {
                 order.iscomplete === false &&
                 order.incart === true &&
                 order.bundlekitId === null
-              )
+              ) {
                 return (
-                  <div
-                    key={order.id}
-                    className='myorders'
-                  >
+                  <div key={order.id} className='myorders'>
                     <div id='flexedorders'>
                       <div id='fleximage'>
-                        <img
-                          id='shelleycart'
-                          src={shelleycart}
-                        ></img>
+                        <img id='shelleycart' src={shelleycart}></img>
                       </div>
                       <div id='orderinfo'>
                         <p>Date of Purchase: {order.orderdate}</p>
@@ -70,10 +62,7 @@ const UserCart = ({ orders }) => {
 
                     {order.services.map((service) => {
                       return (
-                        <div
-                          key={service.id}
-                          className='myservices'
-                        >
+                        <div key={service.id} className='myservices'>
                           <h4>Customized Paint and Sip:</h4>
                           <p>Age Group: {service.type}</p>
                           <p>In-person or remote: {service.isremote}</p>
@@ -97,12 +86,15 @@ const UserCart = ({ orders }) => {
                                 order.iscomplete,
                                 !ordInCart,
                                 order.serviceId,
-                                order.bundlekitId
+                                order.bundlekitId,
+                                order.paypalId
                               );
                               console.log(
                                 'this is updatedOrdIN cart!!!!',
                                 updatedOrdInCart
                               );
+                              localStorage.removeItem('serviceCost');
+                              redirCart();
                             }}
                           >
                             Remove From Cart
@@ -112,6 +104,7 @@ const UserCart = ({ orders }) => {
                     })}
                   </div>
                 );
+              }
             })}
         </div>
         <div>

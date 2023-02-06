@@ -34,7 +34,7 @@ const ShippingAddresses = () => {
             }}
           ></input>
 
-          <button onClick={submitHandler}>Remove</button>
+          <button onClick={submitHandler}>Replace</button>
         </form>
       </div>
     );

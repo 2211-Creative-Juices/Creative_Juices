@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { updateOrder } from '../api/orders';
 import { useAuth } from '../custom-hooks';
@@ -8,18 +8,45 @@ import { useState } from 'react';
 const PayPalCheckout = ({ myOrders }) => {
   const user = useAuth();
   const [payPalId, setPayPalId] = useState('');
+  const [totalAmount, setTotalAmount] = useState(0);
+
   const bundTotal = localStorage.getItem('bundleCost');
   const serviceTotal = localStorage.getItem('serviceCost');
 
-  const amount = parseInt(bundTotal) + parseInt(serviceTotal);
+  // const comboAmount = parseInt(bundTotal) + parseInt(serviceTotal);
+  // const bundOnlyAmount = parseInt(bundTotal);
+  // const serviceOnlyAmount = parseInt(serviceTotal);
 
-  console.log('TOTAL AMOUNT pasrse ', amount);
+  const redirCart = () => {
+    window.location.href = '/usercart';
+  };
+
+  useEffect(() => {
+    const figureAmount = () => {
+      if (bundTotal && serviceTotal) {
+        let amount = parseInt(bundTotal) + parseInt(serviceTotal);
+        setTotalAmount(amount);
+      } else if (!bundTotal) {
+        let amount = parseInt(serviceTotal);
+        setTotalAmount(amount);
+      } else if (!serviceTotal) {
+        let amount = parseInt(bundTotal);
+        setTotalAmount(amount);
+      } else {
+        return 0;
+      }
+    };
+    figureAmount();
+  }, []);
+
+  console.log('amount', totalAmount);
+
   const currency = 'USD';
   return (
     <div id='paypalcontainerthing'>
       <p>
         <span className='total-cost'>
-          Total Cost: ${amount ? amount : 0}.00
+          Total Cost: ${totalAmount ? totalAmount : 0}.00 $
         </span>
       </p>
       <PayPalScriptProvider
@@ -37,7 +64,7 @@ const PayPalCheckout = ({ myOrders }) => {
                   {
                     amount: {
                       currency_code: currency,
-                      value: amount,
+                      value: totalAmount,
                     },
                   },
                 ],
@@ -84,6 +111,7 @@ const PayPalCheckout = ({ myOrders }) => {
                 }
               });
             localStorage.removeItem('serviceCost', 'bundleCost');
+            redirCart();
           }}
         >
           Finalize
