@@ -114,7 +114,7 @@ async function createTables() {
      incart BOOLEAN default true,
      "serviceId" INTEGER REFERENCES services(id) DEFAULT null,
      "bundlekitId" INTEGER REFERENCES bundlekit(id) DEFAULT null,
-     paypalid INT DEFAULT 0
+     paypalid varchar(255)
     );
     `);
 

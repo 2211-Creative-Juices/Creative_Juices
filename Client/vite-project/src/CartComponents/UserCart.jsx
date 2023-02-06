@@ -79,6 +79,9 @@ const UserCart = ({ orders }) => {
                           <p>In-person or remote: {service.isremote}</p>
                           <p>Number of Participants: {service.guests}</p>
                           <p>Event Cost: {service.cost}</p>
+                          <p>
+                            {localStorage.setItem('serviceCost', service.cost)}
+                          </p>
                           <p>Prefered Location: {service.location}</p>
                           <p>First Choice Date: {service.date}</p>
                           <p>Additional Notes: {service.notes}</p>

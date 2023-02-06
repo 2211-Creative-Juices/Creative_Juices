@@ -11,12 +11,13 @@ const AllBundles = ({ bundles, todaysDate }) => {
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
+      let cost = quantity * 20;
 
       let newBundle = await createABundle(
         user.token,
         bundles.bundlename,
         quantity,
-        bundles.cost
+        cost
       );
       console.log('this is my newBUndles', newBundle);
 
@@ -60,7 +61,10 @@ const AllBundles = ({ bundles, todaysDate }) => {
               }}
             ></input>
           </label>
-          <button onClick={submitHandler} type={'submit'}>
+          <button
+            onClick={submitHandler}
+            type={'submit'}
+          >
             Add Paint Kit to Cart
           </button>
         </div>

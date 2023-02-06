@@ -2,18 +2,25 @@ import React from 'react';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { updateOrder } from '../api/orders';
 import { useAuth } from '../custom-hooks';
+import { useState } from 'react';
 // const { CLIENT_ID_PP } = process.env;
 
 const PayPalCheckout = ({ myOrders }) => {
-  console.log('these are my accessible orders', myOrders);
   const user = useAuth();
+  const [payPalId, setPayPalId] = useState('');
+  const bundTotal = localStorage.getItem('bundleCost');
+  const serviceTotal = localStorage.getItem('serviceCost');
 
-  const amount = '2';
+  const amount = parseInt(bundTotal) + parseInt(serviceTotal);
+
+  console.log('TOTAL AMOUNT pasrse ', amount);
   const currency = 'USD';
   return (
     <div id='paypalcontainerthing'>
       <p>
-        <span className='total-cost'>$20.00</span>
+        <span className='total-cost'>
+          Total Cost: ${amount ? amount : 0}.00
+        </span>
       </p>
       <PayPalScriptProvider
         options={{
@@ -22,6 +29,7 @@ const PayPalCheckout = ({ myOrders }) => {
         }}
       >
         <PayPalButtons
+          setPayPalId={setPayPalId}
           createOrder={(data, actions) => {
             return actions.order
               .create({
@@ -35,6 +43,10 @@ const PayPalCheckout = ({ myOrders }) => {
                 ],
               })
               .then((orderId) => {
+                setPayPalId(orderId);
+                // localStorage.setItem("paypalId", orderId)
+                console.log('this is ORDER ID from paypal', orderId);
+                console.log('THIS IS THE PAY PAL ID', payPalId);
                 return orderId;
               });
           }}
@@ -48,31 +60,37 @@ const PayPalCheckout = ({ myOrders }) => {
           }}
         />
       </PayPalScriptProvider>
-      <form>
-        <button></button>
-      </form>
+      <div>
+        <button
+          onClick={() => {
+            console.log('paypal state', payPalId);
+            myOrders &&
+              myOrders.map(async (order) => {
+                if (order.iscomplete === false && order.incart === true) {
+                  const updatedOrder = await updateOrder(
+                    user.token,
+                    order.id,
+                    '2-6-23',
+                    order.purchaserId,
+                    order.iscomplete,
+                    false,
+                    order.serviceId,
+                    order.bundlekitId,
+                    payPalId
+                  );
+
+                  console.log('updated orders::', updatedOrder);
+                  return updatedOrder;
+                }
+              });
+            localStorage.removeItem('serviceCost', 'bundleCost');
+          }}
+        >
+          Finalize
+        </button>
+      </div>
     </div>
   );
 };
-
-// {
-//   myOrders &&
-//     myOrders.map((order) => {
-//       if (order.iscomplete === false && order.incart === true) {
-//         let updatedOrder = updateOrder(
-//           user.token,
-//           order.id,
-//           order.date,
-//           order.purchaserId,
-//           order.iscomplete,
-//           order.incart,
-//           order.serviceId,
-//           order.bundlekitId,
-//           orderId
-//         );
-//         return updatedOrder;
-//       }
-//     });
-// }
 
 export default PayPalCheckout;

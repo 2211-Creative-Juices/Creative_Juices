@@ -7,13 +7,12 @@ const OrderHistoryServices = ({ myOrders }) => {
       <div id='oldservice-map-container'>
         {myOrders &&
           myOrders.map((order) => {
-            if (
-              order.iscomplete === true &&
-              order.incart === true &&
-              order.bundlekitId === null
-            )
+            if (order.incart === false && order.bundlekitId === null)
               return (
-                <div key={order.id} className='myoldserviceorders'>
+                <div
+                  key={order.id}
+                  className='myoldserviceorders'
+                >
                   <h3>Orders:</h3>
                   <p>Order Date: {order.orderdate}</p>
                   <p>Fullfilled?: {order.iscomplete}</p>
@@ -21,7 +20,10 @@ const OrderHistoryServices = ({ myOrders }) => {
                   {/* <p>BK ID: {order.bundlekitId}</p> */}
                   {order.services.map((service) => {
                     return (
-                      <div key={service.id} className='myoldservices'>
+                      <div
+                        key={service.id}
+                        className='myoldservices'
+                      >
                         <h4>Services:</h4>
                         <p>Type: {service.type}</p>
                         <p>isremote: {service.isremote}</p>
