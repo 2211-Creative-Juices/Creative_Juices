@@ -1,0 +1,71 @@
+#myorders-container{
+    background-color: rgb(192, 192, 192);
+}
+#orders-map-container{
+    border: white solid 2px;
+}
+#myorders-container{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+}
+#myorders-bunds-container{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+}
+#orders-map-container{
+    width: 40%;
+    background-color: white;
+    margin-left: 4em;
+    padding: 1.5em;
+    margin-right: 0;
+}
+.inner-orderdiv{
+    display: flex;
+    flex-direction: column;
+}
+#flexedorders{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    border-color: white;
+   
+}
+#fleximage{
+    width: 20%;
+}
+#shelleycart{
+    max-width: 80%;
+}
+#bundpic{
+    max-width: 20%;
+}
+.mybunds{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    gap: 2em;
+}
+#historylink{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+.orderhistorylink{
+    background-color: white;
+    color: black;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+#paypalcontainerthing{
+    width: 70%;
+    background-color: white;
+    padding: 2em;
+    margin-bottom: 4em;
+}
+.prior-orders-linked{
+    width: 65%;
+}
+

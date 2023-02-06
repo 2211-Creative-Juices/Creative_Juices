@@ -29,7 +29,6 @@ ordersRouter.get('/', async (req, res, next) => {
 
 ordersRouter.get('/:orderId', requireUser, async (req, res, next) => {
   const id = req.params.orderId;
-  console.log('this is req.params in ORDERS', req.params);
   try {
     if (req.user) {
       const orderbyId = await getOrderById(id);
@@ -43,11 +42,9 @@ ordersRouter.get('/:orderId', requireUser, async (req, res, next) => {
 
 ordersRouter.get('/:username/orders', requireUser, async (req, res, next) => {
   const myOwnUsername = req.params.username;
-  console.log('These are the params', req.params);
   try {
     if (req.user) {
       const userOrders = await getAllOrdersByUser(myOwnUsername);
-      // const attachedServicesOrders = await attachServicesToOrder(userOrders);
       res.send(userOrders);
     }
   } catch (error) {
@@ -61,11 +58,9 @@ ordersRouter.get(
   requireUser,
   async (req, res, next) => {
     const myOwnUsername = req.params.username;
-    console.log('These are the params', req.params);
     try {
       if (req.user) {
         const userOrders = await getAllOrdersByUserWithBunds(myOwnUsername);
-        // const attachedServicesOrders = await attachServicesToOrder(userOrders);
         res.send(userOrders);
       }
     } catch (error) {
@@ -76,7 +71,6 @@ ordersRouter.get(
 );
 
 ordersRouter.post('/', requireUser, async (req, res, next) => {
-  console.log('this is req.body', req.body);
   const { orderdate, purchaserId, iscomplete, incart, serviceId, bundlekitId } =
     req.body;
   if (req.user);
@@ -90,7 +84,6 @@ ordersRouter.post('/', requireUser, async (req, res, next) => {
         serviceId,
         bundlekitId,
       });
-      console.log('This is newOrder:', newOrder);
       res.send(newOrder);
     } catch (error) {
       console.error('this is new order error:', error);
@@ -103,11 +96,7 @@ ordersRouter.post('/', requireUser, async (req, res, next) => {
 ordersRouter.patch('/:orderId', requireUser, async (req, res, next) => {
   const { orderdate, purchaserId, iscomplete, incart, serviceId, bundlekitId } =
     req.body;
-  console.log('this is the req.body for update orders', req.body);
-
   const id = req.params.orderId;
-  console.log('these are the params for update order', req.params);
-
   try {
     const ogOrder = await getOrderById(id);
 
