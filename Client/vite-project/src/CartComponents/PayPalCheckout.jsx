@@ -6,7 +6,7 @@ const PayPalCheckout = () => {
   const amount = '2';
   const currency = 'USD';
   return (
-    <div>
+    <div id='paypalcontainerthing'>
       <p>
         <span className='total-cost'>$20.00</span>
       </p>

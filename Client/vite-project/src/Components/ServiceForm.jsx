@@ -4,7 +4,7 @@ import { createService } from '../api/services';
 import { createNewOrder } from '../api/orders';
 import { NavLink } from 'react-router-dom';
 import AllServices from './Services';
-import cjtimelapse from "../assets/videos/cjtimelapse.mp4"
+// import cjtimelapse from "../assets/videos/cjtimelapse.mp4"
 
 const ServiceForm = ({ services, todaysDate }) => {
   const user = useAuth();
@@ -20,7 +20,7 @@ const ServiceForm = ({ services, todaysDate }) => {
   const [openPlease, setOpenPlease] = useState(false);
   const handlePlease = () => {
     setOpenPlease(!openPlease);
-  }
+  };
 
   //************* CHECK BOX STATE **************/
   const [isBreweryChecked, setBreweryIsChecked] = useState(false);
@@ -33,52 +33,53 @@ const ServiceForm = ({ services, todaysDate }) => {
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
-      if(user.token) {
-      let newService = await createService(
-        user.token,
-        type,
-        isRemote,
-        guests,
-        cost,
-        location,
-        date,
-        notes
-      );
+      if (user.token) {
+        let newService = await createService(
+          user.token,
+          type,
+          isRemote,
+          guests,
+          cost,
+          location,
+          date,
+          notes
+        );
 
-      console.log('HTIS IS MY NEWSERVCIE', newService);
+        console.log('HTIS IS MY NEWSERVCIE', newService);
 
-      let serviceId = newService.id;
-      console.log('NEW SERVICEID', serviceId);
-      let todaysOrderDate = todaysDate;
-      console.log('NEW dateeeeee', todaysOrderDate);
-      let purchaserId = user.user.id;
-      console.log('NEW users.users.id', user.user.id);
-      // let bundlekitId = 0;
-      // let isintheCart = setisinCart(true);
-      // console.log('NEW isintheCart', isintheCart);
-      const newOrder = await createNewOrder(
-        user.token,
-        todaysOrderDate,
-        purchaserId,
+        let serviceId = newService.id;
+        // console.log('NEW SERVICEID', serviceId);
+        let todaysOrderDate = JSON.stringify(todaysDate);
+        console.log('NEW dateeeeee', todaysOrderDate);
+        let purchaserId = user.user.id;
+        // console.log('NEW users.users.id', user.user.id);
+        // let bundlekitId = 0;
+        // let isintheCart = setisinCart(true);
+        // console.log('NEW isintheCart', isintheCart);
+        const newOrder = await createNewOrder(
+          user.token,
+          todaysOrderDate,
+          purchaserId,
 
-        serviceId
-        // bundlekitId
-      );
-      console.log('THIS IS THE NEW ORDERBABYYYY', newOrder);
+          serviceId
+          // bundlekitId
+        );
+        console.log('THIS IS THE NEW ORDERBABYYYY', newOrder);
+      } else {
+        handlePlease();
       }
-      else {handlePlease()}
 
       // console.log('this is the new service!', newService);
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   return (
     <div id='service-container'>
-      <form id= 'service-form' onSubmit={(e) => submitHandler(e)}>
+      <form id='service-form' onSubmit={(e) => submitHandler(e)}>
         <div id='service-form-inputs'>
-        <div id='type-box'>
+          <div id='type-box'>
             {' '}
             Type:
             <label>
@@ -198,23 +199,23 @@ const ServiceForm = ({ services, todaysDate }) => {
               ></input>
             </label>
           </div>
-            <div>
+          <div>
             <input
               value={date}
               type='text'
               placeholder='Date of Event'
               onChange={(e) => setDate(e.target.value)}
             ></input>
-            </div>
-            <div>
+          </div>
+          <div>
             <input
               value={notes}
               type='text'
               placeholder='Additional notes for Shelley'
               onChange={(e) => setNotes(e.target.value)}
             ></input>
-            </div>
-            <div>
+          </div>
+          <div>
             <label>
               Select Here to make it Virtual!
               <input
@@ -226,22 +227,24 @@ const ServiceForm = ({ services, todaysDate }) => {
                 }}
               ></input>
             </label>
-            </div>
-            <button onClick={submitHandler} type={'submit'}>
-              Add to Cart
-            </button>
+          </div>
+          <button onClick={submitHandler} type={'submit'}>
+            Add to Cart
+          </button>
         </div>
       </form>
-      {openPlease ? (<div>Please <span>
-        <NavLink to="/signup">
-          register
-          </NavLink>
-          </span> or <span>
-          <NavLink to="/login">
-          log in
-          </NavLink>
+      {openPlease ? (
+        <div>
+          Please{' '}
+          <span>
+            <NavLink to='/signup'>register</NavLink>
+          </span>{' '}
+          or{' '}
+          <span>
+            <NavLink to='/login'>log in</NavLink>
           </span>
-          </div>) : null}
+        </div>
+      ) : null}
       <div>
         <AllServices services={services} />
       </div>

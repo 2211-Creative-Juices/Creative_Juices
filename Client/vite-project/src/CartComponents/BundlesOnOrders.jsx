@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { getAllTheOrdersByUserWithBundKit } from '../api/orders';
 import { updateOrder } from '../api/orders';
 import MyFilledOrders from './MyFilledOrders';
+import bundlekit from '../assets/images/bundlekit.jpeg';
+import { Route, Link, Routes } from 'react-router-dom';
 
 const BundleOrder = ({ myOrders }) => {
   const user = useAuth();
@@ -26,8 +28,7 @@ const BundleOrder = ({ myOrders }) => {
   }, [user.user.username]);
 
   return (
-    <div id='myorders-container'>
-      <h2 id='myorders-header'>My Orders</h2>
+    <div id='myorders-bunds-container'>
       <div id='orders-map-container'>
         {bundOrders &&
           bundOrders.map((order) => {
@@ -38,19 +39,19 @@ const BundleOrder = ({ myOrders }) => {
             )
               return (
                 <div key={order.id} className='myorders'>
-                  <h3>Orders:</h3>
-                  <p>Order Date: {order.orderdate}</p>
-                  <p>Fullfilled?: {order.iscomplete}</p>
-                  <p>BundleKitID: {order.bundlekitId}</p>
-                  <div> BUNDLE HERE:</div>
+                  <p>Purchase Date: {order.orderdate}</p>
+                  <p>ID {order.bundlekitId}</p>
+                  <div id='bundleimg'>
+                    <img id='bundpic' src={bundlekit}></img>
+                  </div>
 
                   {/* <p>BK ID: {order.bundlekitId}</p> */}
 
                   {order.bundles.map((bundle) => {
                     return (
-                      <div key={bundle.id} className='myservices'>
-                        <h4>Bundles:</h4>
-                        <p>quantity: {bundle.quantity}</p>
+                      <div key={bundle.id} className='mybunds'>
+                        <p>Qty {bundle.quantity}</p>
+                        <h4>Kits pair well with a virtual paint n sip!</h4>
                         <button
                           onClick={async () => {
                             const ordInCart = order.incart;
@@ -79,7 +80,26 @@ const BundleOrder = ({ myOrders }) => {
               );
           })}
       </div>
-      <MyFilledOrders bundOrders={bundOrders} myOrders={myOrders} />
+      <div className='prior-orders-linked'>
+        <div>
+          <Routes>
+            <Route
+              path='/priororders'
+              element={
+                <div>
+                  {' '}
+                  <MyFilledOrders myOrders={myOrders} bundOrders={bundOrders} />
+                </div>
+              }
+            />
+          </Routes>
+        </div>
+        <div id='historylink'>
+          <Link className='orderhistorylink' to='/priororders'>
+            Click to view My Order History
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
