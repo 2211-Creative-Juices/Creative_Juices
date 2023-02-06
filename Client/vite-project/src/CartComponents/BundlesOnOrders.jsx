@@ -6,7 +6,7 @@ import { getAllTheOrdersByUserWithBundKit } from '../api/orders';
 import { updateOrder } from '../api/orders';
 import MyFilledOrders from './MyFilledOrders';
 import bundlekit from '../assets/images/bundlekit.jpeg';
-import { Route, Link, Routes } from 'react-router-dom';
+import { Route, Link, Routes, NavLink } from 'react-router-dom';
 
 const BundleOrder = ({ myOrders }) => {
   const user = useAuth();
@@ -38,19 +38,35 @@ const BundleOrder = ({ myOrders }) => {
               order.serviceId === null
             )
               return (
-                <div key={order.id} className='myorders'>
+                <div
+                  key={order.id}
+                  className='myorders'
+                >
                   <p>Purchase Date: {order.orderdate}</p>
                   <p>ID {order.bundlekitId}</p>
                   <div id='bundleimg'>
-                    <img id='bundpic' src={bundlekit}></img>
+                    <img
+                      id='bundpic'
+                      src={bundlekit}
+                    ></img>
                   </div>
 
                   {/* <p>BK ID: {order.bundlekitId}</p> */}
 
                   {order.bundles.map((bundle) => {
                     return (
-                      <div key={bundle.id} className='mybunds'>
+                      <div
+                        key={bundle.id}
+                        className='mybunds'
+                      >
                         <p>Qty {bundle.quantity}</p>
+                        <p>Cost:{bundle.bundlecost}</p>
+                        <p>
+                          {localStorage.setItem(
+                            'bundleCost',
+                            bundle.bundlecost
+                          )}
+                        </p>
                         <h4>Kits pair well with a virtual paint n sip!</h4>
                         <button
                           onClick={async () => {
@@ -86,18 +102,21 @@ const BundleOrder = ({ myOrders }) => {
             <Route
               path='/priororders'
               element={
-                <div>
-                  {' '}
-                  <MyFilledOrders myOrders={myOrders} bundOrders={bundOrders} />
-                </div>
+                <MyFilledOrders
+                  myOrders={myOrders}
+                  bundOrders={bundOrders}
+                />
               }
-            />
+            ></Route>
           </Routes>
         </div>
         <div id='historylink'>
-          <Link className='orderhistorylink' to='/priororders'>
+          {/* <NavLink
+            className='orderhistorylink'
+            to='/priororders'
+          >
             Click to view My Order History
-          </Link>
+          </NavLink> */}
         </div>
       </div>
     </div>

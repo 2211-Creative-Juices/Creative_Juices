@@ -8,8 +8,8 @@ const {
   getUserByUsername,
   getAllUsers,
   createUser,
-  // getUserById,
-  // getServicesByUser,
+  getUserById,
+  updateUser,
   // getAllOrdersByUser,
 } = require('../db');
 // const { JWT_SECRET = 'donottell' } = process.env;
@@ -131,6 +131,38 @@ usersRouter.get('/me', async (req, res, next) => {
   try {
     const me = req.user;
     res.send(me);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//PATCH /api/users/:userId
+usersRouter.patch('/:userId', requireUser, async (req, res, next) => {
+  const { name, username, password, zipcode, email, isadmin } = req.body;
+
+  const id = req.params.userId;
+
+  try {
+    const ogUser = await getUserById(id);
+
+    if (!ogUser) {
+      next({
+        error: 'error',
+        name: 'NoUserFoundError',
+        message: `User ${id} not found`,
+      });
+    } else {
+      const updatedUser = await updateUser(id, {
+        name,
+        username,
+        password,
+        zipcode,
+        email,
+        isadmin,
+      });
+
+      res.send(updatedUser);
+    }
   } catch (error) {
     next(error);
   }
