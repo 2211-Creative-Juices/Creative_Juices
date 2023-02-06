@@ -50,10 +50,9 @@ const NavBar = ({ orders }) => {
             setActiveNavLinkId={setActiveNavLinkId}
           />
         ))}
-        <button>
-          <Link to='/usercart'>CART</Link>
-        </button>
-        <CartImage orders={orders} />
+        <Link to='/usercart'>
+          <CartImage orders={orders} />
+        </Link>
       </nav>
     </div>
   );

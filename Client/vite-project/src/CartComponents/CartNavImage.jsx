@@ -22,7 +22,7 @@ const CartImage = ({ orders }) => {
     return (
       <div>
         <FontAwesomeIcon icon={faCartShopping} />
-        <div>1</div>
+        <div>{countOrders}</div>
         <div></div>
       </div>
     );

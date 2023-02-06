@@ -7,13 +7,12 @@ const OrderHistoryBundles = ({ bundOrders }) => {
       <div id='oldbundorders-map-container'>
         {bundOrders &&
           bundOrders.map((order) => {
-            if (
-              order.iscomplete === true &&
-              order.incart === true &&
-              order.serviceId === null
-            )
+            if (order.incart === false && order.serviceId === null)
               return (
-                <div key={order.id} className='myoldbundorders'>
+                <div
+                  key={order.id}
+                  className='myoldbundorders'
+                >
                   <h3>Orders:</h3>
                   <p>Order Date: {order.orderdate}</p>
                   <p>Fullfilled?: {order.iscomplete}</p>
@@ -24,7 +23,10 @@ const OrderHistoryBundles = ({ bundOrders }) => {
 
                   {order.bundles.map((bundle) => {
                     return (
-                      <div key={bundle.id} className='myoldbunds'>
+                      <div
+                        key={bundle.id}
+                        className='myoldbunds'
+                      >
                         <h4>Bundles:</h4>
                         <p>quantity: {bundle.quantity}</p>
                       </div>

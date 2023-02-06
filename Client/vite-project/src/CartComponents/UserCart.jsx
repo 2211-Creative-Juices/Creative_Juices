@@ -51,10 +51,16 @@ const UserCart = ({ orders }) => {
                 order.bundlekitId === null
               )
                 return (
-                  <div key={order.id} className='myorders'>
+                  <div
+                    key={order.id}
+                    className='myorders'
+                  >
                     <div id='flexedorders'>
                       <div id='fleximage'>
-                        <img id='shelleycart' src={shelleycart}></img>
+                        <img
+                          id='shelleycart'
+                          src={shelleycart}
+                        ></img>
                       </div>
                       <div id='orderinfo'>
                         <p>Date of Purchase: {order.orderdate}</p>
@@ -64,12 +70,18 @@ const UserCart = ({ orders }) => {
 
                     {order.services.map((service) => {
                       return (
-                        <div key={service.id} className='myservices'>
+                        <div
+                          key={service.id}
+                          className='myservices'
+                        >
                           <h4>Customized Paint and Sip:</h4>
                           <p>Age Group: {service.type}</p>
                           <p>In-person or remote: {service.isremote}</p>
                           <p>Number of Participants: {service.guests}</p>
                           <p>Event Cost: {service.cost}</p>
+                          <p>
+                            {localStorage.setItem('serviceCost', service.cost)}
+                          </p>
                           <p>Prefered Location: {service.location}</p>
                           <p>First Choice Date: {service.date}</p>
                           <p>Additional Notes: {service.notes}</p>
@@ -111,7 +123,7 @@ const UserCart = ({ orders }) => {
           <Checkout />
         </div>
         <div>
-          <PayPalCheckout />
+          <PayPalCheckout myOrders={myOrders} />
         </div>
       </div>
     </div>

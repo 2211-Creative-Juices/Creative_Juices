@@ -94,8 +94,15 @@ ordersRouter.post('/', requireUser, async (req, res, next) => {
 
 //PATCH /api/orders/:orderId
 ordersRouter.patch('/:orderId', requireUser, async (req, res, next) => {
-  const { orderdate, purchaserId, iscomplete, incart, serviceId, bundlekitId } =
-    req.body;
+  const {
+    orderdate,
+    purchaserId,
+    iscomplete,
+    incart,
+    serviceId,
+    bundlekitId,
+    paypalid,
+  } = req.body;
   const id = req.params.orderId;
   try {
     const ogOrder = await getOrderById(id);
@@ -114,6 +121,7 @@ ordersRouter.patch('/:orderId', requireUser, async (req, res, next) => {
         incart,
         serviceId,
         bundlekitId,
+        paypalid,
       });
 
       res.send(updatedOrder);
