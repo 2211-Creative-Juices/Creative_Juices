@@ -84,7 +84,7 @@ function App() {
               path='/'
               element={
                 <div>
-                  <NavBar />
+                  <NavBar orders={orders} />
                   <Home /> <About />
                   <div id='service-form'>
                     <ServiceForm services={services} todaysDate={todaysDate} />
