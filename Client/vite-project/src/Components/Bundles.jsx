@@ -8,6 +8,10 @@ const AllBundles = ({ bundles, todaysDate }) => {
   const [quantity, setQuantity] = useState(0);
   const user = useAuth();
 
+  const redirHome = () => {
+    window.location.href = '/';
+  };
+
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
@@ -28,18 +32,15 @@ const AllBundles = ({ bundles, todaysDate }) => {
       let purchaserId = user.user.id;
       console.log('NEW users.users.id', user.user.id);
       let servicekitId = null;
-      // let bundlekitId = 0;
-      // let isintheCart = setisinCart(true);
-      // console.log('NEW isintheCart', isintheCart);
+
       const newOrder = await createNewOrder(
         user.token,
         todaysOrderDate,
         purchaserId,
         servicekitId,
         bundlekitId
-        // bundlekitId
       );
-      console.log('THIS IS THE NEW ORDER WITH BUNDLE!!!', newOrder);
+      redirHome();
     } catch (error) {
       console.error(error);
     }
@@ -61,10 +62,7 @@ const AllBundles = ({ bundles, todaysDate }) => {
               }}
             ></input>
           </label>
-          <button
-            onClick={submitHandler}
-            type={'submit'}
-          >
+          <button onClick={submitHandler} type={'submit'}>
             Add Paint Kit to Cart
           </button>
         </div>

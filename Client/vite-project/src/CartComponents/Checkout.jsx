@@ -27,6 +27,7 @@ const Checkout = () => {
               placeholder='Full Address Here: Name, Street, City, State, zipcode'
             />
             <button>Set Shipping Address</button>
+            <p>After setting please remove below address to replace</p>
           </div>
         </form>
         <ShippingAddresses />

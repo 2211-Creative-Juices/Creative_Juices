@@ -14,6 +14,10 @@ const BundleOrder = ({ myOrders }) => {
 
   let username = user.user.username;
 
+  const redirCart = () => {
+    window.location.href = '/usercart';
+  };
+
   useEffect(() => {
     const getAllMyOrdersWithBunds = async () => {
       const orderAndMyBunds = await getAllTheOrdersByUserWithBundKit(
@@ -38,27 +42,18 @@ const BundleOrder = ({ myOrders }) => {
               order.serviceId === null
             )
               return (
-                <div
-                  key={order.id}
-                  className='myorders'
-                >
+                <div key={order.id} className='myorders'>
                   <p>Purchase Date: {order.orderdate}</p>
                   <p>ID {order.bundlekitId}</p>
                   <div id='bundleimg'>
-                    <img
-                      id='bundpic'
-                      src={bundlekit}
-                    ></img>
+                    <img id='bundpic' src={bundlekit}></img>
                   </div>
 
                   {/* <p>BK ID: {order.bundlekitId}</p> */}
 
                   {order.bundles.map((bundle) => {
                     return (
-                      <div
-                        key={bundle.id}
-                        className='mybunds'
-                      >
+                      <div key={bundle.id} className='mybunds'>
                         <p>Qty {bundle.quantity}</p>
                         <p>Cost:{bundle.bundlecost}</p>
                         <p>
@@ -85,6 +80,8 @@ const BundleOrder = ({ myOrders }) => {
                               'this is updatedOrdIN cart!!!!',
                               updatedOrdInCart
                             );
+                            localStorage.removeItem('bundleCost');
+                            redirCart();
                           }}
                         >
                           Remove From Cart
@@ -102,10 +99,7 @@ const BundleOrder = ({ myOrders }) => {
             <Route
               path='/priororders'
               element={
-                <MyFilledOrders
-                  myOrders={myOrders}
-                  bundOrders={bundOrders}
-                />
+                <MyFilledOrders myOrders={myOrders} bundOrders={bundOrders} />
               }
             ></Route>
           </Routes>

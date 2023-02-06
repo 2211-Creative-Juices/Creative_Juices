@@ -30,6 +30,11 @@ const ServiceForm = ({ services, todaysDate }) => {
   const [isAdultChecked, setIsAdultChecked] = useState(false);
   const [isKidChecked, setIsKidChecked] = useState(false);
 
+  const redirHome = () => {
+    window.location.href = '/';
+    alert('Added To Your Cart!');
+  };
+
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
@@ -68,7 +73,7 @@ const ServiceForm = ({ services, todaysDate }) => {
       } else {
         handlePlease();
       }
-
+      redirHome();
       // console.log('this is the new service!', newService);
     } catch (error) {
       console.error(error);

@@ -90,7 +90,7 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       bundlename varchar(255) DEFAULT 'Paint-Kit',
       quantity INT NOT NULL,
-      bundlecost DECIMAL
+      bundlecost DECIMAL default 0
     );
     
     CREATE TABLE services (
