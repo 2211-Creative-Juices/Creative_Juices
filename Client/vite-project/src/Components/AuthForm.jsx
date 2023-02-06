@@ -33,6 +33,10 @@ const AuthForm = ({ name, buttonName }) => {
       );
       updateAuthStatus();
     }
+    const reload = () => {
+      window.location.href = '/';
+    };
+    reload();
   };
 
   return (
@@ -47,14 +51,8 @@ const AuthForm = ({ name, buttonName }) => {
           <input type='text' name='password' />
         </div>
         {name === 'login' ? (
-          <button onClick={async () => {
-            const reload = () => {
-              window.location.href = '/';
-            };
-            reload();
-          }}
-          type={'submit'}
-        > {buttonName} 
+          <button> 
+        {buttonName} 
           </button>
         ) : (
           <div>
@@ -64,15 +62,7 @@ const AuthForm = ({ name, buttonName }) => {
             <input type='text' name='zipcode' />
             <label htmlFor='email'>Email:</label>
             <input type='text' name='email' />
-            <button
-            onClick={async () => {
-              const reload = () => {
-                window.location.href = '/';
-              };
-              reload();
-            }}
-            type={'submit'}
-            >{buttonName}</button>
+            <button>{buttonName}</button>
           </div>
         )}
       </form>
