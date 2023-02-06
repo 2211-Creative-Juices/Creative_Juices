@@ -1,8 +1,13 @@
 import React from 'react';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { updateOrder } from '../api/orders';
+import { useAuth } from '../custom-hooks';
 // const { CLIENT_ID_PP } = process.env;
 
-const PayPalCheckout = () => {
+const PayPalCheckout = ({ myOrders }) => {
+  console.log('these are my accessible orders', myOrders);
+  const user = useAuth();
+
   const amount = '2';
   const currency = 'USD';
   return (
@@ -18,16 +23,20 @@ const PayPalCheckout = () => {
       >
         <PayPalButtons
           createOrder={(data, actions) => {
-            return actions.order.create({
-              purchase_units: [
-                {
-                  amount: {
-                    currency_code: currency,
-                    value: amount,
+            return actions.order
+              .create({
+                purchase_units: [
+                  {
+                    amount: {
+                      currency_code: currency,
+                      value: amount,
+                    },
                   },
-                },
-              ],
-            });
+                ],
+              })
+              .then((orderId) => {
+                return orderId;
+              });
           }}
           onApprove={(data, actions) => {
             return actions.order.capture().then(function (details) {
@@ -45,5 +54,25 @@ const PayPalCheckout = () => {
     </div>
   );
 };
+
+// {
+//   myOrders &&
+//     myOrders.map((order) => {
+//       if (order.iscomplete === false && order.incart === true) {
+//         let updatedOrder = updateOrder(
+//           user.token,
+//           order.id,
+//           order.date,
+//           order.purchaserId,
+//           order.iscomplete,
+//           order.incart,
+//           order.serviceId,
+//           order.bundlekitId,
+//           orderId
+//         );
+//         return updatedOrder;
+//       }
+//     });
+// }
 
 export default PayPalCheckout;

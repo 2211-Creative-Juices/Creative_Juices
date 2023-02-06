@@ -75,7 +75,7 @@ async function createTables() {
     console.log('Starting to build tables...');
 
     await client.query(`
-CREATE TABLE users (
+    CREATE TABLE users (
       id SERIAL PRIMARY KEY,
       name varchar(255) NOT NULL,
       username varchar(255) NOT NULL,
@@ -113,7 +113,8 @@ CREATE TABLE users (
      iscomplete BOOLEAN default false,
      incart BOOLEAN default true,
      "serviceId" INTEGER REFERENCES services(id) DEFAULT null,
-     "bundlekitId" INTEGER REFERENCES bundlekit(id) DEFAULT null
+     "bundlekitId" INTEGER REFERENCES bundlekit(id) DEFAULT null,
+     paypalid INT DEFAULT 0
     );
     `);
 

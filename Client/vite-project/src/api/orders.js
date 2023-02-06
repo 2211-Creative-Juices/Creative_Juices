@@ -88,11 +88,11 @@ export const updateOrder = async (
   iscomplete,
   incart,
   serviceId,
-  bundlekitId
+  bundlekitId,
+  paypalid
 ) => {
   console.log(
     'THREEEEE THINGS:',
-    token,
     token,
     orderId,
     orderdate,
@@ -100,7 +100,8 @@ export const updateOrder = async (
     iscomplete,
     incart,
     serviceId,
-    bundlekitId
+    bundlekitId,
+    paypalid
   );
   try {
     const response = await fetch(`${BASE_API}/orders/${orderId}`, {
@@ -116,6 +117,7 @@ export const updateOrder = async (
         incart,
         serviceId,
         bundlekitId,
+        paypalid,
       }),
     });
     const updatedOrder = await response.json();
