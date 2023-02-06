@@ -5,9 +5,9 @@ const AdminServices = ({ services }) => {
   const user = useAuth();
   console.log('these are admin all services', services);
   return (
-    <div id='services-container'>
-      <h2 id='services-header'>Services</h2>
-      <div id='services-map-container'>
+    <div id='admin-services-container'>
+      <h2 id='admin-services-header'>Services</h2>
+      <div id='admin-services-map-container'>
         {services &&
           services.map((service) => {
             return (

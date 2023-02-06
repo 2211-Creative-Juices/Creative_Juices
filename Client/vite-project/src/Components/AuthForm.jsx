@@ -47,7 +47,15 @@ const AuthForm = ({ name, buttonName }) => {
           <input type='text' name='password' />
         </div>
         {name === 'login' ? (
-          <button>{buttonName}</button>
+          <button onClick={async () => {
+            const reload = () => {
+              window.location.href = '/';
+            };
+            reload();
+          }}
+          type={'submit'}
+        > {buttonName} 
+          </button>
         ) : (
           <div>
             <label htmlFor='name'>Full Name:</label>
@@ -56,7 +64,15 @@ const AuthForm = ({ name, buttonName }) => {
             <input type='text' name='zipcode' />
             <label htmlFor='email'>Email:</label>
             <input type='text' name='email' />
-            <button>{buttonName}</button>
+            <button
+            onClick={async () => {
+              const reload = () => {
+                window.location.href = '/';
+              };
+              reload();
+            }}
+            type={'submit'}
+            >{buttonName}</button>
           </div>
         )}
       </form>
@@ -67,7 +83,7 @@ const AuthForm = ({ name, buttonName }) => {
         </p>
       ) : (
         <p>
-          Alreay have an account?
+          Already have an account?
           <Link to='/login'>Login Here</Link>!
         </p>
       )}
