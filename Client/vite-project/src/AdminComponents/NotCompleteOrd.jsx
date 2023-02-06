@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../custom-hooks';
 import { updateOrder } from '../api/orders';
+import "./Admin-style.css"
 
 const NotCompleteOrd = ({ orders }) => {
   const user = useAuth();
@@ -9,9 +10,9 @@ const NotCompleteOrd = ({ orders }) => {
   const [isOrderId, setIsOrderId] = useState(0);
 
   return (
-    <div id='orders-container'>
-      <h2 id='orders-header'>Incomplete Orders</h2>
-      <div id='orders-map-container'>
+    <div id='incomplete-orders-container'>
+      <h2 id='incomplete-orders-header'>Incomplete Orders</h2>
+      <div id='incomplete-orders-map-container'>
         {orders &&
           orders.map((order) => {
             if (!order.iscomplete) {

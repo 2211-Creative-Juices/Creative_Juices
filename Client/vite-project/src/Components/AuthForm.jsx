@@ -33,6 +33,10 @@ const AuthForm = ({ name, buttonName }) => {
       );
       updateAuthStatus();
     }
+    const reload = () => {
+      window.location.href = '/';
+    };
+    reload();
   };
 
   return (
@@ -47,7 +51,9 @@ const AuthForm = ({ name, buttonName }) => {
           <input type='text' name='password' />
         </div>
         {name === 'login' ? (
-          <button>{buttonName}</button>
+          <button> 
+        {buttonName} 
+          </button>
         ) : (
           <div>
             <label htmlFor='name'>Full Name:</label>
@@ -67,7 +73,7 @@ const AuthForm = ({ name, buttonName }) => {
         </p>
       ) : (
         <p>
-          Alreay have an account?
+          Already have an account?
           <Link to='/login'>Login Here</Link>!
         </p>
       )}
