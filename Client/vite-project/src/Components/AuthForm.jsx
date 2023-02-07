@@ -48,7 +48,8 @@ const AuthForm = ({ name, buttonName }) => {
         </div>
         <div>
           <label htmlFor='password'>Password</label>
-          <input type='text' name='password' />
+          <input type='password' name='password'/>
+          
         </div>
         {name === 'login' ? (
           <button> 
