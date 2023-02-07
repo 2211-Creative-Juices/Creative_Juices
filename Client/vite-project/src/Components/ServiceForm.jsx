@@ -242,9 +242,7 @@ const ServiceForm = ({ services, todaysDate }) => {
           </span>
         </div>
       ) : null}
-      <div>
-        <AllServices services={services} />
-      </div>
+
       {/* <div id='video-box'>
       <video width="100%" height="100%" >
   <source src={cjtimelapse.mp4} type='cjtimelapse/mp4'/>
