@@ -97,8 +97,8 @@ function App() {
                   <div id='bundle-main'>
                     <AllBundles bundles={bundles} />
                   </div>
-                  <Testimonials />
                   <FAQs />
+                  <Testimonials />
                   <button onClick={logout}>Logout</button>
                   <Footer />
                 </div>
