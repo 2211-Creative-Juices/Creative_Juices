@@ -16,6 +16,7 @@ import {
   UserNav,
   ContactForm,
   Footer,
+  FAQs,
 } from './Components/Index';
 import UserCart from './CartComponents/UserCart';
 import AdminServices from './AdminComponents/AdminServices';
@@ -88,10 +89,16 @@ function App() {
                   <NavBar orders={orders} />
                   <Home /> <About />
                   <div id='service-form'>
-                    <ServiceForm services={services} todaysDate={todaysDate} />
+                    <ServiceForm
+                      services={services}
+                      todaysDate={todaysDate}
+                    />
                   </div>
-                  <AllBundles bundles={bundles} />
+                  <div id='bundle-main'>
+                    <AllBundles bundles={bundles} />
+                  </div>
                   <Testimonials />
+                  <FAQs />
                   <button onClick={logout}>Logout</button>
                   <Footer />
                 </div>
@@ -140,7 +147,10 @@ function App() {
               element={
                 <div>
                   <UserNav />
-                  <NotCompleteOrd orders={orders} setOrders={setOrders} />
+                  <NotCompleteOrd
+                    orders={orders}
+                    setOrders={setOrders}
+                  />
                 </div>
               }
             />
@@ -158,12 +168,20 @@ function App() {
               element={
                 <div>
                   <UserNav />
-                  <UserCart orders={orders} todaysDate={todaysDate} />
+                  <UserCart
+                    orders={orders}
+                    todaysDate={todaysDate}
+                  />
                 </div>
               }
             ></Route>
           </Routes>
-          <a id='back-to-top' href='#top'>Back to Top</a>
+          <a
+            id='back-to-top'
+            href='#top'
+          >
+            Back to Top
+          </a>
           <div>©Copyright 2023 Creative Juices</div>
         </div>
       </div>

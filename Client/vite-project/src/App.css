@@ -1,0 +1,36 @@
+#faqs-header {
+  font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+  color: rgb(0, 0, 0);
+  font-weight: bolder;
+  font-size: 30px;
+  margin-right: 10em;
+}
+
+#faqs-container {
+  background-color: rgb(73, 135, 160);
+  color: rgba(0, 0, 0, 0.87);
+  padding: 5em;
+  border-radius: 3%;
+  min-height: 50rem;
+}
+
+.faqs-content {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  text-align: start;
+}
+
+.question {
+  font-size: 14pt;
+  cursor: pointer;
+  color: white;
+}
+
+#faqsimg {
+  width: 15rem;
+  height: 17rem;
+  border: 3pt white solid;
+  margin-left: 2rem;
+  border-radius: 30px;
+}

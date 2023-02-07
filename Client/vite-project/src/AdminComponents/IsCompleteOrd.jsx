@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../custom-hooks';
-import "./Admin-style.css"
+import './Admin-style.css';
 
 const IsCompleteOrd = ({ orders }) => {
   const user = useAuth();
@@ -13,12 +13,33 @@ const IsCompleteOrd = ({ orders }) => {
           orders.map((order) => {
             if (order.iscomplete === true) {
               return (
-                <div key={order.id} className='completed-order'>
-                  <p>Order Date: {order.orderdate}</p>
-                  <p>Purchaser ID: {order.purchaserId}</p>
-                  <p>Service ID: {order.serviceId}</p>
-                  <p>Bundle Kit ID: {order.bundlekitId}</p>
-                  <p>{order.iscomplete ? 'Complete!' : 'Not Complete'}</p>
+                <div
+                  key={order.id}
+                  className='completed-order'
+                >
+                  <p>
+                    <span className='liltitle'>Order Date: </span>
+                    {order.orderdate}
+                  </p>
+                  <p>
+                    <span className='liltitle'>Purchaser ID: </span>
+                    {order.purchaserId}
+                  </p>
+                  <p>
+                    <span className='liltitle'>Service ID: </span>
+                    {order.serviceId}
+                  </p>
+                  <p>
+                    <span className='liltitle'>Bundle Kit ID: </span>
+                    {order.bundlekitId}
+                  </p>
+                  <p>
+                    {order.iscomplete ? (
+                      <span className='complete'>Order Is Complete!</span>
+                    ) : (
+                      'Not Complete'
+                    )}
+                  </p>
                 </div>
               );
             }

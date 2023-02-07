@@ -5,7 +5,7 @@ const AdminUsers = ({ users }) => {
   return (
     <div id='allusers-container'>
       <h2 id='allusers-header'>All Users</h2>
-      <div id='alluserss-map-container'>
+      <div id='allusers-map-container'>
         {users &&
           users.map((user) => {
             return (
@@ -13,11 +13,20 @@ const AdminUsers = ({ users }) => {
                 key={user.id}
                 className='user'
               >
-                <h3>User Info:</h3>
-                <p>User Full Name: {user.name}</p>
-                <p>Username: {user.username}</p>
-                <p>Email: {user.email}</p>
-                <p>Zip Code: {user.zipcode}</p>
+                <p>
+                  <span className='liltitle'>Full Name:</span> {user.name}
+                </p>
+                <p>
+                  <span className='liltitle'>Username: </span>
+                  {user.username}
+                </p>
+                <p>
+                  <span className='liltitle'>Email: </span>
+                  {user.email}
+                </p>
+                <p>
+                  <span className='liltitle'>Zip Code: </span> {user.zipcode}
+                </p>
               </div>
             );
           })}

@@ -15,14 +15,38 @@ const AdminServices = ({ services }) => {
                 key={service.id}
                 className='service'
               >
-                <h3>Service:</h3>
-                <p>Service Type: {service.type}</p>
-                <p>In-Person/Virtual: {service.isremote}</p>
-                <p>Number of Guests: {service.guests}</p>
-                <p>Cost: {service.cost}</p>
-                <p>Location: {service.location}</p>
-                <p>Date: {service.date}</p>
-                <p>Note: {service.notes}</p>
+                <p>
+                  <span className='liltitle'>Service ID: </span>
+                  {service.id}
+                </p>
+                <p>
+                  <span className='liltitle'>Service Type: </span>
+                  {service.type}
+                </p>
+                <p>
+                  <span className='liltitle'>In-Person/Virtual: </span>
+                  {service.isremote}
+                </p>
+                <p>
+                  <span className='liltitle'>Number of Guests: </span>
+                  {service.guests}
+                </p>
+                <p>
+                  <span className='liltitle'>Cost: </span>
+                  {service.cost}
+                </p>
+                <p>
+                  <span className='liltitle'>Location: </span>
+                  {service.location}
+                </p>
+                <p>
+                  <span className='liltitle'>Date: </span>
+                  {service.date}
+                </p>
+                <p>
+                  <p className='liltitle'>Notes: </p>
+                  {service.notes}
+                </p>
               </div>
             );
           })}
