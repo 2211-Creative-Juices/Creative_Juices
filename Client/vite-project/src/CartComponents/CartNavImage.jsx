@@ -20,10 +20,13 @@ const CartImage = ({ orders }) => {
       }
     });
     return (
-      <div>
-        <FontAwesomeIcon icon={faCartShopping} />
-        <div>{countOrders}</div>
-        <div></div>
+      <div id='cart-num'>
+        <FontAwesomeIcon
+          className='fashopping'
+          size='2x'
+          icon={faCartShopping}
+        />
+        <div id='count'>{countOrders}</div>
       </div>
     );
   }

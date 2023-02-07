@@ -64,6 +64,7 @@ const BundleOrder = ({ myOrders }) => {
                         </p>
                         <h4>Kits pair well with a virtual paint n sip!</h4>
                         <button
+                          id='bund-delete'
                           onClick={async () => {
                             const ordInCart = order.incart;
                             const updatedOrdInCart = await updateOrder(
@@ -94,16 +95,7 @@ const BundleOrder = ({ myOrders }) => {
           })}
       </div>
       <div className='prior-orders-linked'>
-        <div>
-          <Routes>
-            <Route
-              path='/priororders'
-              element={
-                <MyFilledOrders myOrders={myOrders} bundOrders={bundOrders} />
-              }
-            ></Route>
-          </Routes>
-        </div>
+        <div></div>
         <div id='historylink'>
           {/* <NavLink
             className='orderhistorylink'
@@ -113,6 +105,14 @@ const BundleOrder = ({ myOrders }) => {
           </NavLink> */}
         </div>
       </div>
+      <Routes>
+        <Route
+          path='/priororders'
+          element={
+            <MyFilledOrders myOrders={myOrders} bundOrders={bundOrders} />
+          }
+        ></Route>
+      </Routes>
     </div>
   );
 };

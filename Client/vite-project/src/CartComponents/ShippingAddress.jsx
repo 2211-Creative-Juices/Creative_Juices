@@ -5,10 +5,15 @@ const ShippingAddresses = () => {
   const user = useAuth();
   const [isDeleteChecked, setIsDeleteChecked] = useState(false);
 
+  const redirCart = () => {
+    window.location.href = '/usercart';
+  };
+
   const submitHandler = async (e) => {
     try {
-      if (!isDeleteChecked) {
+      if (isDeleteChecked) {
         localStorage.removeItem('shipping-Address');
+        redirCart();
       }
     } catch (error) {
       console.error(error);
@@ -34,7 +39,7 @@ const ShippingAddresses = () => {
             }}
           ></input>
 
-          <button onClick={submitHandler}>Replace</button>
+          <button onClick={submitHandler}>Remove Address</button>
         </form>
       </div>
     );

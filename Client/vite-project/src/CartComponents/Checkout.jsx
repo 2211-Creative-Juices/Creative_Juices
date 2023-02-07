@@ -6,6 +6,10 @@ const Checkout = () => {
   const user = useAuth();
   const [shippingAddress, setShippingAddress] = useState({});
 
+  const redirCart = () => {
+    window.location.href = '/usercart';
+  };
+
   if (user.token) {
     return (
       <div>
@@ -14,6 +18,7 @@ const Checkout = () => {
             try {
               event.preventDefault();
               localStorage.setItem('shipping-Address', shippingAddress);
+              redirCart();
             } catch (error) {
               console.error(error);
             }
@@ -21,13 +26,13 @@ const Checkout = () => {
         >
           <div>
             <input
+              id='set-my-ship'
               onChange={(e) => setShippingAddress(e.target.value)}
               type='text'
               name='address'
-              placeholder='Full Address Here: Name, Street, City, State, zipcode'
+              placeholder='Full Address Here:'
             />
             <button>Set Shipping Address</button>
-            <p>After setting please remove below address to replace</p>
           </div>
         </form>
         <ShippingAddresses />
