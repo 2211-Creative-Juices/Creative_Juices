@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import bundlekit from '../assets/images/bundlekit.jpeg';
 import { useAuth } from '../custom-hooks';
 import { createABundle } from '../api/bundles';
 import { createNewOrder } from '../api/orders';
@@ -48,25 +49,34 @@ const AllBundles = ({ bundles, todaysDate }) => {
 
   return (
     <div id='bundles-container'>
-      <p>BUNDLES DESCRIPTION</p>
-      <form onSubmit={(e) => submitHandler(e)}>
-        <div id='bundles-map-container'>
-          <label>
-            Number of Kits
-            <input
-              type='number'
-              value={quantity}
-              id='input'
-              onChange={(e) => {
-                setQuantity(e.target.value);
-              }}
-            ></input>
-          </label>
-          <button onClick={submitHandler} type={'submit'}>
-            Add Paint Kit to Cart
-          </button>
-        </div>
-      </form>
+      <div className='flex-bunds'>
+        <img id='bundkitimg' src={bundlekit}></img>
+        <form id='bundle-form-main' onSubmit={(e) => submitHandler(e)}>
+          <h3> Add a Paint Kit!</h3>
+          <div id='bundles-map-container'>
+            <label>
+              Number of Kits
+              <input
+                type='number'
+                value={quantity}
+                id='input-bundles'
+                onChange={(e) => {
+                  setQuantity(e.target.value);
+                }}
+              ></input>
+            </label>
+            <p id='includes'>
+              {' '}
+              An individual kit includes two paintbrushes (small and large), a
+              set of watercolor cards with envelopes, watercolor paints, and
+              water container.
+            </p>
+            <button id='bund-cart-butt' onClick={submitHandler} type={'submit'}>
+              Add Paint Kit to Cart
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
