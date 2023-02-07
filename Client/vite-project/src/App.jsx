@@ -91,7 +91,7 @@ function App() {
                     <ServiceForm services={services} todaysDate={todaysDate} />
                   </div>
                   <AllBundles bundles={bundles} />
-                  <Testimonials/>
+                  <Testimonials />
                   <button onClick={logout}>Logout</button>
                   <Footer />
                 </div>
@@ -163,7 +163,7 @@ function App() {
               }
             ></Route>
           </Routes>
-          <a href='#top'>Back to Top</a>
+          <a id='back-to-top' href='#top'>Back to Top</a>
           <div>©Copyright 2023 Creative Juices</div>
         </div>
       </div>
