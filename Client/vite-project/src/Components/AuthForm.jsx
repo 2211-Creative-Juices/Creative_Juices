@@ -2,6 +2,7 @@ import React from 'react';
 import { authenticateUser } from '../api/auth';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../custom-hooks';
+import './style.css';
 
 const AuthForm = ({ name, buttonName }) => {
   const { updateAuthStatus } = useAuth();
@@ -40,28 +41,40 @@ const AuthForm = ({ name, buttonName }) => {
   };
 
   return (
-    <div>
+    <div >
+    <div id="whole-login-form-box">
       <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor='username'>Username</label>
+        <div className='login-form'>
+          <label htmlFor='username'>Username  </label>
           <input type='text' name='username' />
         </div>
-        <div>
-          <label htmlFor='password'>Password</label>
-          <input type='text' name='password' />
+       
+        <div className='login-form'>
+          <label htmlFor='password'>Password  </label>
+          <input type='password' name='password'/>
         </div>
+     
         {name === 'login' ? (
           <button> 
         {buttonName} 
           </button>
         ) : (
           <div>
-            <label htmlFor='name'>Full Name:</label>
+            <div  className='login-form'>
+            <label htmlFor='name'>Full Name  </label>
             <input type='text' name='fullname' />
-            <label htmlFor='zip'>ZIP code:</label>
+            </div>
+       
+            <div  className='login-form'>
+            <label htmlFor='zip'>ZIP code  </label>
             <input type='text' name='zipcode' />
-            <label htmlFor='email'>Email:</label>
+            </div>
+        
+            <div  className='login-form'>
+            <label htmlFor='email'>Email      </label>
             <input type='text' name='email' />
+            </div>
+           
             <button>{buttonName}</button>
           </div>
         )}
@@ -77,6 +90,7 @@ const AuthForm = ({ name, buttonName }) => {
           <Link to='/login'>Login Here</Link>!
         </p>
       )}
+    </div>
     </div>
   );
 };

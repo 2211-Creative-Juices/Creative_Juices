@@ -1,0 +1,14 @@
+#whole-login-form-box{
+    margin: 0% 35%
+    
+}
+
+.login-form{
+    display: grid;
+    grid-template-columns: auto 1fr;
+   justify-content: center;
+   
+    align-items: center;
+    column-gap: 10px;
+    /* margin: 0.1cap */
+}
