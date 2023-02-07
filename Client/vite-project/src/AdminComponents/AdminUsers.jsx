@@ -11,7 +11,7 @@ const AdminUsers = ({ users }) => {
             return (
               <div
                 key={user.id}
-                className='users'
+                className='user'
               >
                 <h3>User Info:</h3>
                 <p>User Full Name: {user.name}</p>

@@ -13,8 +13,7 @@ const IsCompleteOrd = ({ orders }) => {
           orders.map((order) => {
             if (order.iscomplete === true) {
               return (
-                <div key={order.id} className='order'>
-                  <h3>Completed Orders:</h3>
+                <div key={order.id} className='completed-order'>
                   <p>Order Date: {order.orderdate}</p>
                   <p>Purchaser ID: {order.purchaserId}</p>
                   <p>Service ID: {order.serviceId}</p>

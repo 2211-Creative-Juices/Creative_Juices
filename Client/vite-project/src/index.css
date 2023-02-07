@@ -5,7 +5,7 @@
   font-weight: 400;
   margin: 0 auto;
   color-scheme: light dark;
-  color: rgba(38, 70, 83, 0.87);
+  color: rgba(38, 70, 83);
   background-color: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,14 +26,21 @@ a {
 }
 
 nav {
+  font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: smaller;
+  font-weight: 600;
   display: flex;
   justify-content: space-evenly;
-  background-color: rgba(42, 157, 144, 0.591);
+  background-color: rgba(42, 157, 144, 0.698);
 
   align-items: center;
   color: black;
   cursor: pointer;
-  padding: 1.5em;
+  padding: 0.35em;
+}
+
+#initialslogo {
+  width: 5%;
 }
 
 .is-sticky {
@@ -42,23 +49,41 @@ nav {
 }
 
 #about-container {
-background-color: rgb(233, 196, 106);
-color: rgba(0, 0, 0, 0.87);
-padding: 5em;
-border-radius: 3%;
-}
-.about-content {
-width: 75%;
-display: flex;
-flex-direction: row;
-gap: 4em;
-}
-#prettyshelley {
-width: 500%;
-border: 4pt white solid;
-}
-#about-header {
+  background-color: rgb(233, 196, 106);
   color: rgba(0, 0, 0, 0.87);
+  padding: 5em;
+  border-radius: 3%;
+}
+
+.about-content {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  gap: 4em;
+}
+
+#prettyshelley {
+  width: 500%;
+  border: 4pt white solid;
+
+}
+
+#prettyshelley:hover {
+  width: 500%;
+  border: 4pt white solid;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  transform: scale(1.1);
+}
+
+#about-header {
+  font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+  color: rgb(0, 0, 0);
   font-weight: bolder;
   font-size: 30px;
   margin-right: 10em;
@@ -72,12 +97,38 @@ border: 4pt white solid;
   background: center;
   background-size: cover;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 5em;
 }
-#logo {
-  width: 25%;
+
+#home-logo {
+  padding-top: 5em;
+  width: 35%;
 }
+
+#links-container {
+  padding-top: 5em;
+
+  color: #ffffff;
+  gap: 5em;
+}
+
+#sign-up-home {
+  border: #ffffff solid 2px;
+  padding: 6px;
+  background-color: rgba(38, 70, 83, 0.876);
+  border-radius: 5%;
+}
+
+#log-in-home {
+  border: #ffffff solid 2px;
+  padding: 6px;
+  background-color: rgba(38, 70, 83, 0.876);
+  border-radius: 5%;
+}
+
 #home-message {
   border: 2pt solid orangered;
   width: 50%;
@@ -107,6 +158,26 @@ border: 4pt white solid;
   border: 4pt white solid;
 }
 
+#testimonial1:hover {
+  border: 4pt white solid;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  transform: scale(1.1);
+}
+
+#testimonials-header {
+  font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+  color: rgb(0, 0, 0);
+  font-weight: bolder;
+  font-size: 30px;
+  margin-right: 10em;
+}
+
 #testimonials-header {
   color: rgba(0, 0, 0, 0.87);
   font-weight: bolder;
@@ -115,17 +186,17 @@ border: 4pt white solid;
 }
 
 #testimonials-container {
-background-color: rgb(233, 196, 106);
-color: rgba(0, 0, 0, 0.87);
-padding: 5em;
-border-radius: 3%;
+  background-color: rgb(233, 196, 106);
+  color: rgba(0, 0, 0, 0.87);
+  padding: 5em;
+  border-radius: 3%;
 }
 
 .testimonials-content {
-width: 75%;
-display: flex;
-flex-direction: row;
-gap: 4em;
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  gap: 4em;
 }
 
 #footer-container {
@@ -166,4 +237,8 @@ gap: 4em;
   min-width: 12rem;
   min-height: 8rem;
   max-height: 14rem;
+}
+
+#back-to-top {
+  color: rgba(38, 70, 83);
 }

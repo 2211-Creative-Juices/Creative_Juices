@@ -21,7 +21,6 @@ const NotCompleteOrd = ({ orders }) => {
                   key={order.id}
                   className='incomplete-orders'
                 >
-                  <h3>Incomplete Orders:</h3>
                   <p>Order Date: {order.orderdate}</p>
                   <p>Purchaser ID: {order.purchaserId}</p>
                   <p>Service ID: {order.serviceId}</p>

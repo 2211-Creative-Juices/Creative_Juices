@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartImage from '../CartComponents/CartNavImage';
+import initialsnobckgrnd from '../assets/images/initialsnobckgrnd.png'
 
 const navLinks = [
-  { navLinkId: 'Home', scrollToId: 'home-container' },
-  { navLinkId: 'About', scrollToId: 'about-container' },
-  { navLinkId: 'Services', scrollToId: 'services-container' },
-  { navLinkId: 'Testimonials', scrollToId: 'testimonials-container' },
+  { navLinkId: 'HOME', scrollToId: 'home-container' },
+  { navLinkId: 'ABOUT', scrollToId: 'about-container' },
+  { navLinkId: 'SERVICES', scrollToId: 'services-container' },
+  { navLinkId: 'TESTIMONIALS', scrollToId: 'testimonials-container' },
   { navLinkId: "FAQ's", scrollToId: 'faqs-container' },
-  { navLinkId: 'Contact', scrollToId: 'footer-container' },
+  { navLinkId: 'CONTACT', scrollToId: 'footer-container' },
 ];
 
 const NavLink = ({
@@ -37,10 +38,10 @@ const NavLink = ({
 
 const NavBar = ({ orders }) => {
   const [activeNavLinkId, setActiveNavLinkId] = useState('');
-
   return (
     <div className='is-sticky'>
       <nav>
+        <img id='initialslogo' src={initialsnobckgrnd}></img>
         {navLinks.map(({ navLinkId, scrollToId }) => (
           <NavLink
             key={navLinkId}
