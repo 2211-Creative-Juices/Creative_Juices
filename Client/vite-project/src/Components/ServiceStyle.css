@@ -1,0 +1,206 @@
+
+
+#service-form-big {
+    padding: 2rem;
+    background-color: white;
+    color: #040404;
+    border-radius: 30px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+    0 2px 2px rgba(0,0,0,0.15), 
+    0 4px 4px rgba(0,0,0,0.15), 
+    0 8px 8px rgba(0,0,0,0.15);
+  }
+  #service-form-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 20em;
+  }
+  #guest-label{
+    font-style: italic;
+    font-weight: 800;
+  }
+  #not-a-user{
+    color: white;
+    font-size: 30px;
+  }
+  #bundle-form-main{
+    padding: 2rem;
+    border-radius: 30px;
+    text-align: center;
+    background-color: white;
+    color: #040404;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+    0 2px 2px rgba(0,0,0,0.15), 
+    0 4px 4px rgba(0,0,0,0.15), 
+    0 8px 8px rgba(0,0,0,0.15);
+  }
+.flex-bunds{
+    display: flex;
+    flex-direction: row;
+   width: 50%;
+    justify-content: center;
+    align-content: center;
+    margin-left: 50%; 
+    gap: 2em;
+}
+#bundkitimg{
+    border-radius: 30px;
+    width: 60%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+    0 2px 2px rgba(0,0,0,0.15), 
+    0 4px 4px rgba(0,0,0,0.15), 
+    0 8px 8px rgba(0,0,0,0.15);
+}
+#flex-services{
+    display: flex;
+    flex-direction: row;
+   width: 40%;
+    justify-content: center;
+    align-content: center;
+    margin-left:25em; 
+    margin-top: 4em;
+    gap: 2em;
+}
+#group-paint{
+    width: 200%;
+    border-radius: 30px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+    0 2px 2px rgba(0,0,0,0.15), 
+    0 4px 4px rgba(0,0,0,0.15), 
+    0 8px 8px rgba(0,0,0,0.15);
+}
+#add-serv-butt {
+    font-family: 'Poppins';
+    width: 200px;
+    height: 50px;
+    border: black solid 1px;
+    outline: none;
+    color: #494949;
+    background: #ffffff;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 4px;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    transition: 0.5s ease-in-out;
+    margin-left: 4em;
+}
+
+#add-serv-butt:before {
+    content: '';
+    background: linear-gradient(45deg, #FF0000, #FFF700, #FF7000, #FF00FE, #3FF4EB, #9E00FF, #00BEFF, #FF00DD, #FF0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+#add-serv-butt:active {
+    color: #000
+}
+
+#add-serv-butt:active:after {
+    background: transparent;
+}
+
+#add-serv-butt:hover {
+    transform: scale(1.05);
+}
+
+#add-serv-butt:hover:before {
+    opacity: 1;
+}
+
+#add-serv-butt:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    left: 0;
+    top: 0;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+#bund-cart-butt {
+    font-family: 'Poppins';
+    width: 200px;
+    height: 50px;
+    border: black solid 1px;
+    outline: none;
+    color: #494949;
+    background: #ffffff;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 4px;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    transition: 0.5s ease-in-out;
+    margin-left: 1.5em;
+}
+
+#bund-cart-butt:before {
+    content: '';
+    background: linear-gradient(45deg, #FF0000, #FFF700, #FF7000, #FF00FE, #3FF4EB, #9E00FF, #00BEFF, #FF00DD, #FF0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+#bund-cart-butt:active {
+    color: #000
+}
+
+#bund-cart-butt:active:after {
+    background: transparent;
+}
+
+#bund-cart-butt:hover {
+    transform: scale(1.05);
+}
+
+#bund-cart-butt:hover:before {
+    opacity: 1;
+}
+
+#bund-cart-butt:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    left: 0;
+    top: 0;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+

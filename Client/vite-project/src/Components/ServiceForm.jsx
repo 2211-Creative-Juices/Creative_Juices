@@ -1,4 +1,6 @@
 import { useAuth } from '../custom-hooks';
+import './ServiceStyle.css';
+import grouppaint from '../assets/images/grouppaint.jpeg';
 import { React, useState, useEffect } from 'react';
 import { createService } from '../api/services';
 import { createNewOrder } from '../api/orders';
@@ -74,181 +76,186 @@ const ServiceForm = ({ services, todaysDate }) => {
 
   return (
     <div id='service-container'>
-      <form id='service-form' onSubmit={(e) => submitHandler(e)}>
-        <div id='service-form-inputs'>
-          <div id='type-box'>
-            {' '}
-            Type:
-            <label>
-              Adults
+      <div id='flex-services'>
+        <img id='group-paint' src={grouppaint} />
+        <form id='service-form-big' onSubmit={(e) => submitHandler(e)}>
+          <div id='service-form-inputs'>
+            <h3>Customize Your Paint and Sip!</h3>
+            <div id='type-box'>
+              {' '}
+              Type: &nbsp;&nbsp;
+              <label>
+                Adults
+                <input
+                  id='adult'
+                  label='Adult'
+                  value='adult'
+                  type='checkbox'
+                  checked={isAdultChecked}
+                  onChange={(e) => {
+                    setIsAdultChecked(!isAdultChecked);
+                    setType(e.target.value);
+                    isKidChecked && setIsKidChecked(!isKidChecked);
+                  }}
+                ></input>
+              </label>{' '}
+              <label>
+                Kids
+                <input
+                  id='kid'
+                  label='Kid'
+                  value='kid'
+                  type='checkbox'
+                  checked={isKidChecked}
+                  onChange={(e) => {
+                    setType(e.target.value);
+                    setIsKidChecked(!isKidChecked);
+                    isAdultChecked && setIsAdultChecked(!isAdultChecked);
+                  }}
+                ></input>
+              </label>
+            </div>
+            <div>
+              <label id='guest-label'>
+                # of Guests: &nbsp;
+                <input
+                  type='number'
+                  value={guests}
+                  id='input'
+                  min='4'
+                  max='20'
+                  onChange={(e) => {
+                    setGuests(e.target.value);
+                    setCost(20 * e.target.value);
+                  }}
+                ></input>
+              </label>
+            </div>
+            <div id='location-box'>
+              Location: &nbsp;
+              <label>
+                Brewery
+                <input
+                  id='brewery'
+                  label='brewery'
+                  value='brewery'
+                  type='checkbox'
+                  checked={isBreweryChecked}
+                  onChange={(e) => {
+                    setBreweryIsChecked(!isBreweryChecked);
+                    setLocation(e.target.value);
+                    isOtherChecked && setOtherIsChecked(!isOtherChecked);
+                    isCoffeeChecked && setCoffeeIsChecked(!isCoffeeChecked);
+                    isHomeChecked && setHomeIsChecked(!isHomeChecked);
+                  }}
+                ></input>
+              </label>
+              <label>
+                Coffee Shop
+                <input
+                  id='coffee-shop'
+                  label='coffee-shop'
+                  value='coffee-shop'
+                  type='checkbox'
+                  checked={isCoffeeChecked}
+                  onChange={(e) => {
+                    setCoffeeIsChecked(!isCoffeeChecked);
+                    setLocation(e.target.value);
+                    isBreweryChecked && setBreweryIsChecked(!isBreweryChecked);
+                    isOtherChecked && setOtherIsChecked(!isOtherChecked);
+                    isHomeChecked && setHomeIsChecked(!isHomeChecked);
+                  }}
+                ></input>
+              </label>
+              <label>
+                Home
+                <input
+                  id='home'
+                  label='home'
+                  value='home'
+                  type='checkbox'
+                  checked={isHomeChecked}
+                  onChange={(e) => {
+                    setHomeIsChecked(!isHomeChecked);
+                    setLocation(e.target.value);
+                    isBreweryChecked && setBreweryIsChecked(!isBreweryChecked);
+                    isOtherChecked && setOtherIsChecked(!isOtherChecked);
+                    isCoffeeChecked && setCoffeeIsChecked(!isCoffeeChecked);
+                  }}
+                ></input>
+              </label>
+              <label>
+                Other
+                <input
+                  id='other'
+                  label='other'
+                  value='other'
+                  type='checkbox'
+                  checked={isOtherChecked}
+                  onChange={(e) => {
+                    setOtherIsChecked(!isOtherChecked);
+                    setLocation(e.target.value);
+                    isBreweryChecked && setBreweryIsChecked(!isBreweryChecked);
+                    isCoffeeChecked && setCoffeeIsChecked(!isCoffeeChecked);
+                    isHomeChecked && setHomeIsChecked(!isHomeChecked);
+                  }}
+                ></input>
+              </label>
+            </div>
+            <div>
               <input
-                id='adult'
-                label='Adult'
-                value='adult'
-                type='checkbox'
-                checked={isAdultChecked}
-                onChange={(e) => {
-                  setIsAdultChecked(!isAdultChecked);
-                  setType(e.target.value);
-                  isKidChecked && setIsKidChecked(!isKidChecked);
-                }}
+                value={date}
+                type='text'
+                placeholder='Date of Event'
+                onChange={(e) => setDate(e.target.value)}
               ></input>
-            </label>{' '}
-            Type:
-            <label>
-              Kid
+            </div>
+            <div>
               <input
-                id='kid'
-                label='Kid'
-                value='kid'
-                type='checkbox'
-                checked={isKidChecked}
-                onChange={(e) => {
-                  setType(e.target.value);
-                  setIsKidChecked(!isKidChecked);
-                  isAdultChecked && setIsAdultChecked(!isAdultChecked);
-                }}
+                value={notes}
+                type='text'
+                placeholder='Additional notes'
+                onChange={(e) => setNotes(e.target.value)}
               ></input>
-            </label>
+            </div>
+            <div>
+              <label>
+                Select Here to make it Virtual!
+                <input
+                  id='dropdown-virtual'
+                  type='checkbox'
+                  checked={isRemote}
+                  onChange={(e) => {
+                    setIsRemote(e.target.checked);
+                  }}
+                ></input>
+              </label>
+            </div>
+            <button id='add-serv-butt' onClick={submitHandler} type={'submit'}>
+              Add to Cart
+            </button>
           </div>
-          <div>
-            <label>
-              # of Guests
-              <input
-                type='number'
-                value={guests}
-                id='input'
-                onChange={(e) => {
-                  setGuests(e.target.value);
-                  setCost(20 * e.target.value);
-                }}
-              ></input>
-            </label>
+        </form>
+        {openPlease ? (
+          <div id='not-a-user'>
+            Please{' '}
+            <span>
+              <NavLink to='/signup'>register</NavLink>
+            </span>{' '}
+            or{' '}
+            <span>
+              <NavLink to='/login'>login! </NavLink>
+            </span>
           </div>
-          <div id='location-box'>
-            Location
-            <label>
-              Brewery
-              <input
-                id='brewery'
-                label='brewery'
-                value='brewery'
-                type='checkbox'
-                checked={isBreweryChecked}
-                onChange={(e) => {
-                  setBreweryIsChecked(!isBreweryChecked);
-                  setLocation(e.target.value);
-                  isOtherChecked && setOtherIsChecked(!isOtherChecked);
-                  isCoffeeChecked && setCoffeeIsChecked(!isCoffeeChecked);
-                  isHomeChecked && setHomeIsChecked(!isHomeChecked);
-                }}
-              ></input>
-            </label>
-            <label>
-              Coffee Shop
-              <input
-                id='coffee-shop'
-                label='coffee-shop'
-                value='coffee-shop'
-                type='checkbox'
-                checked={isCoffeeChecked}
-                onChange={(e) => {
-                  setCoffeeIsChecked(!isCoffeeChecked);
-                  setLocation(e.target.value);
-                  isBreweryChecked && setBreweryIsChecked(!isBreweryChecked);
-                  isOtherChecked && setOtherIsChecked(!isOtherChecked);
-                  isHomeChecked && setHomeIsChecked(!isHomeChecked);
-                }}
-              ></input>
-            </label>
-            <label>
-              Home
-              <input
-                id='home'
-                label='home'
-                value='home'
-                type='checkbox'
-                checked={isHomeChecked}
-                onChange={(e) => {
-                  setHomeIsChecked(!isHomeChecked);
-                  setLocation(e.target.value);
-                  isBreweryChecked && setBreweryIsChecked(!isBreweryChecked);
-                  isOtherChecked && setOtherIsChecked(!isOtherChecked);
-                  isCoffeeChecked && setCoffeeIsChecked(!isCoffeeChecked);
-                }}
-              ></input>
-            </label>
-            <label>
-              Other
-              <input
-                id='other'
-                label='other'
-                value='other'
-                type='checkbox'
-                checked={isOtherChecked}
-                onChange={(e) => {
-                  setOtherIsChecked(!isOtherChecked);
-                  setLocation(e.target.value);
-                  isBreweryChecked && setBreweryIsChecked(!isBreweryChecked);
-                  isCoffeeChecked && setCoffeeIsChecked(!isCoffeeChecked);
-                  isHomeChecked && setHomeIsChecked(!isHomeChecked);
-                }}
-              ></input>
-            </label>
-          </div>
-          <div>
-            <input
-              value={date}
-              type='text'
-              placeholder='Date of Event'
-              onChange={(e) => setDate(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <input
-              value={notes}
-              type='text'
-              placeholder='Additional notes for Shelley'
-              onChange={(e) => setNotes(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <label>
-              Select Here to make it Virtual!
-              <input
-                id='dropdown-virtual'
-                type='checkbox'
-                checked={isRemote}
-                onChange={(e) => {
-                  setIsRemote(e.target.checked);
-                }}
-              ></input>
-            </label>
-          </div>
-          <button onClick={submitHandler} type={'submit'}>
-            Add to Cart
-          </button>
-        </div>
-      </form>
-      {openPlease ? (
-        <div>
-          Please{' '}
-          <span>
-            <NavLink to='/signup'>register</NavLink>
-          </span>{' '}
-          or{' '}
-          <span>
-            <NavLink to='/login'>log in</NavLink>
-          </span>
-        </div>
-      ) : null}
+        ) : null}
 
-      {/* <div id='video-box'>
+        {/* <div id='video-box'>
       <video width="100%" height="100%" >
   <source src={cjtimelapse.mp4} type='cjtimelapse/mp4'/>
 Your browser does not support the video tag.
 </video>
       </div> */}
+      </div>
     </div>
   );
 };
