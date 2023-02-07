@@ -9,12 +9,13 @@ import CJlogonobckgrnd from '../assets/images/CJlogonobckgrnd.png';
 const Footer = () => {
   return (
     <footer id='footer-container'>
-       <div>
-      <img id='footer-logo' src={CJlogonobckgrnd}></img>
+      <div id='footer-logo-container'>
+        <img id='footer-logo' src={CJlogonobckgrnd}></img>
       </div>
       <div className='socials'>
         <div>
-          <a href='https://www.instagram.com/creativejuices.paint/?fbclid=IwAR1_TkmS9e-EwyQy98DVkQoBaHB21TzEQRe1wRTDB25ENU9tcapIWKZROc4'>
+          <a href='https://www.instagram.com/creativejuices.paint/?fbclid=IwAR1_TkmS9e-EwyQy98DVkQoBaHB21TzEQRe1wRTDB25ENU9tcapIWKZROc4'
+            target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon
               className='instagram-social'
               icon={faInstagram}
@@ -24,7 +25,8 @@ const Footer = () => {
           </a>
         </div>
         <div>
-          <a href='https://www.facebook.com/creativejuices.paint'>
+          <a href='https://www.facebook.com/creativejuices.paint'
+            target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon
               className='facebook-social'
               icon={faSquareFacebook}
@@ -34,7 +36,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <div>
+      <div id='contact-container'>
         <ContactForm />
       </div>
     </footer>
