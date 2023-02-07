@@ -86,7 +86,10 @@ function App() {
               path='/'
               element={
                 <div>
-                  <NavBar orders={orders} />
+                  <NavBar
+                    logout={logout}
+                    orders={orders}
+                  />
                   <Home /> <About />
                   <div id='service-form'>
                     <ServiceForm
@@ -99,7 +102,6 @@ function App() {
                   </div>
                   <FAQs />
                   <Testimonials />
-                  <button onClick={logout}>Logout</button>
                   <Footer />
                 </div>
               }
