@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../custom-hooks';
 import { updateOrder } from '../api/orders';
-import "./Admin-style.css"
+import './Admin-style.css';
 
 const NotCompleteOrd = ({ orders }) => {
   const user = useAuth();
@@ -21,15 +21,32 @@ const NotCompleteOrd = ({ orders }) => {
                   key={order.id}
                   className='incomplete-orders'
                 >
-                  <p>Order Date: {order.orderdate}</p>
-                  <p>Purchaser ID: {order.purchaserId}</p>
-                  <p>Service ID: {order.serviceId}</p>
-                  <p>Bundle Kit ID: {order.bundlekitId}</p>
-                  <p>{order.iscomplete ? 'Complete!' : 'Not Complete'}</p>
+                  <p>
+                    <span className='liltitle'>Order Date: </span>
+                    {order.orderdate}
+                  </p>
+                  <p>
+                    <span className='liltitle'>Purchaser ID: </span>
+                    {order.purchaserId}
+                  </p>
+                  <p>
+                    <span className='liltitle'>Service ID: </span>
+                    {order.serviceId}
+                  </p>
+                  <p>
+                    <span className='liltitle'>Bundle Kit ID: </span>
+                    {order.bundlekitId}
+                  </p>
+                  <p>
+                    {order.iscomplete ? (
+                      'Order Is Complete!'
+                    ) : (
+                      <span className='bigtitle'>Order Incomplete</span>
+                    )}
+                  </p>
                   <button
                     onClick={async () => {
                       const ordComplete = order.iscomplete;
-                      console.log('ORDERIDIDIDIDODERDOEIRDO:', order.id);
                       const updatedOrder = await updateOrder(
                         user.token,
                         order.id,
