@@ -36,11 +36,11 @@ const ContactForm = () => {
         onSubmit={handleOnSubmit}
         className='ContactForm'
       >
-        <div>Contact Shelley:</div>
+        <div id='contact-shelley' >CONTACT SHELLEY</div>
         <Form.Field
           id='form-input-control-email'
           control={Input}
-          label='Email'
+          label='EMAIL'
           name='user_email'
           placeholder='Email'
           required
@@ -50,7 +50,7 @@ const ContactForm = () => {
         <Form.Field
           id='form-input-control-last-name'
           control={Input}
-          label='Name'
+          label='NAME'
           name='user_name'
           placeholder='Name'
           required
@@ -60,7 +60,7 @@ const ContactForm = () => {
         <Form.Field
           id='form-textarea-control-opinion'
           control={TextArea}
-          label='Message'
+          label='MESSAGE'
           name='user_message'
           placeholder='Message'
           required

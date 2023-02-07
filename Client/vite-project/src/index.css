@@ -21,10 +21,6 @@ a {
   color: white;
 }
 
-.service {
-  border: 1pt rgb(0, 0, 0) solid;
-}
-
 nav {
   font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: smaller;
@@ -32,7 +28,6 @@ nav {
   display: flex;
   justify-content: space-evenly;
   background-color: rgba(42, 157, 144, 0.698);
-
   align-items: center;
   color: black;
   cursor: pointer;
@@ -65,7 +60,6 @@ nav {
 #prettyshelley {
   width: 500%;
   border: 4pt white solid;
-
 }
 
 #prettyshelley:hover {
@@ -110,7 +104,6 @@ nav {
 
 #links-container {
   padding-top: 5em;
-
   color: #ffffff;
   gap: 5em;
 }
@@ -140,17 +133,15 @@ nav {
 }
 
 #service-form {
-  padding: 2rem;
   background-color: rgba(38, 70, 83);
-  color: #ffffff;
-  margin: 20px;
-  border-radius: 3%;
-  box-shadow: 0 0 2em hsl(231deg 62% 75%);
+  padding: 3em;
 }
 
-#service-form-inputs {
-  display: flex;
-  flex-direction: column;
+#bundle-main {
+  background-color: rgba(38, 70, 83);
+  color: white;
+  padding-right: 5em;
+  padding-bottom: 4em;
 }
 
 #testimonial1 {
@@ -211,7 +202,38 @@ nav {
 }
 
 #footer-logo {
-  width: 45%
+  width: 15em;
+}
+
+#footer-logo-container {
+  width: 2em;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  padding: 0.5rem;
+}
+
+.socials {
+  width: 3em;
+}
+
+#contact-shelley {
+  font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: medium;
+  font-weight: 600;
+}
+
+#form-input-control-email {
+  font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: smaller;
+  font-weight: 600;
+}
+
+#form-input-control-last-name {
+  font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: smaller;
+  font-weight: 600;
 }
 
 .ContactForm-container {
@@ -219,26 +241,34 @@ nav {
   justify-content: center;
   text-align: center;
   margin: auto;
-  border: #242424 solid 1pt;
   padding: 0.5rem;
   max-width: 14rem;
+  min-width: 14rem;
 }
 
 .ContactForm {
-  background-color: #242424;
-  border: 2pt white solid;
+  background-color: #ffffff;
+  border: 2pt rgb(0, 0, 0) solid;
   text-align: center;
   padding: 2rem;
   max-width: 14rem;
+  max-height: 14rem;
+  box-shadow: 0 0 2em rgb(158, 159, 166);
 }
 
 #form-textarea-control-opinion {
   max-width: 12rem;
   min-width: 12rem;
-  min-height: 8rem;
-  max-height: 14rem;
+  min-height: 4rem;
+  max-height: 4rem;
+  font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: smaller;
+  font-weight: 600;
 }
 
 #back-to-top {
   color: rgba(38, 70, 83);
+  font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: medium;
+  font-weight: 600;
 }
