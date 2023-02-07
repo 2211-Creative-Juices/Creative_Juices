@@ -1,4 +1,3 @@
-import React from 'react';
 const BASE_API = `https://creative-juices.fly.dev/api`;
 // const BASE_API = `/api`;
 
