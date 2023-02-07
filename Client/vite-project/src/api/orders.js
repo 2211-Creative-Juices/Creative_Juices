@@ -1,5 +1,5 @@
-const BASE_API = `https://creative-juices.fly.dev/api`;
-// const BASE_API = `/api`;
+// const BASE_API = `https://creative-juices.fly.dev/api`;
+const BASE_API = `/api`;
 
 export const getAllOrders = async () => {
   try {
