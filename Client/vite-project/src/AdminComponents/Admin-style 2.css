@@ -1,0 +1,15 @@
+#incomplete-orders-container{
+    background-color: rgb(73, 135, 160);
+}
+
+#incomplete-orders-map-container{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    background-color: white;
+    border: solid, 2px, black;
+}
+
+#completed-orders-container{
+    background-color: rgb (239, 213, 147);
+}

@@ -118,6 +118,8 @@ const ServiceForm = ({ services, todaysDate }) => {
                 type='number'
                 value={guests}
                 id='input'
+                min="4"
+                max="20"
                 onChange={(e) => {
                   setGuests(e.target.value);
                   setCost(20 * e.target.value);
