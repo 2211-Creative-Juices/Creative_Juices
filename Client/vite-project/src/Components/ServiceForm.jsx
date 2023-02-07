@@ -51,30 +51,22 @@ const ServiceForm = ({ services, todaysDate }) => {
         );
 
         console.log('HTIS IS MY NEWSERVCIE', newService);
-
         let serviceId = newService.id;
-        // console.log('NEW SERVICEID', serviceId);
         let todaysOrderDate = JSON.stringify(todaysDate);
         console.log('NEW dateeeeee', todaysOrderDate);
         let purchaserId = user.user.id;
-        // console.log('NEW users.users.id', user.user.id);
-        // let bundlekitId = 0;
-        // let isintheCart = setisinCart(true);
-        // console.log('NEW isintheCart', isintheCart);
+
         const newOrder = await createNewOrder(
           user.token,
           todaysOrderDate,
           purchaserId,
-
           serviceId
-          // bundlekitId
         );
         console.log('THIS IS THE NEW ORDERBABYYYY', newOrder);
+        redirHome();
       } else {
         handlePlease();
       }
-      redirHome();
-      // console.log('this is the new service!', newService);
     } catch (error) {
       console.error(error);
     }
