@@ -4,6 +4,7 @@ import CartImage from '../CartComponents/CartNavImage';
 import initialsnobckgrnd from '../assets/images/initialsnobckgrnd.png';
 
 import { useAuth } from '../custom-hooks';
+import UserCart from '../CartComponents/UserCart';
 
 const navLinks = [
   { navLinkId: 'HOME', scrollToId: 'home-container' },
@@ -39,12 +40,16 @@ const NavLink = ({
 };
 
 const NavBar = ({ orders }) => {
-  const { logout } = useAuth();
+  const { logout, token } = useAuth();
+  console.log('this is user FOR CART ICON STUFF', token);
   const [activeNavLinkId, setActiveNavLinkId] = useState('');
   return (
     <div className='is-sticky'>
       <nav>
-        <img id='initialslogo' src={initialsnobckgrnd}></img>
+        <img
+          id='initialslogo'
+          src={initialsnobckgrnd}
+        ></img>
         {navLinks.map(({ navLinkId, scrollToId }) => (
           <NavLink
             key={navLinkId}
@@ -54,12 +59,21 @@ const NavBar = ({ orders }) => {
             setActiveNavLinkId={setActiveNavLinkId}
           />
         ))}
-        <button id='logout-butt' onClick={logout}>
+        <button
+          id='logout-butt'
+          onClick={logout}
+        >
           Logout
         </button>
-        <Link to='/usercart'>
-          <CartImage orders={orders} />
-        </Link>
+        {token ? (
+          <Link to='/usercart'>
+            <CartImage orders={orders} />
+          </Link>
+        ) : (
+          <Link to='/signup'>
+            <CartImage orders={orders} />
+          </Link>
+        )}
       </nav>
     </div>
   );
