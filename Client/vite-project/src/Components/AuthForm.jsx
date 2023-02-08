@@ -41,57 +41,63 @@ const AuthForm = ({ name, buttonName }) => {
   };
 
   return (
-    <div >
     <div id="whole-login-form-box">
       <form onSubmit={handleSubmit} name={name}>
-        <div className='login-form'>
+    <div className='login-form'>
+        {/* <div className='login-form'> */}
           <label htmlFor='username'>Username  </label>
           <input type='text' name='username' />
-        </div>
+        {/* </div> */}
        
-        <div className='login-form'>
+        {/* <div > */}
           <label htmlFor='password'>Password  </label>
           <input type='password' name='password'/>
-        </div>
+        {/* </div> */}
      
+        </div>
         {name === 'login' ? (
-          <button> 
+          <button className='login-button'> 
         {buttonName} 
           </button>
         ) : (
           <div>
-            <div  className='login-form'>
+          <div className='login-form'>
+            {/* <div  className='login-form'> */}
             <label htmlFor='name'>Full Name  </label>
             <input type='text' name='fullname' />
-            </div>
+            {/* </div> */}
        
-            <div  className='login-form'>
+            {/* <div  className='login-form'> */}
             <label htmlFor='zip'>ZIP code  </label>
             <input type='text' name='zipcode' />
-            </div>
+            {/* </div> */}
         
-            <div  className='login-form'>
+            {/* <div  > */}
             <label htmlFor='email'>Email      </label>
             <input type='text' name='email' />
-            </div>
+            {/* </div> */}
            
-            <button>{buttonName}</button>
           </div>
+            <button className='login-button'>{buttonName}</button>
+            </div>
         )}
       </form>
+      <div >
       {name === 'login' ? (
+        
         <p>
-          Not a user yet?
-          <Link to='/signup'>Sign Up Here</Link>!
+          Not a user yet? 
+          <Link to='/signup' className='login-links'>Sign Up Here</Link>!
         </p>
       ) : (
         <p>
-          Already have an account?
-          <Link to='/login'>Login Here</Link>!
+          Already have an account? 
+          <Link to='/login' className='login-links'>Login Here</Link>!
         </p>
       )}
+      </div>
     </div>
-    </div>
+  
   );
 };
 
