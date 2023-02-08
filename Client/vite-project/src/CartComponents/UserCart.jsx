@@ -37,7 +37,7 @@ const UserCart = ({ orders }) => {
   console.log('87138941730487393487', myOrders);
 
   return (
-    <div>
+    <div id='all-it'>
       <h2 id='myorders-header'>My Cart</h2>
       <div id='myorders-container'>
         <div className='inner-orderdiv'>
@@ -114,6 +114,9 @@ const UserCart = ({ orders }) => {
           </div>
           <div>
             <BundleOrder myOrders={myOrders} />
+          </div>
+          <div>
+            <MyFilledOrders myOrders={myOrders} />
           </div>
         </div>
         <div id='money-gather'>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartImage from '../CartComponents/CartNavImage';
 import initialsnobckgrnd from '../assets/images/initialsnobckgrnd.png';
+
 import { useAuth } from '../custom-hooks';
 
 const navLinks = [
@@ -43,10 +44,7 @@ const NavBar = ({ orders }) => {
   return (
     <div className='is-sticky'>
       <nav>
-        <img
-          id='initialslogo'
-          src={initialsnobckgrnd}
-        ></img>
+        <img id='initialslogo' src={initialsnobckgrnd}></img>
         {navLinks.map(({ navLinkId, scrollToId }) => (
           <NavLink
             key={navLinkId}
@@ -56,7 +54,9 @@ const NavBar = ({ orders }) => {
             setActiveNavLinkId={setActiveNavLinkId}
           />
         ))}
-        <button onClick={logout}>Logout</button>
+        <button id='logout-butt' onClick={logout}>
+          Logout
+        </button>
         <Link to='/usercart'>
           <CartImage orders={orders} />
         </Link>
