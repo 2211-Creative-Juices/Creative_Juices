@@ -8,7 +8,7 @@ const eye = <FontAwesomeIcon icon={faEye} />;
 import './style.css';
 
 const AuthForm = ({ name, buttonName }) => {
-  const user = useAuth();
+  const { user, token } = useAuth();
   const { updateAuthStatus } = useAuth();
   const [passwordShown, setPasswordShown] = useState(false);
 
@@ -30,14 +30,14 @@ const AuthForm = ({ name, buttonName }) => {
       alert('password must be 8 or more characters');
       return;
     }
-    if (name === 'login' && user.user.password != event.target.password.value) {
-      alert('password is incorrect');
-      return;
-    }
-    if (name === 'login' && user.user.username != event.target.username.value) {
-      alert('password is incorrect');
-      return;
-    }
+    // if (name === 'login' && user.user.password != event.target.password.value) {
+    //   alert('password is incorrect');
+    //   return;
+    // }
+    // if (name === 'login' && user.user.username != event.target.username.value) {
+    //   alert('password is incorrect');
+    //   return;
+    // }
     if (formName === 'login') {
       await authenticateUser(username, password, formName);
       updateAuthStatus();
@@ -62,7 +62,7 @@ const AuthForm = ({ name, buttonName }) => {
     };
     reload();
 
-    // if (user.token) {
+    // if (token) {
     //   const reload = () => {
     //     window.location.href = '/';
     //   };
@@ -74,19 +74,43 @@ const AuthForm = ({ name, buttonName }) => {
 
   return (
     <div id='whole-login-form-box'>
-      <form onSubmit={handleSubmit} name={name}>
+      {name === 'login' ? (
+        <div>
+          <h2>Welcome Back!</h2>
+          <h3>Please Log in.</h3>
+        </div>
+      ) : (
+        <div>
+          <h2>Welcome To Creative Juices!</h2>
+          <h3>Please Register Here.</h3>
+        </div>
+      )}
+
+      <form
+        onSubmit={handleSubmit}
+        name={name}
+      >
         <div className='login-form'>
           {' '}
           {/* <div className='login-form'> */}
           <label htmlFor='username'>Username </label>
-          <input type='text' name='username' />
+          <input
+            type='text'
+            name='username'
+          />
           {/* </div> */}
           {/* <div > */}
           <label htmlFor='password'>Password </label>
-          <input type={passwordShown ? 'text' : 'password'} name='password' />
+          <input
+            type={passwordShown ? 'text' : 'password'}
+            name='password'
+          />
           {/* </div> */}
         </div>
-        <i id='eyeball' onClick={togglePasswordVisiblity}>
+        <i
+          id='eyeball'
+          onClick={togglePasswordVisiblity}
+        >
           {eye}
         </i>{' '}
         <p> password must be at least 8 characters long</p>
@@ -97,17 +121,26 @@ const AuthForm = ({ name, buttonName }) => {
             <div className='login-form'>
               {/* <div  className='login-form'> */}
               <label htmlFor='name'>Full Name </label>
-              <input type='text' name='fullname' />
+              <input
+                type='text'
+                name='fullname'
+              />
               {/* </div> */}
 
               {/* <div  className='login-form'> */}
               <label htmlFor='zip'>ZIP code </label>
-              <input type='text' name='zipcode' />
+              <input
+                type='text'
+                name='zipcode'
+              />
               {/* </div> */}
 
               {/* <div  > */}
               <label htmlFor='email'>Email </label>
-              <input type='text' name='email' />
+              <input
+                type='text'
+                name='email'
+              />
               {/* </div> */}
             </div>
             <button className='login-button'>{buttonName}</button>
@@ -118,7 +151,10 @@ const AuthForm = ({ name, buttonName }) => {
         {name === 'login' ? (
           <p>
             Not a user yet?
-            <Link to='/signup' className='login-links'>
+            <Link
+              to='/signup'
+              className='login-links'
+            >
               Sign Up Here
             </Link>
             !
@@ -126,7 +162,10 @@ const AuthForm = ({ name, buttonName }) => {
         ) : (
           <p>
             Already have an account?
-            <Link to='/login' className='login-links'>
+            <Link
+              to='/login'
+              className='login-links'
+            >
               Login Here
             </Link>
             !
@@ -137,5 +176,15 @@ const AuthForm = ({ name, buttonName }) => {
   );
 };
 
-export const Login = <AuthForm name={'login'} buttonName={'Login'} />;
-export const Signup = <AuthForm name={'register'} buttonName={'Register'} />;
+export const Login = (
+  <AuthForm
+    name={'login'}
+    buttonName={'Login'}
+  />
+);
+export const Signup = (
+  <AuthForm
+    name={'register'}
+    buttonName={'Register'}
+  />
+);

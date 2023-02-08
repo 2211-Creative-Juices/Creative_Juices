@@ -5,10 +5,18 @@ import { useAuth } from '../custom-hooks';
 import { createABundle } from '../api/bundles';
 import { createNewOrder } from '../api/orders';
 import ServiceForm from './ServiceForm';
+import { NavLink } from 'react-router-dom';
+import './ServiceStyle.css';
 
 const AllBundles = ({ bundles, todaysDate, services }) => {
   const [quantity, setQuantity] = useState(0);
   const user = useAuth();
+
+  //************* LOGIN/REGISTER STATE **************/
+  const [openPlease, setOpenPlease] = useState(false);
+  const handlePlease = () => {
+    setOpenPlease(!openPlease);
+  };
 
   const redirHome = () => {
     window.location.href = '/';
@@ -17,32 +25,36 @@ const AllBundles = ({ bundles, todaysDate, services }) => {
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
-      let cost = quantity * 20;
+      if (user.token) {
+        let cost = quantity * 20;
 
-      let newBundle = await createABundle(
-        user.token,
-        bundles.bundlename,
-        quantity,
-        cost
-      );
-      console.log('this is my newBUndles', newBundle);
+        let newBundle = await createABundle(
+          user.token,
+          bundles.bundlename,
+          quantity,
+          cost
+        );
+        console.log('this is my newBUndles', newBundle);
 
-      let bundlekitId = newBundle.id;
-      console.log('NEW BUNDLEKITID', bundlekitId);
-      let todaysOrderDate = todaysDate;
-      console.log('NEW dateeeeee', todaysOrderDate);
-      let purchaserId = user.user.id;
-      console.log('NEW users.users.id', user.user.id);
-      let servicekitId = null;
+        let bundlekitId = newBundle.id;
+        console.log('NEW BUNDLEKITID', bundlekitId);
+        let todaysOrderDate = todaysDate;
+        console.log('NEW dateeeeee', todaysOrderDate);
+        let purchaserId = user.user.id;
+        console.log('NEW users.users.id', user.user.id);
+        let servicekitId = null;
 
-      const newOrder = await createNewOrder(
-        user.token,
-        todaysOrderDate,
-        purchaserId,
-        servicekitId,
-        bundlekitId
-      );
-      redirHome();
+        const newOrder = await createNewOrder(
+          user.token,
+          todaysOrderDate,
+          purchaserId,
+          servicekitId,
+          bundlekitId
+        );
+        redirHome();
+      } else {
+        handlePlease();
+      }
     } catch (error) {
       console.error(error);
     }
@@ -52,10 +64,19 @@ const AllBundles = ({ bundles, todaysDate, services }) => {
     <div id='bundles-container'>
       <div className='flex-bunds'>
         <div>
-          <ServiceForm services={services} todaysDate={todaysDate} />
+          <ServiceForm
+            services={services}
+            todaysDate={todaysDate}
+          />
         </div>
-        <img id='bundkitimg' src={bundlekit}></img>
-        <form id='bundle-form-main' onSubmit={(e) => submitHandler(e)}>
+        <img
+          id='bundkitimg'
+          src={bundlekit}
+        ></img>
+        <form
+          id='bundle-form-main'
+          onSubmit={(e) => submitHandler(e)}
+        >
           <h3> Add a Paint Kit!</h3>
           <div id='bundles-map-container'>
             <label>
@@ -75,12 +96,28 @@ const AllBundles = ({ bundles, todaysDate, services }) => {
               set of watercolor cards with envelopes, watercolor paints, and
               water container.
             </p>
-            <button id='bund-cart-butt' onClick={submitHandler} type={'submit'}>
+            <button
+              id='bund-cart-butt'
+              onClick={submitHandler}
+              type={'submit'}
+            >
               Add Paint Kit to Cart
             </button>
           </div>
         </form>
       </div>
+      {openPlease ? (
+        <div id='not-a-user'>
+          Please{' '}
+          <span>
+            <NavLink to='/signup'>register</NavLink>
+          </span>{' '}
+          or{' '}
+          <span>
+            <NavLink to='/login'>login! </NavLink>
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 };
