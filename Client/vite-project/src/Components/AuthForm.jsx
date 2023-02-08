@@ -1,19 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { authenticateUser } from '../api/auth';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../custom-hooks';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+const eye = <FontAwesomeIcon icon={faEye} />;
 import './style.css';
 
 const AuthForm = ({ name, buttonName }) => {
+  const user = useAuth();
   const { updateAuthStatus } = useAuth();
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formName = event.target.name;
     const username = event.target.username.value;
     const password = event.target.password.value;
-    if (!username || !password || password.length < 5) {
+    if (!username || !password) {
+      alert('you need a valid username and password');
       console.log('Either no input or password too short');
+      return;
+    }
+    if (password.length < 8) {
+      alert('password must be 8 or more characters');
+      return;
+    }
+    if (name === 'login' && user.user.password != event.target.password.value) {
+      alert('password is incorrect');
+      return;
+    }
+    if (name === 'login' && user.user.username != event.target.username.value) {
+      alert('password is incorrect');
       return;
     }
     if (formName === 'login') {
@@ -52,27 +74,22 @@ const AuthForm = ({ name, buttonName }) => {
 
   return (
     <div id='whole-login-form-box'>
-      <form
-        onSubmit={handleSubmit}
-        name={name}
-      >
+      <form onSubmit={handleSubmit} name={name}>
         <div className='login-form'>
+          {' '}
           {/* <div className='login-form'> */}
           <label htmlFor='username'>Username </label>
-          <input
-            type='text'
-            name='username'
-          />
+          <input type='text' name='username' />
           {/* </div> */}
-
           {/* <div > */}
           <label htmlFor='password'>Password </label>
-          <input
-            type='password'
-            name='password'
-          />
+          <input type={passwordShown ? 'text' : 'password'} name='password' />
           {/* </div> */}
         </div>
+        <i id='eyeball' onClick={togglePasswordVisiblity}>
+          {eye}
+        </i>{' '}
+        <p> password must be at least 8 characters long</p>
         {name === 'login' ? (
           <button className='login-button'>{buttonName}</button>
         ) : (
@@ -80,26 +97,17 @@ const AuthForm = ({ name, buttonName }) => {
             <div className='login-form'>
               {/* <div  className='login-form'> */}
               <label htmlFor='name'>Full Name </label>
-              <input
-                type='text'
-                name='fullname'
-              />
+              <input type='text' name='fullname' />
               {/* </div> */}
 
               {/* <div  className='login-form'> */}
               <label htmlFor='zip'>ZIP code </label>
-              <input
-                type='text'
-                name='zipcode'
-              />
+              <input type='text' name='zipcode' />
               {/* </div> */}
 
               {/* <div  > */}
               <label htmlFor='email'>Email </label>
-              <input
-                type='text'
-                name='email'
-              />
+              <input type='text' name='email' />
               {/* </div> */}
             </div>
             <button className='login-button'>{buttonName}</button>
@@ -110,10 +118,7 @@ const AuthForm = ({ name, buttonName }) => {
         {name === 'login' ? (
           <p>
             Not a user yet?
-            <Link
-              to='/signup'
-              className='login-links'
-            >
+            <Link to='/signup' className='login-links'>
               Sign Up Here
             </Link>
             !
@@ -121,10 +126,7 @@ const AuthForm = ({ name, buttonName }) => {
         ) : (
           <p>
             Already have an account?
-            <Link
-              to='/login'
-              className='login-links'
-            >
+            <Link to='/login' className='login-links'>
               Login Here
             </Link>
             !
@@ -135,15 +137,5 @@ const AuthForm = ({ name, buttonName }) => {
   );
 };
 
-export const Login = (
-  <AuthForm
-    name={'login'}
-    buttonName={'Login'}
-  />
-);
-export const Signup = (
-  <AuthForm
-    name={'register'}
-    buttonName={'Register'}
-  />
-);
+export const Login = <AuthForm name={'login'} buttonName={'Login'} />;
+export const Signup = <AuthForm name={'register'} buttonName={'Register'} />;

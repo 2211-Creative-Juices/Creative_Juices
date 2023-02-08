@@ -44,10 +44,7 @@ const NavBar = ({ orders }) => {
   return (
     <div className='is-sticky'>
       <nav>
-        <img
-          id='initialslogo'
-          src={initialsnobckgrnd}
-        ></img>
+        <img id='initialslogo' src={initialsnobckgrnd}></img>
         {navLinks.map(({ navLinkId, scrollToId }) => (
           <NavLink
             key={navLinkId}
@@ -57,10 +54,7 @@ const NavBar = ({ orders }) => {
             setActiveNavLinkId={setActiveNavLinkId}
           />
         ))}
-        <button
-          id='logout-butt'
-          onClick={logout}
-        >
+        <button id='logout-butt' onClick={logout}>
           Logout
         </button>
         <Link to='/usercart'>
