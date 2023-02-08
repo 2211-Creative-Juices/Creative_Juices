@@ -60,12 +60,12 @@ nav {
 }
 
 #prettyshelley {
-  width: 500%;
+  width: 200%;
   border: 4pt white solid;
 }
 
 #prettyshelley:hover {
-  width: 500%;
+  width: 250%;
   border: 4pt white solid;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
@@ -95,33 +95,171 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  
   align-items: center;
   gap: 5em;
 }
 
 #home-logo {
-  padding-top: 5em;
+  padding-top: 7em;
+  
   width: 35%;
 }
 
 #links-container {
-  padding-top: 5em;
+  padding-top: 10em;
   color: #ffffff;
   gap: 5em;
 }
 
-#sign-up-home {
-  border: #ffffff solid 2px;
-  padding: 6px;
-  background-color: rgba(38, 70, 83, 0.876);
-  border-radius: 5%;
+.register{
+  color: #9E00FF;
+}
+#sign-up-home{
+  font-family: 'Poppins';
+  width: 75%;
+  height: 90px;
+  border: black solid 1px;
+  outline: none;
+  color: #494949;
+  background: #ffffff;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 4px;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  transition: 0.5s ease-in-out;
+  margin-bottom: 1em;
+  padding-top: 1em;
+ 
+
 }
 
-#log-in-home {
-  border: #ffffff solid 2px;
-  padding: 6px;
-  background-color: rgba(38, 70, 83, 0.876);
-  border-radius: 5%;
+#sign-up-home:before {
+  content: '';
+  background: linear-gradient(45deg, #FF0000, #FFF700, #FF7000, #FF00FE, #3FF4EB, #9E00FF, #00BEFF, #FF00DD, #FF0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+#sign-up-home:active {
+  color: #000
+}
+
+#sign-up-home:active:after {
+  background: transparent;
+}
+
+#sign-up-home:hover {
+  transform: scale(1.05);
+}
+
+#sign-up-home:hover:before {
+  opacity: 1;
+}
+
+#sign-up-home:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  left: 0;
+  top: 0;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+#set-my-ship{
+  margin-right: 1em;
+}
+
+
+.login-link{
+  color: #9E00FF;
+}
+#log-in-home{
+  font-family: 'Poppins';
+  width: 75%;
+  height: 90px;
+  border: black solid 1px;
+  outline: none;
+  color: #494949;
+  background: #ffffff;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 4px;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  transition: 0.5s ease-in-out;
+  margin-bottom: 1em;
+  padding-top: 1em;
+ 
+
+}
+
+#log-in-home:before {
+  content: '';
+  background: linear-gradient(45deg, #FF0000, #FFF700, #FF7000, #FF00FE, #3FF4EB, #9E00FF, #00BEFF, #FF00DD, #FF0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+#log-in-home:active {
+  color: #000
+}
+
+#log-in-home:active:after {
+  background: transparent;
+}
+
+#log-in-home:hover {
+  transform: scale(1.05);
+}
+
+#log-in-home:hover:before {
+  opacity: 1;
+}
+
+#log-in-home:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  left: 0;
+  top: 0;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
 }
 
 #home-message {
@@ -361,7 +499,15 @@ nav {
 }
 
 /* ****************** FOOTER ************** */
-
+#shellimg-contact{
+  width: 10%;
+  margin-right: 20em;
+  margin-top: 3em;
+}
+#shellimg{
+  border-radius: 50%;
+  border: black solid 4px;
+}
 #footer-container {
   border-top: 2pt white solid;
   margin: 1rem;
@@ -375,7 +521,9 @@ nav {
 
 #footer-logo {
   width: 15em;
+  margin-right: 10em;
 }
+
 
 #footer-logo-container {
   width: 2em;
@@ -388,6 +536,7 @@ nav {
 
 .socials {
   width: 3em;
+  margin-top: 7em;
 }
 
 #contact-shelley {
@@ -416,6 +565,8 @@ nav {
   padding: 0.5rem;
   max-width: 14rem;
   min-width: 14rem;
+  margin-right: 6em;
+  margin-top: 3em;
 }
 
 .ContactForm {
@@ -443,4 +594,51 @@ nav {
   font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: medium;
   font-weight: 600;
+}
+
+#HOME:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+#HOME:active {
+  text-decoration: underline;
+}
+
+#ABOUT:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+#ABOUT:active {
+  text-decoration: underline;
+}
+
+#SERVICES:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+#SERVICES:active {
+  text-decoration: underline;
+}
+
+#FAQs:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+#FAQs:active {
+  text-decoration: underline;
+}
+#TESTIMONIALS:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+#TESTIMONIALS:active {
+  text-decoration: underline;
+}
+
+#CONTACT:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+#CONTACT:active {
+  text-decoration: underline;
 }
