@@ -13,10 +13,6 @@ const PayPalCheckout = ({ myOrders }) => {
   const bundTotal = localStorage.getItem('bundleCost');
   const serviceTotal = localStorage.getItem('serviceCost');
 
-  // const comboAmount = parseInt(bundTotal) + parseInt(serviceTotal);
-  // const bundOnlyAmount = parseInt(bundTotal);
-  // const serviceOnlyAmount = parseInt(serviceTotal);
-
   const redirCart = () => {
     window.location.href = '/usercart';
   };
@@ -39,14 +35,12 @@ const PayPalCheckout = ({ myOrders }) => {
     figureAmount();
   }, []);
 
-  console.log('amount', totalAmount);
-
   const currency = 'USD';
   return (
     <div id='paypalcontainerthing'>
       <p>
         <span className='total-cost'>
-          Total Cost: ${totalAmount ? totalAmount : 0}.00 $
+          Total Cost: ${totalAmount ? totalAmount : 0}.00
         </span>
       </p>
       <PayPalScriptProvider
@@ -71,7 +65,6 @@ const PayPalCheckout = ({ myOrders }) => {
               })
               .then((orderId) => {
                 setPayPalId(orderId);
-                // localStorage.setItem("paypalId", orderId)
                 console.log('this is ORDER ID from paypal', orderId);
                 console.log('THIS IS THE PAY PAL ID', payPalId);
                 return orderId;
@@ -79,7 +72,6 @@ const PayPalCheckout = ({ myOrders }) => {
           }}
           onApprove={(data, actions) => {
             return actions.order.capture().then(function (details) {
-              // This function shows a transaction success message to your buyer.
               alert(
                 'Transaction completed by ' + details.payer.name.given_name
               );
@@ -89,6 +81,7 @@ const PayPalCheckout = ({ myOrders }) => {
       </PayPalScriptProvider>
       <div>
         <button
+          id='finalize-button'
           onClick={() => {
             console.log('paypal state', payPalId);
             myOrders &&
@@ -111,10 +104,13 @@ const PayPalCheckout = ({ myOrders }) => {
                 }
               });
             localStorage.removeItem('serviceCost', 'bundleCost');
+            alert(
+              'Thanks for your order! Shelley will contact you to confirm dates/locations!'
+            );
             redirCart();
           }}
         >
-          Finalize
+          Click Me to finalize your order!
         </button>
       </div>
     </div>
