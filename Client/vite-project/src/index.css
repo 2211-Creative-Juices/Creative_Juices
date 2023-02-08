@@ -49,7 +49,7 @@ nav {
   background-color: rgb(233, 196, 106);
   color: rgba(0, 0, 0, 0.87);
   padding: 5em;
-  border-radius: 3%;
+  
 }
 
 .about-content {
@@ -86,10 +86,10 @@ nav {
 }
 
 #home-container {
-  padding: 10em;
+  padding: 8em;
   background-image: -webkit-image-set();
-  border-bottom-right-radius: 3%;
-  border-bottom-left-radius: 3%;
+ 
+ 
   background: center;
   background-size: cover;
   display: flex;
