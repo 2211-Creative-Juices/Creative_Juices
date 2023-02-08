@@ -39,7 +39,7 @@ const FAQs = () => {
 
       <div className='faqs-content'>
         <div className='questions'>
-          <p>
+          <div>
             <p className='question' onClick={handlePlease1}>
               What does a Paint and Sip involve? +
             </p>
@@ -52,8 +52,8 @@ const FAQs = () => {
                 design for your group.{' '}
               </p>
             ) : null}
-          </p>
-          <p>
+          </div>
+          <div>
             <p className='question' onClick={handlePlease2}>
               How do we decide on location? +
             </p>
@@ -66,50 +66,56 @@ const FAQs = () => {
                 contact you and discuss local options that will host your group.{' '}
               </p>
             ) : null}
-          </p>
-          <p className='question' onClick={handlePlease3}>
-            What about kid parties? +
-          </p>
-          {openPlease3 ? (
-            <p>
-              Shelleys background as a teacher makes her the perfect candidate
-              to work with big groups of kis! Birthday parties, wedding tables,
-              or just to provide a distraction for a parents night in painting
-              is for all ages!.{' '}
+          </div>
+          <div>
+            <p className='question' onClick={handlePlease3}>
+              What about kid parties? +
             </p>
-          ) : null}
-
-          <p className='question' onClick={handlePlease4}>
-            Is alcohol/coffee provided? +
-          </p>
-          {openPlease4 ? (
-            <p>
-              You are responsible for providing your own alcohol or purchasing
-              from the location that the paint event is being held. What a great
-              way to also support your local breweries and coffee shops!{' '}
+            {openPlease3 ? (
+              <p>
+                Shelleys background as a teacher makes her the perfect candidate
+                to work with big groups of kis! Birthday parties, wedding
+                tables, or just to provide a distraction for a parents night in
+                painting is for all ages!.{' '}
+              </p>
+            ) : null}
+          </div>
+          <div>
+            <p className='question' onClick={handlePlease4}>
+              Is alcohol/coffee provided? +
             </p>
-          ) : null}
-
-          <p className='question' onClick={handlePlease5}>
-            How many people can come and what is the cost? +
-          </p>
-          {openPlease5 ? (
-            <p>
-              I am currently limiting to groups between 4-20 people. The cost is
-              $20 per person. If you want to do a group of 2 contact Shelley
-              directly and we can discuss.{' '}
+            {openPlease4 ? (
+              <p>
+                You are responsible for providing your own alcohol or purchasing
+                from the location that the paint event is being held. What a
+                great way to also support your local breweries and coffee shops!{' '}
+              </p>
+            ) : null}
+          </div>
+          <div>
+            <p className='question' onClick={handlePlease5}>
+              How many people can come and what is the cost? +
             </p>
-          ) : null}
-          <p className='question' onClick={handlePlease6}>
-            What is a paint kit? +
-          </p>
-          {openPlease6 ? (
-            <p>
-              You will find everything we make is super easy to do alone at
-              Home. Either purchase a full kit to continue to explore at home or
-              to pull Shelley in for a virtual paint and sip!!{' '}
+            {openPlease5 ? (
+              <p>
+                I am currently limiting to groups between 4-20 people. The cost
+                is $20 per person. If you want to do a group of 2 contact
+                Shelley directly and we can discuss.{' '}
+              </p>
+            ) : null}
+          </div>
+          <div>
+            <p className='question' onClick={handlePlease6}>
+              What is a paint kit? +
             </p>
-          ) : null}
+            {openPlease6 ? (
+              <p>
+                You will find everything we make is super easy to do alone at
+                Home. Either purchase a full kit to continue to explore at home
+                or to pull Shelley in for a virtual paint and sip!!{' '}
+              </p>
+            ) : null}
+          </div>
         </div>
 
         <div>

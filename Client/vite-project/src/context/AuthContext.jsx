@@ -26,6 +26,7 @@ export default function AuthProvider({ children }) {
     delete localStorage['juice-token'];
     delete localStorage['bundleCost'];
     delete localStorage['serviceCost'];
+    delete localStorage['shipping-Address'];
     updateAuthStatus();
   };
 

@@ -51,9 +51,9 @@ const AllBundles = ({ bundles, todaysDate, services }) => {
   return (
     <div id='bundles-container'>
       <div className='flex-bunds'>
-        <dvi>
+        <div>
           <ServiceForm services={services} todaysDate={todaysDate} />
-        </dvi>
+        </div>
         <img id='bundkitimg' src={bundlekit}></img>
         <form id='bundle-form-main' onSubmit={(e) => submitHandler(e)}>
           <h3> Add a Paint Kit!</h3>
