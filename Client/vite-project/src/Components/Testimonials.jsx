@@ -4,7 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 const Testimonials = () => {
   return (
-    <div id='testimonial-all'>
+    <div id='testimonials-container'>
       <div className='parallax1'></div>
 
       <Carousel

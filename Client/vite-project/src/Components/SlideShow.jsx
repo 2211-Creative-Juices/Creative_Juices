@@ -6,7 +6,7 @@ import paint from '../assets/images/paint.jpg';
 const SlideShow = () => {
   return (
     <div>
-      <div className='fancywords'>
+      <div id='fancywords'>
         <h2 className='title'>
           <span className='title-word title-word-1'>Sign</span>
           <span className='title-word title-word-2'>up</span>
