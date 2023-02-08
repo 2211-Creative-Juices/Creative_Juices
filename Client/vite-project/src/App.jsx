@@ -25,6 +25,7 @@ import NotCompleteOrd from './AdminComponents/NotCompleteOrd';
 import AdminUsers from './AdminComponents/AdminUsers';
 import { Signup, Login } from './Components/AuthForm';
 import { useAuth } from './custom-hooks';
+import SlideShow from './Components/SlideShow';
 
 // import { AuthForm } from './Components/AuthForm';
 
@@ -86,19 +87,18 @@ function App() {
               path='/'
               element={
                 <div>
-                  <NavBar
-                    logout={logout}
-                    orders={orders}
-                  />
+                  <NavBar logout={logout} orders={orders} />
                   <Home /> <About />
-                  <div id='service-form'>
-                    <ServiceForm
+                  {/* <div id='service-form'>
+                    <ServiceForm services={services} todaysDate={todaysDate} />
+                  </div> */}
+                  <SlideShow />
+                  <div id='bundle-main'>
+                    <AllBundles
                       services={services}
                       todaysDate={todaysDate}
+                      bundles={bundles}
                     />
-                  </div>
-                  <div id='bundle-main'>
-                    <AllBundles bundles={bundles} />
                   </div>
                   <FAQs />
                   <Testimonials />
@@ -149,10 +149,7 @@ function App() {
               element={
                 <div>
                   <UserNav />
-                  <NotCompleteOrd
-                    orders={orders}
-                    setOrders={setOrders}
-                  />
+                  <NotCompleteOrd orders={orders} setOrders={setOrders} />
                 </div>
               }
             />
@@ -166,22 +163,16 @@ function App() {
               }
             />
             <Route
-              path='/usercart'
+              path='/usercart/*'
               element={
                 <div>
                   <UserNav />
-                  <UserCart
-                    orders={orders}
-                    todaysDate={todaysDate}
-                  />
+                  <UserCart orders={orders} todaysDate={todaysDate} />
                 </div>
               }
             ></Route>
           </Routes>
-          <a
-            id='back-to-top'
-            href='#top'
-          >
+          <a id='back-to-top' href='#top'>
             Back to Top
           </a>
           <div>©Copyright 2023 Creative Juices</div>

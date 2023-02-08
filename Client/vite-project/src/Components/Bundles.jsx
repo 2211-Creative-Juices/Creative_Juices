@@ -4,8 +4,9 @@ import bundlekit from '../assets/images/bundlekit.jpeg';
 import { useAuth } from '../custom-hooks';
 import { createABundle } from '../api/bundles';
 import { createNewOrder } from '../api/orders';
+import ServiceForm from './ServiceForm';
 
-const AllBundles = ({ bundles, todaysDate }) => {
+const AllBundles = ({ bundles, todaysDate, services }) => {
   const [quantity, setQuantity] = useState(0);
   const user = useAuth();
 
@@ -50,6 +51,9 @@ const AllBundles = ({ bundles, todaysDate }) => {
   return (
     <div id='bundles-container'>
       <div className='flex-bunds'>
+        <dvi>
+          <ServiceForm services={services} todaysDate={todaysDate} />
+        </dvi>
         <img id='bundkitimg' src={bundlekit}></img>
         <form id='bundle-form-main' onSubmit={(e) => submitHandler(e)}>
           <h3> Add a Paint Kit!</h3>

@@ -1,11 +1,12 @@
 import { useAuth } from '../custom-hooks';
 import './ServiceStyle.css';
-import grouppaint from '../assets/images/grouppaint.jpeg';
+import collage from '../assets/images/collage.png';
 import { React, useState, useEffect } from 'react';
 import { createService } from '../api/services';
 import { createNewOrder } from '../api/orders';
 import { NavLink } from 'react-router-dom';
 import AllServices from './Services';
+import SlideShow from './SlideShow';
 // import cjtimelapse from "../assets/videos/cjtimelapse.mp4"
 
 const ServiceForm = ({ services, todaysDate }) => {
@@ -77,7 +78,6 @@ const ServiceForm = ({ services, todaysDate }) => {
   return (
     <div id='service-container'>
       <div id='flex-services'>
-        <img id='group-paint' src={grouppaint} />
         <form id='service-form-big' onSubmit={(e) => submitHandler(e)}>
           <div id='service-form-inputs'>
             <h3>Customize Your Paint and Sip!</h3>
