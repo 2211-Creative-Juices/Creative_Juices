@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 :root {
   font-family: 'Roboto', Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -144,51 +146,133 @@ nav {
   padding-bottom: 4em;
 }
 
-#testimonial1 {
-  width: 100%;
-  border: 4pt white solid;
-}
-
-#testimonial1:hover {
-  border: 4pt white solid;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  transform: scale(1.1);
-}
+/* ****************** TESTIMONIALS ************** */
 
 #testimonials-header {
   font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
-  color: rgb(0, 0, 0);
+  color: black;
   font-weight: bolder;
   font-size: 30px;
-  margin-right: 10em;
 }
 
-#testimonials-header {
-  color: rgba(0, 0, 0, 0.87);
-  font-weight: bolder;
-  font-size: 30px;
-  margin-right: 10em;
-}
-
-#testimonials-container {
+.testimonial {
+  color: rgb(112, 109, 109);
   background-color: rgb(233, 196, 106);
-  color: rgba(0, 0, 0, 0.87);
-  padding: 5em;
-  border-radius: 3%;
+  padding: 2rem;
 }
 
-.testimonials-content {
-  width: 75%;
-  display: flex;
-  flex-direction: row;
-  gap: 4em;
+.parallax1 {
+  min-height: 12rem;
+  background-image: url('./assets/images/testimonial4.jpeg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+.parallax2 {
+  min-height: 12rem;
+  background-image: url('./assets/images/testimonial4.jpeg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.carousel-root {
+  width: 64%;
+  margin: auto;
+  padding: 2rem;
+}
+
+.carousel .slide {
+  background: #fff;
+  color: black;
+  height: 100%;
+}
+
+.myCarousel {
+  background: #fafafa;
+  margin-top: -6%;
+  width: 54%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 6%;
+  padding-bottom: 8%;
+  padding-left: 5%;
+  padding-right: 5%;
+
+  max-height: 600px;
+  min-height: 286px;
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.carousel .control-dots {
+  padding-left: 5px;
+  outline: 0;
+  /* bottom: 5%; */
+}
+
+.myCarousel h3 {
+  color: #222;
+  font-weight: 100;
+  letter-spacing: 0.2px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 17px;
+}
+
+.myCarousel h4 {
+  text-transform: uppercase;
+  margin-top: 0;
+  padding-top: 0;
+  font-weight: 500;
+  color: #787878;
+  font-size: 14px;
+}
+
+.myCarousel p {
+  font-weight: 100;
+  line-height: 29px;
+  color: #222;
+  font-size: 15px;
+  font-family: sans-serif;
+  max-height: 67px;
+}
+
+.myCarousel p:before {
+  content: '“';
+  color: #aaa;
+  font-size: 26px;
+  font-family: monospace;
+  font-weight: 100;
+}
+
+.myCarousel p:after {
+  content: '”';
+  color: #aaa;
+  font-size: 26px;
+  font-family: monospace;
+  font-weight: 100;
+  line-height: 0;
+}
+
+.carousel .control-dots .dot {
+  box-shadow: none;
+  background: #454545;
+  outline: 0;
+}
+
+.carousel.carousel-slider .control-arrow {
+  background: #000;
+  height: 50px;
+  position: absolute;
+  top: 35%;
+}
+
+/* ****************** FOOTER ************** */
 
 #footer-container {
   border-top: 2pt white solid;

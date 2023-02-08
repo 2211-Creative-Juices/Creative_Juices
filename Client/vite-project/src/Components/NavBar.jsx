@@ -8,8 +8,8 @@ const navLinks = [
   { navLinkId: 'HOME', scrollToId: 'home-container' },
   { navLinkId: 'ABOUT', scrollToId: 'about-container' },
   { navLinkId: 'SERVICES', scrollToId: 'services-container' },
-  { navLinkId: 'TESTIMONIALS', scrollToId: 'testimonials-container' },
   { navLinkId: "FAQ's", scrollToId: 'faqs-container' },
+  { navLinkId: 'TESTIMONIALS', scrollToId: 'testimonials-container' },
   { navLinkId: 'CONTACT', scrollToId: 'footer-container' },
 ];
 
