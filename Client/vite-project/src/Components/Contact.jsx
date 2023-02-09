@@ -1,6 +1,6 @@
 import { React } from 'react';
 import { Form, Input, TextArea, Button } from 'semantic-ui-react';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 
 const SERVICE_ID = 'philip-rau-email';
@@ -36,7 +36,7 @@ const ContactForm = () => {
         onSubmit={handleOnSubmit}
         className='ContactForm'
       >
-        <div id='contact-shelley' >CONTACT SHELLEY</div>
+        <div id='contact-shelley'>CONTACT SHELLEY</div>
         <Form.Field
           id='form-input-control-email'
           control={Input}
@@ -44,8 +44,8 @@ const ContactForm = () => {
           name='user_email'
           placeholder='Email'
           required
-        // icon='mail'
-        // iconPosition='left'
+          // icon='mail'
+          // iconPosition='left'
         />
         <Form.Field
           id='form-input-control-last-name'
@@ -54,8 +54,8 @@ const ContactForm = () => {
           name='user_name'
           placeholder='Name'
           required
-        // icon='user circle'
-        // iconPosition='left'
+          // icon='user circle'
+          // iconPosition='left'
         />
         <Form.Field
           id='form-textarea-control-opinion'
@@ -65,11 +65,7 @@ const ContactForm = () => {
           placeholder='Message'
           required
         />
-        <Button
-          type='submit'
-        >
-          Submit
-        </Button>
+        <Button type='submit'>Submit</Button>
       </Form>
     </div>
   );
