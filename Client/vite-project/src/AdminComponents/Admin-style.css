@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   flex-direction: row;
-
+flex-wrap: wrap;
   width: 100%;
   box-sizing: border-box;
   gap: 1rem;
@@ -34,6 +34,7 @@
 #completed-orders-map-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   flex-direction: row;
   width: 100%;
   border: solid, 10px, black;

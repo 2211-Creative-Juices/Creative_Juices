@@ -8,6 +8,10 @@ export default function AuthProvider({ children }) {
   const [shouldUpdate, setShouldUpdate] = useState(false);
   const [user, setUser] = useState({});
 
+  const redirHome = () => {
+    window.location.href = '/';
+  };
+
   useEffect(() => {
     settoken(localStorage['juice-token'] || '');
 
@@ -28,6 +32,7 @@ export default function AuthProvider({ children }) {
     delete localStorage['serviceCost'];
     delete localStorage['shipping-Address'];
     updateAuthStatus();
+    redirHome();
   };
 
   const providerValue = {

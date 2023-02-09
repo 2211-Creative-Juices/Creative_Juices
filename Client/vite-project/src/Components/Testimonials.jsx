@@ -16,22 +16,33 @@ const Testimonials = () => {
         interval={6100}
       >
         <div className='myCarousel'>
-          <h3>Chelsea Haldane</h3>
-          <h4>Devleoper</h4>
+          <h3>Olivia M</h3>
+          <h4>CLIENT</h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Shelley is a wonderful teacher who made out paint and sip incredibly
+            enjoyable. She brought all of the art supplies neede to create
+            beautiful fall-themed cards. I definitly didn't think I could paint
+            pumpkins but she proved me wrong!
           </p>
         </div>
 
         <div>
           {/* <img src='/images/daniel.png' /> */}
           <div className='myCarousel'>
-            <h3>Ashley Hoath</h3>
-            <h4>Developer</h4>
+            <h3>Carly H</h3>
+            <h4>Client</h4>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Shelley Hoath and Creative Juices Paint & Sip made my Bridal
+              Shower unforgettable! Not only was Shelley extremely
+              knowledgeable, but she helped everyone there tap into their
+              creative sides and make many different works of art. We had a wide
+              range of beginners to more experienced painters and Shelley made
+              everyone excited to dive into the project of the day! It’s such an
+              amazing experience getting to paint with all of your favorite
+              people with the best instructor! Such a special day! I would
+              highly recommend booking any event, big or small, and I definitely
+              plan on organizing another Paint and Sip with Shelley! Thank you
+              for making my Bridal Shower so special!
             </p>
           </div>
         </div>
