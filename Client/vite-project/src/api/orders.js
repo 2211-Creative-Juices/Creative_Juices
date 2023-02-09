@@ -5,7 +5,7 @@ export const getAllOrders = async () => {
   try {
     const response = await fetch(`${BASE_API}/orders`);
     const results = await response.json();
-    console.log('get all orders orders orders: ', results);
+
     return results;
   } catch (error) {
     console.error(error);
@@ -13,8 +13,6 @@ export const getAllOrders = async () => {
 };
 
 export const getAllTheOrdersByUser = async (token, username) => {
-  // console.log('accessing get order by purchaser id honhon: ', username);
-  // console.log('accessing get order by purchaser id TOKEN honhon: ', token);
   try {
     const response = await fetch(`${BASE_API}/orders/${username}/orders`, {
       headers: {
@@ -23,7 +21,7 @@ export const getAllTheOrdersByUser = async (token, username) => {
       },
     });
     const results = await response.json();
-    console.log('this is results in ordersapi', results);
+
     return results;
   } catch (error) {
     console.error(error);
@@ -31,8 +29,6 @@ export const getAllTheOrdersByUser = async (token, username) => {
 };
 
 export const getAllTheOrdersByUserWithBundKit = async (token, username) => {
-  // console.log('accessing get order by purchaser id honhon: ', username);
-  // console.log('accessing get order by purchaser id TOKEN honhon: ', token);
   try {
     const response = await fetch(
       `${BASE_API}/orders/${username}/orders/bundles`,
@@ -44,7 +40,7 @@ export const getAllTheOrdersByUserWithBundKit = async (token, username) => {
       }
     );
     const results = await response.json();
-    console.log('this is results in ordersapi', results);
+
     return results;
   } catch (error) {
     console.error(error);
@@ -73,7 +69,7 @@ export const createNewOrder = async (
       }),
     });
     const newOrder = await response.json();
-    console.log('this is new ORDER', newOrder);
+
     return newOrder;
   } catch (error) {
     console.error(error);
@@ -121,7 +117,7 @@ export const updateOrder = async (
       }),
     });
     const updatedOrder = await response.json();
-    console.log('this is our updated ORDER******************', updatedOrder);
+
     return updatedOrder;
   } catch (error) {
     console.error(error);

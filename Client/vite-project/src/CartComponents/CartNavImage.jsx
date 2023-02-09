@@ -16,7 +16,6 @@ const CartImage = ({ orders }) => {
         order.purchaserId === user.user.id
       ) {
         countOrders++;
-        console.log('TIS IS COUNT ORDERS', countOrders);
       }
     });
     return (

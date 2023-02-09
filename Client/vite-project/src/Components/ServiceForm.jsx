@@ -53,7 +53,6 @@ const ServiceForm = ({ services, todaysDate }) => {
           notes
         );
 
-        console.log('HTIS IS MY NEWSERVCIE', newService);
         let serviceId = newService.id;
         let todaysOrderDate = JSON.stringify(todaysDate);
         console.log('NEW dateeeeee', todaysOrderDate);
@@ -78,10 +77,7 @@ const ServiceForm = ({ services, todaysDate }) => {
   return (
     <div id='service-container'>
       <div id='flex-services'>
-        <form
-          id='service-form-big'
-          onSubmit={(e) => submitHandler(e)}
-        >
+        <form id='service-form-big' onSubmit={(e) => submitHandler(e)}>
           <div id='service-form-inputs'>
             <h3>Customize Your Paint and Sip!</h3>
             <div id='type-box'>
@@ -235,11 +231,7 @@ const ServiceForm = ({ services, todaysDate }) => {
                 ></input>
               </label>
             </div>
-            <button
-              id='add-serv-butt'
-              onClick={submitHandler}
-              type={'submit'}
-            >
+            <button id='add-serv-butt' onClick={submitHandler} type={'submit'}>
               Add to Cart
             </button>
           </div>

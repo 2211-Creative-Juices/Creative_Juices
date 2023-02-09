@@ -55,3 +55,39 @@ export const createABundle = async (
     throw error;
   }
 };
+
+export const updateBundle = async (
+  token,
+  bundleId,
+  bundlename,
+  quantity,
+  bundlecost
+) => {
+  console.log(
+    'THREEEEE THINGS:',
+    token,
+    bundleId,
+    bundlename,
+    quantity,
+    bundlecost
+  );
+  try {
+    const response = await fetch(`${BASE_API}/bundles/${bundleId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        bundlename,
+        quantity,
+        bundlecost,
+      }),
+    });
+    const updatedBundle = await response.json();
+    console.log('this is our updated ORDER******************', updatedBundle);
+    return updatedBundle;
+  } catch (error) {
+    console.error(error);
+  }
+};

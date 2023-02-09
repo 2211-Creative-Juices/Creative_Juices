@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../custom-hooks';
-import { getBundlesById } from '../api/bundles';
+import UpdateBunds from './UpdateBundInCart';
 import { useState, useEffect } from 'react';
 import { getAllTheOrdersByUserWithBundKit } from '../api/orders';
 import { updateOrder } from '../api/orders';
@@ -8,7 +8,7 @@ import MyFilledOrders from './MyFilledOrders';
 import bundlekit from '../assets/images/bundlekit.jpeg';
 import { Route, Link, Routes, NavLink } from 'react-router-dom';
 
-const BundleOrder = ({ myOrders }) => {
+const BundleOrder = ({ myOrders, bundles }) => {
   const user = useAuth();
   const [bundOrders, setBundOrders] = useState([]);
 
@@ -55,6 +55,11 @@ const BundleOrder = ({ myOrders }) => {
                     return (
                       <div key={bundle.id} className='mybunds'>
                         <p>Qty {bundle.quantity}</p>
+                        <UpdateBunds
+                          bundlesQuant={bundles.quantity}
+                          bundleId={bundle.id}
+                          bundleCost={bundle.bundlecost}
+                        ></UpdateBunds>
                         <p>Cost:{bundle.bundlecost}</p>
                         <p>
                           {localStorage.setItem(
