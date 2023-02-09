@@ -565,7 +565,9 @@ nav {
 .socials {
   width: 3em;
   margin-top: 7em;
+  
 }
+
 
 #contact-shelley {
   font-family: 'Montserrat', Inter, Avenir, Helvetica, Arial, sans-serif;
@@ -669,4 +671,22 @@ nav {
 }
 #CONTACT:active {
   text-decoration: underline;
+}
+.instagram-social{
+  transition: all .2s ease-in-out; 
+}
+.instagram-social:hover{
+  transform: scale(0.9); 
+}
+.facebook-social{
+  transition: all .2s ease-in-out; 
+}
+.facebook-social:hover{
+  transform: scale(0.9); 
+}
+.tiktok-social{
+  transition: all .2s ease-in-out; 
+}
+.tiktok-social:hover{
+  transform: scale(0.9); 
 }

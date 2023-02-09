@@ -41,15 +41,12 @@ const NavLink = ({
 
 const NavBar = ({ orders }) => {
   const { logout, token } = useAuth();
-  console.log('this is user FOR CART ICON STUFF', token);
+
   const [activeNavLinkId, setActiveNavLinkId] = useState('');
   return (
     <div className='is-sticky'>
       <nav>
-        <img
-          id='initialslogo'
-          src={initialsnobckgrnd}
-        ></img>
+        <img id='initialslogo' src={initialsnobckgrnd}></img>
         {navLinks.map(({ navLinkId, scrollToId }) => (
           <NavLink
             key={navLinkId}
@@ -59,10 +56,7 @@ const NavBar = ({ orders }) => {
             setActiveNavLinkId={setActiveNavLinkId}
           />
         ))}
-        <button
-          id='logout-butt'
-          onClick={logout}
-        >
+        <button id='logout-butt' onClick={logout}>
           Logout
         </button>
         {token ? (

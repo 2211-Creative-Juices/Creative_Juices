@@ -1,9 +1,7 @@
 import React from 'react';
 import './Cart.css';
 import { useEffect, useState } from 'react';
-import OrderHistoryServices from './OrderHistoryServices';
-import OrderHistoryBundles from './OrderHistoryBundles';
-import { getBundlesById } from '../api/bundles';
+
 import shelleycart from '../assets/images/shelleycart.jpeg';
 import { getAllTheOrdersByUser, updateOrder } from '../api/orders';
 import { useAuth } from '../custom-hooks';
@@ -12,13 +10,11 @@ import MyFilledOrders from './MyFilledOrders';
 import Checkout from './Checkout';
 import PayPalCheckout from './PayPalCheckout';
 
-const UserCart = ({ orders }) => {
+const UserCart = ({ orders, bundles }) => {
   const user = useAuth();
   const [myOrders, setMyOrders] = useState([]);
 
   let username = user.user.username;
-  const singleOrder = orders[0];
-  console.log('this is single ORDER', singleOrder);
 
   const redirCart = () => {
     window.location.href = '/usercart';
@@ -28,13 +24,11 @@ const UserCart = ({ orders }) => {
     const getAllMyOrders = async () => {
       const allMyOrders = await getAllTheOrdersByUser(user.token, username);
       setMyOrders(allMyOrders, ...myOrders);
-      console.log('these are my orders', allMyOrders);
     };
     if (user.user.id) {
       getAllMyOrders();
     }
   }, [user.user.username]);
-  console.log('87138941730487393487', myOrders);
 
   return (
     <div id='all-it'>
@@ -113,7 +107,7 @@ const UserCart = ({ orders }) => {
               })}
           </div>
           <div>
-            <BundleOrder myOrders={myOrders} />
+            <BundleOrder bundles={bundles} myOrders={myOrders} />
           </div>
           <div>
             <MyFilledOrders myOrders={myOrders} />

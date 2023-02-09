@@ -69,7 +69,6 @@ function App() {
     const fetchedOrders = async () => {
       const allOrders = await getAllOrders();
       setOrders(allOrders);
-      console.log('all the orders in App', allOrders);
     };
     fetchedOrders();
   }, [user.token]);
@@ -167,7 +166,11 @@ function App() {
               element={
                 <div>
                   <UserNav />
-                  <UserCart orders={orders} todaysDate={todaysDate} />
+                  <UserCart
+                    bundles={bundles}
+                    orders={orders}
+                    todaysDate={todaysDate}
+                  />
                 </div>
               }
             ></Route>
