@@ -98,8 +98,8 @@
     font-size: .85rem;
     background: hsl(230deg, 50%, 45%);
     color: hsl(190deg, 10%, 95%);
-    width:25%;
-    margin-left: 13em;
+    width: 25%;
+    margin-left: 35%;
     
     box-shadow: 0 0px 0px hsla(190deg, 15%, 5%, .2);
     transfrom: translateY(0);
@@ -365,6 +365,10 @@
   }
   #set-my-ship{
     margin-right: 1em;
+  }
+  #quantityupdate{
+    width: 40px;
+    margin-right: 5px;
   }
 
     
