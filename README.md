@@ -1,5 +1,4 @@
-Welcome to Creative Juices, an fullstack e-commerce platform for a small paint 'n sip. Our site is vibrant and dynamic with adaptable functionality ready to grow with Shelley’s flourishing business. 
-
+Welcome to Creative Juices, a fullstack e-commerce platform for a small paint 'n sip. Our site is vibrant and dynamic with adaptable functionality ready to grow with Shelley’s flourishing business.
 
 For our tech stack:  
 React
@@ -7,9 +6,8 @@ Javascript
 ExpressJS
 NodeJS
 PostgreSQL
-Vite 
+Vite
 PayPal React (for our payment system)
-
 
 Please ensure you have npm installed & each of these packages installed:
 "@fortawesome/fontawesome-svg-core": "^6.2.1",
@@ -37,31 +35,24 @@ Please ensure you have npm installed & each of these packages installed:
 "react-dom": "^18.2.0",
 "react-router-dom": "^6.6.2"
 
-
 Fork and clone:
 https://github.com/2211-Creative-Juices/Creative_Juices
-
 
 Scripts:
 npm run start:dev
 This starts the web application on localhost:8080
 
-
 Features:
 The site features a smooth-scrolling single page application with some fun styling effects to give the site some character like a sticky navbar, animated buttons, carousel photos, and a parallax scrolling background on our testimonials.
-
 
 User Log-In:
 We have easily accessible register and login links to forms where they can sign up or log in. If a customer adds a service to their cart, they can log out and log back in later to find their product still in their cart.
 
-
 Cart:
 A customer will make an event request with our custom services form and choose their preference of the provided fields. They’ll hit add to cart and receive a message showing a successful add to their cart, where they can then remove an item, enter their shipping address or returning users can find their previous shipping address stored for a quicker checkout. After being guided through the automated PayPal payment site, their order will be sent to the admin and added to their order history.
 
-
 Admin Panel:
-Upon login with a secure admin-only username & password, an exclusive administrator navbar appears on the home page. There, they is able to view and manage all requested services, all completed orders, all active orders, and all currently registered users. 
-
+Upon login with a secure admin-only username & password, an exclusive administrator navbar appears on the home page. There, they is able to view and manage all requested services, all completed orders, all active orders, and all currently registered users.
 
 Creators:
 Ashley Hoath, Chelsea Haldane, Megan Miller, Philip Rau
