@@ -49,7 +49,6 @@ nav {
   background-color: rgb(233, 196, 106);
   color: rgba(0, 0, 0, 0.87);
   padding: 5em;
-  
 }
 
 .about-content {
@@ -88,21 +87,20 @@ nav {
 #home-container {
   padding: 8em;
   background-image: -webkit-image-set();
- 
- 
+
   background: center;
   background-size: cover;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
+
   align-items: center;
   gap: 5em;
 }
 
 #home-logo {
   padding-top: 7em;
-  
+
   width: 35%;
 }
 
@@ -112,10 +110,10 @@ nav {
   gap: 5em;
 }
 
-.register{
-  color: #9E00FF;
+.register {
+  color: #9e00ff;
 }
-#sign-up-home{
+#sign-up-home {
   font-family: 'Poppins';
   width: 75%;
   height: 90px;
@@ -132,16 +130,25 @@ nav {
   transition: 0.5s ease-in-out;
   margin-bottom: 1em;
   padding-top: 1em;
- 
-
 }
 
 #sign-up-home:before {
   content: '';
-  background: linear-gradient(45deg, #FF0000, #FFF700, #FF7000, #FF00FE, #3FF4EB, #9E00FF, #00BEFF, #FF00DD, #FF0000);
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #fff700,
+    #ff7000,
+    #ff00fe,
+    #3ff4eb,
+    #9e00ff,
+    #00beff,
+    #ff00dd,
+    #ff0000
+  );
   position: absolute;
   top: -2px;
-  left:-2px;
+  left: -2px;
   background-size: 400%;
   z-index: -1;
   filter: blur(5px);
@@ -149,11 +156,11 @@ nav {
   height: calc(100% + 4px);
   animation: glowing 20s linear infinite;
   opacity: 0;
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 #sign-up-home:active {
-  color: #000
+  color: #000;
 }
 
 #sign-up-home:active:after {
@@ -180,19 +187,24 @@ nav {
 }
 
 @keyframes glowing {
-  0% { background-position: 0 0; }
-  50% { background-position: 400% 0; }
-  100% { background-position: 0 0; }
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
-#set-my-ship{
+#set-my-ship {
   margin-right: 1em;
 }
 
-
-.login-link{
-  color: #9E00FF;
+.login-link {
+  color: #9e00ff;
 }
-#log-in-home{
+#log-in-home {
   font-family: 'Poppins';
   width: 75%;
   height: 90px;
@@ -209,16 +221,25 @@ nav {
   transition: 0.5s ease-in-out;
   margin-bottom: 1em;
   padding-top: 1em;
- 
-
 }
 
 #log-in-home:before {
   content: '';
-  background: linear-gradient(45deg, #FF0000, #FFF700, #FF7000, #FF00FE, #3FF4EB, #9E00FF, #00BEFF, #FF00DD, #FF0000);
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #fff700,
+    #ff7000,
+    #ff00fe,
+    #3ff4eb,
+    #9e00ff,
+    #00beff,
+    #ff00dd,
+    #ff0000
+  );
   position: absolute;
   top: -2px;
-  left:-2px;
+  left: -2px;
   background-size: 400%;
   z-index: -1;
   filter: blur(5px);
@@ -226,11 +247,11 @@ nav {
   height: calc(100% + 4px);
   animation: glowing 20s linear infinite;
   opacity: 0;
-  transition: opacity .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 #log-in-home:active {
-  color: #000
+  color: #000;
 }
 
 #log-in-home:active:after {
@@ -257,9 +278,15 @@ nav {
 }
 
 @keyframes glowing {
-  0% { background-position: 0 0; }
-  50% { background-position: 400% 0; }
-  100% { background-position: 0 0; }
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
 #home-message {
@@ -381,11 +408,11 @@ nav {
   font-size: 30px;
 }
 
-.testimonial {
+/* .testimonial {
   color: rgb(112, 109, 109);
   background-color: rgb(233, 196, 106);
   padding: 2rem;
-}
+} */
 
 .parallax1 {
   min-height: 12rem;
@@ -430,14 +457,13 @@ nav {
 
   max-height: 600px;
   min-height: 286px;
-  max-width: 500px;
-  min-width: 300px;
+  /* max-width: 500px; */
+  min-width: 800px;
 }
 
 .carousel .control-dots {
   padding-left: 5px;
   outline: 0;
-  /* bottom: 5%; */
 }
 
 .myCarousel h3 {
@@ -463,9 +489,12 @@ nav {
   font-weight: 100;
   line-height: 29px;
   color: #222;
-  font-size: 15px;
+  font-size: 12px;
   font-family: sans-serif;
   max-height: 67px;
+  margin-left: 5%;
+  margin-right: 5%;
+  max-width: 600px;
 }
 
 .myCarousel p:before {
@@ -499,12 +528,12 @@ nav {
 }
 
 /* ****************** FOOTER ************** */
-#shellimg-contact{
+#shellimg-contact {
   width: 10%;
   margin-right: 20em;
   margin-top: 3em;
 }
-#shellimg{
+#shellimg {
   border-radius: 50%;
   border: black solid 4px;
 }
@@ -523,7 +552,6 @@ nav {
   width: 15em;
   margin-right: 10em;
 }
-
 
 #footer-logo-container {
   width: 2em;
