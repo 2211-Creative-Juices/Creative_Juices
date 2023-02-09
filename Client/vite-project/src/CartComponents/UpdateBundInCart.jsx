@@ -31,7 +31,7 @@ const UpdateBunds = ({ bundlesQuant, bundleId }) => {
       >
         <div>
           <input
-            id='count'
+            id='quantityupdate'
             value={bundlesQuant}
             type='number'
             placeholder={bundlesQuant}
