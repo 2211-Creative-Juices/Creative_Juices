@@ -42,7 +42,6 @@ ordersRouter.get('/:orderId', requireUser, async (req, res, next) => {
 
 ordersRouter.get('/:username/orders', requireUser, async (req, res, next) => {
   const myOwnUsername = req.params.username;
-
   try {
     if (req.user) {
       const userOrders = await getAllOrdersByUser(myOwnUsername);

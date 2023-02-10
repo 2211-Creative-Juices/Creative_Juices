@@ -10,9 +10,9 @@ const {
   createUser,
   getUserById,
   updateUser,
-  getUser,
+  // getAllOrdersByUser,
 } = require('../db');
-
+// const { JWT_SECRET = 'donottell' } = process.env;
 //Register
 usersRouter.use((req, res, next) => {
   console.log('Request being made to users');
@@ -25,27 +25,22 @@ usersRouter.get('/', async (req, res) => {
   res.send({ users });
 });
 
-usersRouter.get('/:username', requireUser, async (req, res, next) => {
-  const params = req.params;
-  console.log('TTHERSE ARE REQ.PARAMS', params);
-  const username = req.user.username;
-  console.log('This would be the username to send', username);
-  const userWpass = await getUserByUsername(username);
-  console.log('This would be the password to send', userWpass.password);
-  const password = userWpass.password;
-  try {
-    const user = await getUser(username, password);
-    console.log(
-      'THIS IS THE username,password TO SEND TO getuser',
-      username,
-      password
-    );
-    res.send(user);
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
+// usersRouter.get('/:purchaserId/orders', requireUser, async (req, res, next) => {
+//   let id = req.params.purchaserId;
+//   console.log('Req Params', req.params);
+//   try {
+//     const myUsername = req.params.username;
+//     const user = await getUserByUsername(myUsername);
+//     if ((id = user.id)) {
+//       let getOrderForMe = await getAllOrdersByUser(myUsername);
+//       console.log('this is getorderforme', getOrderForMe);
+//       res.send(getOrderForMe);
+//     }
+//   } catch (error) {
+//     console.error('getOrdersForMe', error);
+//     next(error);
+//   }
+// });
 
 //REGISTER /api/users/register
 
