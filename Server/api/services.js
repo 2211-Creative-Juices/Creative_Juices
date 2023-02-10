@@ -62,24 +62,6 @@ servicesRouter.get('/:orderId/order', requireUser, async (req, res, next) => {
   }
 });
 
-// servicesRouter.get(
-//   '/:userId/usersservice',
-//   requireUser,
-//   async (req, res, next) => {
-//     let id = req.params.userId;
-//     console.log('These are the params', req.params);
-//     try {
-//       if (req.user) {
-//         let userServices = await getServicesByUser(id);
-//         res.send(userServices);
-//       }
-//     } catch (error) {
-//       console.error(error);
-//       next(error);
-//     }
-//   }
-// );
-
 // POST /api/services
 
 servicesRouter.post('/', requireUser, async (req, res, next) => {

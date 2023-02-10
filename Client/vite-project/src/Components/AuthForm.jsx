@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { authenticateUser } from '../api/auth';
-import { Link } from 'react-router-dom';
+import { authenticateUser, getAllUsers } from '../api/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../custom-hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
@@ -8,8 +8,8 @@ const eye = <FontAwesomeIcon icon={faEye} />;
 import './style.css';
 
 const AuthForm = ({ name, buttonName }) => {
-  const { user, token } = useAuth();
-  const { updateAuthStatus } = useAuth();
+  const navigate = useNavigate();
+  const { updateAuthStatus, user } = useAuth();
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePasswordVisiblity = () => {
@@ -17,59 +17,61 @@ const AuthForm = ({ name, buttonName }) => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formName = event.target.name;
-    const username = event.target.username.value;
-    const password = event.target.password.value;
-    if (!username || !password) {
-      alert('you need a valid username and password');
-      console.log('Either no input or password too short');
-      return;
-    }
-    if (password.length < 8) {
-      alert('password must be 8 or more characters');
-      return;
-    }
-    // if (name === 'login' && user.user.password != event.target.password.value) {
-    //   alert('password is incorrect');
-    //   return;
-    // }
-    // if (name === 'login' && user.user.username != event.target.username.value) {
-    //   alert('password is incorrect');
-    //   return;
-    // }
-    if (formName === 'login') {
-      await authenticateUser(username, password, formName);
-      updateAuthStatus();
-    } else {
-      const fullName = event.target.fullname.value;
-      const zipcode = event.target.zipcode.value;
-      const email = event.target.email.value;
+    try {
+      event.preventDefault();
 
-      await authenticateUser(
-        username,
-        password,
-        formName,
-        fullName,
-        zipcode,
-        email
-      );
-      updateAuthStatus();
+      const formName = event.target.name;
+      const username = event.target.username.value;
+      const password = event.target.password.value;
+      if (!username || !password) {
+        alert('you need a valid username and password');
+        console.log('Either no input or password too short');
+        return;
+      }
+      if (password.length < 8) {
+        alert('password must be 8 or more characters');
+        return;
+      }
+      // if (name === 'login' && user.user.password != event.target.password.value) {
+      //   alert('password is incorrect');
+      //   return;
+      // }
+      // if (name === 'login' && user.user.username != event.target.username.value) {
+      //   alert('password is incorrect');
+      //   return;
+      // }
+      if (formName === 'login') {
+        await authenticateUser(username, password, formName);
+        updateAuthStatus();
+      } else {
+        const fullName = event.target.fullname.value;
+        const zipcode = event.target.zipcode.value;
+        const email = event.target.email.value;
+
+        await authenticateUser(
+          username,
+          password,
+          formName,
+          fullName,
+          zipcode,
+          email
+        );
+        updateAuthStatus();
+      }
+
+      const allUsers = await getAllUsers();
+      allUsers.forEach((user) => {
+        if (event.target.username.value === user.username) {
+          console.log('USER IN SYSTEM');
+          const reload = () => {
+            window.location.href = '/';
+          };
+          reload();
+        }
+      });
+    } catch (error) {
+      console.error(error);
     }
-
-    const reload = () => {
-      window.location.href = '/';
-    };
-    reload();
-
-    // if (token) {
-    //   const reload = () => {
-    //     window.location.href = '/';
-    //   };
-    //   reload();
-    // } else {
-    //   console.log('not a user, sign up!');
-    // }
   };
 
   return (

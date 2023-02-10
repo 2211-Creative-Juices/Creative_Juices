@@ -100,3 +100,20 @@ export const getAllUsers = async () => {
     console.error(error);
   }
 };
+
+// export const getUser = async (username, password) => {
+//   console.log('VERY IMPORTANT username and password:', username, password);
+
+//   try {
+//     const response = await fetch(`${BASE_API}/users/${username}`, {
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     });
+//     const results = await response.json();
+//     console.log('this is results in services for me api', results);
+//     return results;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
