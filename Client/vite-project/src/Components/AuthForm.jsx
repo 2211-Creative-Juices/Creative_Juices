@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { authenticateUser } from '../api/auth';
+import { authenticateUser, getAllUsers } from '../api/auth';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../custom-hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -57,19 +57,16 @@ const AuthForm = ({ name, buttonName }) => {
       updateAuthStatus();
     }
 
-    const reload = () => {
-      window.location.href = '/';
-    };
-    reload();
-
-    // if (token) {
-    //   const reload = () => {
-    //     window.location.href = '/';
-    //   };
-    //   reload();
-    // } else {
-    //   console.log('not a user, sign up!');
-    // }
+    const allUsers = await getAllUsers();
+    allUsers.forEach((user) => {
+      if (event.target.username.value === user.username) {
+        console.log('USER IN SYSTEM');
+        const reload = () => {
+          window.location.href = '/';
+        };
+        reload();
+      }
+    });
   };
 
   return (
