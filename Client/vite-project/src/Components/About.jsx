@@ -26,11 +26,14 @@ const About = () => {
             opportunity to try something that you never though you could do. In
             my free time you will find me mountian biking or hiking with my
             husband and my two dogs (Griffin and Mowgli). Thanks for checking
-            out my site and I looke forward to hearing from you!
+            out my site and I look forward to hearing from you!
           </div>
         </div>
         <div>
-          <img id='prettyshelley' src={shelleyimg}></img>
+          <img
+            id='prettyshelley'
+            src={shelleyimg}
+          ></img>
         </div>
       </div>
     </div>

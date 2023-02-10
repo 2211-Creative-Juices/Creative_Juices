@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { authenticateUser } from '../api/auth';
+import { authenticateUser, getAllUsers } from '../api/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../custom-hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,10 +19,7 @@ const AuthForm = ({ name, buttonName }) => {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      console.log(
-        'this is sirUser i get from logging in with correct user',
-        user
-      );
+
       const formName = event.target.name;
       const username = event.target.username.value;
       const password = event.target.password.value;
@@ -62,23 +59,16 @@ const AuthForm = ({ name, buttonName }) => {
         updateAuthStatus();
       }
 
-      // const reload = () => {
-      //   window.location.href = '/';
-      // };
-      // reload();
-      // console.log(
-      //   'this is sirUser i get from logging in with correct user',
-      //   user
-      // );
-      if (!user.id) {
-        console.log('not a user, sign up!');
-      } else {
-        // const reload = () => {
-        //   window.location.href = '/';
-        // };
-        // reload();
-        navigate('/');
-      }
+      const allUsers = await getAllUsers();
+      allUsers.forEach((user) => {
+        if (event.target.username.value === user.username) {
+          console.log('USER IN SYSTEM');
+          const reload = () => {
+            window.location.href = '/';
+          };
+          reload();
+        }
+      });
     } catch (error) {
       console.error(error);
     }
